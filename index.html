@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SanPay</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+
+body{
+  background:#f3f7ff;
+  color:#202124;
+  max-width:480px;
+  margin:auto;
+  min-height:100vh;
+}
+
+/* ================= LOGIN ================= */
+
+#auth{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(145deg,#087cf0,#0057d9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  overflow:hidden;
+}
+
+.auth-circle{
+  position:absolute;
+  border-radius:50%;
+  background:#ffffff15;
+  animation:circleMove 5s infinite alternate ease-in-out;
+}
+
+.c1{
+  width:220px;
+  height:220px;
+  left:-80px;
+  top:-60px;
+}
+
+.c2{
+  width:280px;
+  height:280px;
+  right:-120px;
+  bottom:-100px;
+  animation-delay:1s;
+}
+
+.auth-box{
+  width:90%;
+  max-width:380px;
+  background:white;
+  border-radius:25px;
+  padding:28px;
+  box-shadow:0 20px 60px #003b8a66;
+  position:relative;
+  z-index:2;
+  animation:authIn .6s ease;
+}
+
+.auth-logo{
+  width:72px;
+  height:72px;
+  border-radius:21px;
+  background:#087cf0;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+  font-size:32px;
+  font-weight:bold;
+  box-shadow:0 8px 20px #087cf044;
+}
+
+.auth-box h1{
+  text-align:center;
+  color:#087cf0;
+  margin-top:13px;
+}
+
+.auth-sub{
+  text-align:center;
+  color:#888;
+  font-size:12px;
+  margin:7px 0 22px;
+}
+
+.auth-box input{
+  width:100%;
+  height:48px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:0 14px;
+  margin-bottom:11px;
+  outline:none;
+  transition:.25s;
+}
+
+.auth-box input:focus{
+  border-color:#087cf0;
+  box-shadow:0 0 0 3px #087cf014;
+  transform:translateY(-1px);
+}
+
+.auth-btn{
+  width:100%;
+  height:48px;
+  border:0;
+  border-radius:12px;
+  background:#087cf0;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.auth-btn:active{
+  transform:scale(.97);
+}
+
+.switch{
+  text-align:center;
+  margin-top:17px;
+  font-size:12px;
+  color:#777;
+}
+
+.switch span{
+  color:#087cf0;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.auth-error{
+  display:none;
+  background:#fff0f0;
+  color:#d93025;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:12px;
+  font-size:12px;
+  text-align:center;
+  animation:shake .35s;
+}
+
+/* ================= HEADER ================= */
+
+header{
+  background:#087cf0;
+  color:white;
+  padding:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+header:after{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  background:#ffffff12;
+  right:-70px;
+  top:-100px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  z-index:2;
+}
+
+.brand{
+  font-size:23px;
+  font-weight:800;
+}
+
+.header-right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.money{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#ffffff22;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.eye{
+  cursor:pointer;
+  font-size:20px;
+}
+
+.balance{
+  margin-top:20px;
+  position:relative;
+  z-index:2;
+}
+
+.balance small{
+  font-size:12px;
+  opacity:.85;
+}
+
+.balance-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.balance h1{
+  font-size:29px;
+}
+
+/* ================= HOME ================= */
+
+main{
+  padding-bottom:85px;
+}
+
+.section{
+  padding:16px;
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.quick-item{
+  text-align:center;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.quick-icon{
+  height:55px;
+  background:white;
+  border:1px solid #e2eaf7;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  margin-bottom:6px;
+  box-shadow:0 4px 12px #1257a510;
+  transition:.2s;
+}
+
+.quick-item:active .quick-icon{
+  transform:scale(.92);
+}
+
+.banner{
+  height:105px;
+  border-radius:18px;
+  background:linear-gradient(100deg,#075ce0,#42a5ff);
+  color:white;
+  padding:18px;
+  position:relative;
+  overflow:hidden;
+  animation:float 3s infinite ease-in-out;
+}
+
+.banner:after{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  background:#ffffff18;
+  right:-30px;
+  top:-50px;
+}
+
+.banner h2{
+  font-size:18px;
+}
+
+.banner p{
+  font-size:11px;
+  margin-top:7px;
+}
+
+.shape{
+  position:absolute;
+  right:25px;
+  bottom:-20px;
+  width:80px;
+  height:55px;
+  border-radius:15px;
+  background:#ffffff22;
+  transform:rotate(-10deg);
+}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px 8px;
+}
+
+.menu-item{
+  text-align:center;
+  font-size:11px;
+  opacity:.65;
+}
+
+.micon{
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+
+/* ================= PAGES ================= */
+
+.page{
+  display:none;
+  padding:18px;
+  min-height:100vh;
+  padding-bottom:90px;
+}
+
+.page.active{
+  display:block;
+  animation:pageIn .25s ease;
+}
+
+.page-title{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.back{
+  color:#087cf0;
+  font-size:13px;
+  margin-bottom:15px;
+  cursor:pointer;
+}
+
+.search{
+  width:100%;
+  height:45px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:0 15px;
+  outline:none;
+  margin-bottom:20px;
+  background:white;
+}
+
+.pay-section,
+.amount-box{
+  background:white;
+  border-radius:16px;
+  margin-bottom:15px;
+  overflow:hidden;
+  box-shadow:0 3px 12px #00000008;
+}
+
+.pay-title{
+  padding:15px;
+  font-weight:bold;
+  font-size:14px;
+  border-bottom:1px solid #eee;
+}
+
+.bank-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:12px;
+}
+
+.bank{
+  padding:16px;
+  background:#f7f9fc;
+  border-radius:11px;
+  text-align:center;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.cash{
+  padding:15px;
+}
+
+.store{
+  padding:16px;
+  background:#f7f9fc;
+  border-radius:11px;
+  margin-bottom:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.amount-box{
+  padding:18px;
+}
+
+.amount-box input{
+  width:100%;
+  height:48px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:0 13px;
+  margin-top:8px;
+  outline:none;
+}
+
+.amount-btn{
+  width:100%;
+  height:48px;
+  border:0;
+  border-radius:11px;
+  background:#087cf0;
+  color:white;
+  font-weight:bold;
+  margin-top:12px;
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity-item{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 3px 10px #00000008;
+}
+
+.activity-icon{
+  width:43px;
+  height:43px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+}
+
+/* ================= BOTTOM ================= */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:480px;
+  height:68px;
+  background:white;
+  border-top:1px solid #e5e5e5;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  z-index:50;
+}
+
+.nav-item{
+  text-align:center;
+  padding-top:9px;
+  font-size:10px;
+  color:#777;
+  cursor:pointer;
+}
+
+.nav-icon{
+  height:29px;
+  font-size:22px;
+}
+
+.nav-item.active{
+  color:#087cf0;
+  font-weight:bold;
+}
+
+/* ================= RECEIPT ================= */
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0007;
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.receipt-box{
+  background:white;
+  width:100%;
+  max-width:360px;
+  border-radius:18px;
+  padding:22px;
+  animation:authIn .4s ease;
+}
+
+.receipt-head{
+  text-align:center;
+  padding-bottom:15px;
+  border-bottom:1px dashed #ccc;
+}
+
+.receipt-head h2{
+  color:#087cf0;
+}
+
+.receipt-row{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  font-size:13px;
+}
+
+.receipt-code{
+  background:#eef6ff;
+  color:#087cf0;
+  padding:10px;
+  border-radius:9px;
+  text-align:center;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+.success{
+  display:none;
+  position:fixed;
+  top:75px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#20a447;
+  color:white;
+  padding:13px 22px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:bold;
+  z-index:200;
+  box-shadow:0 8px 20px #0003;
+  animation:authIn .4s;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes authIn{
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateX(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+
+@keyframes circleMove{
+  from{transform:translate(0,0)}
+  to{transform:translate(20px,20px)}
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+
+@media(max-width:380px){
+  .quick{gap:5px}
+  .quick-icon{height:48px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= AUTH ================= -->
+
+<div id="auth">
+
+  <div class="auth-circle c1"></div>
+  <div class="auth-circle c2"></div>
+
+  <!-- REGISTER -->
+  <div class="auth-box" id="registerBox">
+
+    <div class="auth-logo">S</div>
+
+    <h1>SanPay</h1>
+
+    <div class="auth-sub">
+      Buat akun SanPay kamu
+    </div>
+
+    <div class="auth-error" id="regError"></div>
+
+    <input
+      id="regUser"
+      type="text"
+      placeholder="Username"
+      autocomplete="off"
+    >
+
+    <input
+      id="regPass"
+      type="password"
+      placeholder="Password"
+    >
+
+    <input
+      id="regConfirm"
+      type="password"
+      placeholder="Confirm pass"
+    >
+
+    <button
+      class="auth-btn"
+      onclick="register()"
+    >
+      Daftar
+    </button>
+
+    <div class="switch">
+      Sudah punya akun?
+      <span onclick="showLogin()">
+        Login
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- LOGIN -->
+  <div
+    class="auth-box"
+    id="loginBox"
+    style="display:none"
+  >
+
+    <div class="auth-logo">S</div>
+
+    <h1>SanPay</h1>
+
+    <div class="auth-sub">
+      Login ke akun SanPay
+    </div>
+
+    <div class="auth-error" id="loginError"></div>
+
+    <input
+      id="loginUser"
+      type="text"
+      placeholder="Username"
+      autocomplete="off"
+    >
+
+    <input
+      id="loginPass"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button
+      class="auth-btn"
+      onclick="login()"
+    >
+      Login
+    </button>
+
+    <div class="switch">
+      Belum punya akun?
+      <span onclick="showRegister()">
+        Daftar
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= HOME ================= -->
+
+<div id="home" style="display:none">
+
+<header>
+
+  <div class="top">
+
+    <div class="brand">
+      SanPay
+    </div>
+
+    <div class="header-right">
+
+      <span style="font-size:11px">
+        Rp
+      </span>
+
+      <div class="money">
+        💰
+      </div>
+
+      <div
+        class="eye"
+        onclick="toggleSaldo()"
+      >
+        👁️
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="balance">
+
+    <small>
+      Saldo SanPay
+    </small>
+
+    <div class="balance-row">
+
+      <span style="font-size:13px">
+        Rp
+      </span>
+
+      <h1 id="saldo">
+        100.000
+      </h1>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="section">
+
+  <div class="quick">
+
+    <div
+      class="quick-item"
+      onclick="openTopup()"
+    >
+      <div class="quick-icon">＋</div>
+      Isi Saldo
+    </div>
+
+    <div class="quick-item">
+      <div class="quick-icon">💵</div>
+      Minta
+    </div>
+
+    <div
+      class="quick-item"
+      onclick="openSend()"
+    >
+      <div class="quick-icon">💸</div>
+      Kirim
+    </div>
+
+    <div class="quick-item">
+      <div class="quick-icon">✉️</div>
+      Pesan
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="banner">
+
+    <h2>
+      Gojo Special Zone
+    </h2>
+
+    <p>
+      Temukan berbagai promo dan layanan SanPay.
+    </p>
+
+    <div class="shape"></div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="menu-grid">
+
+    <div class="menu-item">
+      <div class="micon">▶️</div>
+      Google Play Zone
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">A+</div>
+      A+ Rewards
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">🤝</div>
+      Affiliate
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">📱</div>
+      Pulsa / Data
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">G</div>
+      Google
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">💡</div>
+      Listrik
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">✈️</div>
+      Travel
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">🎁</div>
+      SanPay Kaget
+    </div>
+
+    <div class="menu-item">
+      <div class="micon">•••</div>
+      Lihat Semua
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="banner">
+
+    <h2>
+      ✨ SanPay
+    </h2>
+
+    <p>
+      Nikmati pengalaman pembayaran yang sederhana.
+    </p>
+
+    <div class="shape"></div>
+
+  </div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- ================= TOP UP ================= -->
+
+<div id="topupPage" class="page">
+
+  <div
+    class="back"
+    onclick="backHome()"
+  >
+    ‹ Kembali
+  </div>
+
+  <div class="page-title">
+    Isi Saldo
+  </div>
+
+  <input
+    class="search"
+    placeholder="🔍 Cari metode isi saldo"
+  >
+
+  <div class="pay-section">
+
+    <div class="pay-title">
+      Transfer Bank
+    </div>
+
+    <div class="bank-row">
+
+      <div class="bank">
+        BI FAST
+      </div>
+
+      <div class="bank">
+        BRI
+      </div>
+
+      <div class="bank">
+        CIMB NIAGA
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="pay-section">
+
+    <div class="pay-title">
+      Uang Tunai
+    </div>
+
+    <div class="cash">
+
+      <div
+        class="store"
+        onclick="indomaret()"
+      >
+        🏪 Indomaret
+      </div>
+
+      <div class="store">
+        🏪 Alfamart
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="amountBox"
+    class="amount-box"
+    style="display:none"
+  >
+
+    <h3>
+      Nominal Isi Saldo
+    </h3>
+
+    <input
+      id="amount"
+      type="number"
+      placeholder="Contoh: 50000"
+    >
+
+    <button
+      class="amount-btn"
+      onclick="buatStruk()"
+    >
+      Lanjutkan
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= SEND ================= -->
+
+<div id="sendPage" class="page">
+
+  <div
+    class="back"
+    onclick="backHome()"
+  >
+    ‹ Kembali
+  </div>
+
+  <div class="page-title">
+    Kirim Saldo
+  </div>
+
+  <div class="amount-box">
+
+    <div style="
+      text-align:center;
+      font-size:40px;
+    ">
+      💸
+    </div>
+
+    <h2 style="
+      text-align:center;
+      margin-top:8px;
+    ">
+      Kirim Saldo
+    </h2>
+
+    <p style="
+      text-align:center;
+      color:#888;
+      font-size:12px;
+      margin:5px 0 18px;
+    ">
+      Kirim saldo secara lokal.
+    </p>
+
+    <b style="font-size:13px">
+      Nomor Tujuan
+    </b>
+
+    <input
+      id="sendNumber"
+      type="tel"
+      placeholder="08xxxxxxxxxx"
+    >
+
+    <b style="
+      display:block;
+      margin-top:15px;
+      font-size:13px;
+    ">
+      Nominal
+    </b>
+
+    <input
+      id="sendAmount"
+      type="number"
+      placeholder="Rp10.000"
+    >
+
+    <button
+      class="amount-btn"
+      onclick="kirimSaldo()"
+    >
+      KIRIM SEKARANG
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= ACTIVITY ================= -->
+
+<div id="activityPage" class="page">
+
+  <div
+    class="back"
+    onclick="backHome()"
+  >
+    ‹ Kembali
+  </div>
+
+  <div class="page-title">
+    Aktivitas
+  </div>
+
+  <div id="activityList"></div>
+
+</div>
+
+
+<!-- ================= WALLET ================= -->
+
+<div id="walletPage" class="page">
+
+  <div
+    class="back"
+    onclick="backHome()"
+  >
+    ‹ Kembali
+  </div>
+
+  <div class="page-title">
+    Dompet
+  </div>
+
+  <div
+    class="amount-box"
+    style="text-align:center"
+  >
+
+    <div style="font-size:40px">
+      👛
+    </div>
+
+    <p style="
+      color:#888;
+      font-size:12px;
+      margin-top:7px;
+    ">
+      Total Saldo
+    </p>
+
+    <h1
+      id="walletSaldo"
+      style="
+      color:#087cf0;
+      margin-top:5px;
+      "
+    >
+      Rp100.000
+    </h1>
+
+    <button
+      class="amount-btn"
+      onclick="openTopup()"
+    >
+      ISI SALDO
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= PROFILE ================= -->
+
+<div id="profilePage" class="page">
+
+  <div
+    class="back"
+    onclick="backHome()"
+  >
+    ‹ Kembali
+  </div>
+
+  <div class="page-title">
+    Saya
+  </div>
+
+  <div
+    class="amount-box"
+    style="text-align:center"
+  >
+
+    <div class="profile-avatar">
+      A
+    </div>
+
+    <h2 style="margin-top:12px">
+      <span id="profileUsername">
+        Akhsan
+      </span>
+    </h2>
+
+    <p style="
+      color:#888;
+      font-size:12px;
+      margin-top:5px;
+    ">
+      Pengguna SanPay
+    </p>
+
+  </div>
+
+  <div class="amount-box">
+
+    <div class="profile-option">
+      ⚙️ Pengaturan
+    </div>
+
+    <div class="profile-option">
+      🔔 Notifikasi
+    </div>
+
+    <div class="profile-option">
+      🛡️ Keamanan
+    </div>
+
+    <div class="profile-option">
+      ℹ️ Tentang SanPay
+    </div>
+
+    <div
+      class="profile-option"
+      onclick="logout()"
+      style="color:#e53935;cursor:pointer"
+    >
+      🚪 Keluar
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= BOTTOM ================= -->
+
+<div class="bottom">
+
+  <div
+    class="nav-item active"
+    onclick="navHome(this)"
+  >
+    <div class="nav-icon">⌂</div>
+    Beranda
+  </div>
+
+  <div
+    class="nav-item"
+    onclick="navActivity(this)"
+  >
+    <div class="nav-icon">◷</div>
+    Aktivitas
+  </div>
+
+  <div
+    class="nav-item"
+    onclick="payDemo()"
+  >
+    <div class="nav-icon">▣</div>
+    Pay
+  </div>
+
+  <div
+    class="nav-item"
+    onclick="navWallet(this)"
+  >
+    <div class="nav-icon">▢</div>
+    Dompet
+  </div>
+
+  <div
+    class="nav-item"
+    onclick="navProfile(this)"
+  >
+    <div class="nav-icon">👤</div>
+    Saya
+  </div>
+
+</div>
+
+
+<!-- ================= TOPUP RECEIPT ================= -->
+
+<div id="receipt" class="overlay">
+
+  <div class="receipt-box">
+
+    <div class="receipt-head">
+      <h2>SanPay</h2>
+
+      <p style="
+        font-size:12px;
+        color:#777;
+        margin-top:5px;
+      ">
+        Bukti Isi Saldo
+      </p>
+    </div>
+
+    <div class="receipt-row">
+      <span>Nama</span>
+      <b id="receiptName">Akhsan</b>
+    </div>
+
+    <div class="receipt-row">
+      <span>Metode</span>
+      <b>Indomaret</b>
+    </div>
+
+    <div class="receipt-row">
+      <span>Nominal</span>
+      <b id="receiptAmount">Rp0</b>
+    </div>
+
+    <div class="receipt-row">
+      <span>Tanggal</span>
+      <b id="receiptDate"></b>
+    </div>
+
+    <div class="receipt-code">
+      Kode Isi Saldo<br>
+      <span id="receiptCode"></span>
+    </div>
+
+    <div class="receipt-row">
+      <span>Status</span>
+      <b style="color:#20a447">
+        BERHASIL
+      </b>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= SEND RECEIPT ================= -->
+
+<div id="sendReceipt" class="overlay">
+
+  <div class="receipt-box">
+
+    <div class="receipt-head">
+      <h2>SanPay</h2>
+
+      <p style="
+        font-size:12px;
+        color:#777;
+        margin-top:5px;
+      ">
+        Bukti Kirim Saldo
+      </p>
+    </div>
+
+    <div class="receipt-row">
+      <span>Pengirim</span>
+      <b id="sendReceiptName">
+        Akhsan
+      </b>
+    </div>
+
+    <div class="receipt-row">
+      <span>Tujuan</span>
+      <b id="sendReceiptNumber"></b>
+    </div>
+
+    <div class="receipt-row">
+      <span>Nominal</span>
+      <b id="sendReceiptAmount"></b>
+    </div>
+
+    <div class="receipt-row">
+      <span>Tanggal</span>
+      <b id="sendReceiptDate"></b>
+    </div>
+
+    <div class="receipt-code">
+      Kode Transaksi<br>
+      <span id="sendReceiptCode"></span>
+    </div>
+
+    <div class="receipt-row">
+      <span>Status</span>
+      <b style="color:#20a447">
+        BERHASIL
+      </b>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  id="success"
+  class="success"
+>
+  ✓ Berhasil
+</div>
+
+
+<script>
+
+/* ================= DATA ================= */
+
+let account =
+ JSON.parse(localStorage.getItem("sanpayAccount"));
+
+let saldo=100000;
+
+let saldoVisible=true;
+
+let aktivitas=[];
+
+
+/* ================= AUTH SCREEN ================= */
+
+if(account){
+
+ showLogin();
+
+}
+
+
+/* REGISTER */
+function showRegister(){
+
+ document.getElementById("loginBox")
+  .style.display="none";
+
+ document.getElementById("registerBox")
+  .style.display="block";
+
+}
+
+
+/* LOGIN SCREEN */
+function showLogin(){
+
+ document.getElementById("registerBox")
+  .style.display="none";
+
+ document.getElementById("loginBox")
+  .style.display="block";
+
+}
+
+
+/* REGISTER */
+function register(){
+
+ const user=
+  document.getElementById("regUser")
+   .value.trim();
+
+ const pass=
+  document.getElementById("regPass")
+   .value;
+
+ const confirm=
+  document.getElementById("regConfirm")
+   .value;
+
+ const error=
+  document.getElementById("regError");
+
+
+ error.style.display="none";
+
+
+ if(user.length<3){
+
+  error.textContent=
+   "Username minimal 3 karakter.";
+
+  error.style.display="block";
+
+  return;
+
+ }
+
+
+ if(pass.length<4){
+
+  error.textContent=
+   "Password minimal 4 karakter.";
+
+  error.style.display="block";
+
+  return;
+
+ }
+
+
+ if(pass!==confirm){
+
+  error.textContent=
+   "Confirm pass tidak sama.";
+
+  error.style.display="block";
+
+  return;
+
+ }
+
+
+ account={
+  username:user,
+  password:pass
+ };
+
+
+ localStorage.setItem(
+  "sanpayAccount",
+  JSON.stringify(account)
+ );
+
+
+ document.getElementById("loginUser")
+  .value=user;
+
+ document.getElementById("regUser")
+  .value="";
+
+ document.getElementById("regPass")
+  .value="";
+
+ document.getElementById("regConfirm")
+  .value="";
+
+
+ showLogin();
+
+}
+
+
+/* LOGIN */
+function login(){
+
+ const user=
+  document.getElementById("loginUser")
+   .value.trim();
+
+ const pass=
+  document.getElementById("loginPass")
+   .value;
+
+ const error=
+  document.getElementById("loginError");
+
+
+ error.style.display="none";
+
+
+ if(!account){
+
+  showRegister();
+
+  return;
+
+ }
+
+
+ if(
+  user===account.username &&
+  pass===account.password
+ ){
+
+  document.getElementById("auth")
+   .style.display="none";
+
+  document.getElementById("home")
+   .style.display="block";
+
+  document.getElementById("profileUsername")
+   .textContent=account.username;
+
+ }else{
+
+  error.textContent=
+   "Username atau password salah.";
+
+  error.style.display="block";
+
+ }
+
+}
+
+
+/* LOGOUT */
+function logout(){
+
+ document.getElementById("home")
+  .style.display="none";
+
+ document.querySelectorAll(".page")
+  .forEach(x=>x.classList.remove("active"));
+
+ document.getElementById("auth")
+  .style.display="flex";
+
+ showLogin();
+
+}
+
+
+/* ================= SALDO ================= */
+
+function rupiah(n){
+ return "Rp"+Number(n).toLocaleString("id-ID");
+}
+
+function updateSaldo(){
+
+ document.getElementById("saldo")
+  .textContent=
+  saldoVisible
+  ? saldo.toLocaleString("id-ID")
+  : "••••••";
+
+}
+
+
+function toggleSaldo(){
+
+ saldoVisible=!saldoVisible;
+
+ updateSaldo();
+
+}
+
+
+/* ================= PAGES ================= */
+
+function hidePages(){
+
+ document.getElementById("home")
+  .style.display="none";
+
+ [
+  "topupPage",
+  "sendPage",
+  "activityPage",
+  "walletPage",
+  "profilePage"
+ ].forEach(id=>{
+
+  const el=document.getElementById(id);
+
+  if(el)
+   el.classList.remove("active");
+
+ });
+
+}
+
+
+function backHome(){
+
+ hidePages();
+
+ document.getElementById("home")
+  .style.display="block";
+
+}
+
+
+/* ================= TOPUP ================= */
+
+function openTopup(){
+
+ hidePages();
+
+ document.getElementById("topupPage")
+  .classList.add("active");
+
+}
+
+
+function indomaret(){
+
+ document.getElementById("amountBox")
+  .style.display="block";
+
+ document.getElementById("amountBox")
+  .scrollIntoView({
+   behavior:"smooth",
+   block:"center"
+  });
+
+}
+
+
+function randomCode(){
+
+ const chars=
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+ let code="";
+
+ for(let i=0;i<12;i++){
+
+  code+=chars[
+   Math.floor(Math.random()*chars.length)
+  ];
+
+ }
+
+ return code;
+
+}
+
+
+function buatStruk(){
+
+ const amount=
+  Number(document.getElementById("amount").value);
+
+
+ if(!amount || amount<=0){
+
+  alert("Masukkan nominal isi saldo.");
+
+  return;
+
+ }
+
+
+ saldo+=amount;
+
+
+ aktivitas.unshift({
+
+  type:"topup",
+
+  title:"Isi Saldo",
+
+  detail:"Indomaret",
+
+  amount:amount,
+
+  date:new Date()
+
+ });
+
+
+ updateSaldo();
+
+
+ document.getElementById("walletSaldo")
+  .textContent=rupiah(saldo);
+
+
+ document.getElementById("receiptAmount")
+  .textContent=rupiah(amount);
+
+
+ document.getElementById("receiptCode")
+  .textContent=randomCode();
+
+
+ document.getElementById("receiptDate")
+  .textContent=
+   new Date().toLocaleString("id-ID");
+
+
+ document.getElementById("receipt")
+  .style.display="flex";
+
+
+ setTimeout(()=>{
+
+  document.getElementById("receipt")
+   .style.display="none";
+
+  showSuccess(
+   "✓ Isi saldo berhasil"
+  );
+
+ },6000);
+
+}
+
+
+/* ================= SEND ================= */
+
+function openSend(){
+
+ hidePages();
+
+ document.getElementById("sendPage")
+  .classList.add("active");
+
+}
+
+
+function kirimSaldo(){
+
+ const tujuan=
+  document.getElementById("sendNumber")
+   .value.trim();
+
+ const amount=
+  Number(document.getElementById("sendAmount").value);
+
+
+ if(tujuan.length<5){
+
+  alert("Masukkan nomor tujuan.");
+
+  return;
+
+ }
+
+
+ if(!amount || amount<=0){
+
+  alert("Masukkan nominal.");
+
+  return;
+
+ }
+
+
+ if(amount>saldo){
+
+  alert(
+   "Saldo SanPay tidak mencukupi."
+  );
+
+  return;
+
+ }
+
+
+ saldo-=amount;
+
+
+ aktivitas.unshift({
+
+  type:"send",
+
+  title:"Kirim Saldo",
+
+  detail:tujuan,
+
+  amount:amount,
+
+  date:new Date()
+
+ });
+
+
+ updateSaldo();
+
+
+ document.getElementById("walletSaldo")
+  .textContent=rupiah(saldo);
+
+
+ document.getElementById("sendReceiptNumber")
+  .textContent=tujuan;
+
+
+ document.getElementById("sendReceiptAmount")
+  .textContent=rupiah(amount);
+
+
+ document.getElementById("sendReceiptDate")
+  .textContent=
+   new Date().toLocaleString("id-ID");
+
+
+ document.getElementById("sendReceiptCode")
+  .textContent=randomCode();
+
+
+ document.getElementById("sendReceipt")
+  .style.display="flex";
+
+
+ document.getElementById("sendNumber")
+  .value="";
+
+ document.getElementById("sendAmount")
+  .value="";
+
+
+ setTimeout(()=>{
+
+  document.getElementById("sendReceipt")
+   .style.display="none";
+
+  showSuccess(
+   "✓ Saldo berhasil dikirim"
+  );
+
+ },5000);
+
+}
+
+
+/* ================= ACTIVITY ================= */
+
+function openActivity(){
+
+ hidePages();
+
+ document.getElementById("activityPage")
+  .classList.add("active");
+
+ renderActivity();
+
+}
+
+
+function renderActivity(){
+
+ const box=
+  document.getElementById("activityList");
+
+
+ if(!aktivitas.length){
+
+  box.innerHTML=`
+
+   <div class="amount-box"
+        style="text-align:center">
+
+    <div style="font-size:42px">
+     📋
+    </div>
+
+    <p style="
+     margin-top:10px;
+     color:#888;
+     font-size:13px;
+    ">
+     Belum ada aktivitas
+    </p>
+
+   </div>
+
+  `;
+
+  return;
+
+ }
+
+
+ box.innerHTML="";
+
+
+ aktivitas.forEach(item=>{
+
+  const topup=
+   item.type==="topup";
+
+
+  const div=
+   document.createElement("div");
+
+
+  div.className=
+   "activity-item";
+
+
+  div.innerHTML=`
+
+   <div
+    class="activity-icon"
+    style="
+     background:
+     ${topup
+      ? "#e9f8ed"
+      : "#fff0ef"};
+    "
+   >
+    ${topup ? "＋":"↗"}
+   </div>
+
+   <div style="flex:1">
+
+    <b>
+     ${item.title}
+    </b>
+
+    <div style="
+     font-size:11px;
+     color:#888;
+     margin-top:4px
+    ">
+     ${item.detail}
+    </div>
+
+    <div style="
+     font-size:10px;
+     color:#aaa;
+     margin-top:3px
+    ">
+     ${item.date.toLocaleString("id-ID")}
+    </div>
+
+   </div>
+
+   <b style="
+    color:
+    ${topup
+     ? "#20a447"
+     : "#e53935"};
+    font-size:13px
+   ">
+    ${topup?"+":"-"}
+    ${rupiah(item.amount)}
+   </b>
+
+  `;
+
+
+  box.appendChild(div);
+
+ });
+
+}
+
+
+/* ================= WALLET ================= */
+
+function openWallet(){
+
+ hidePages();
+
+ document.getElementById("walletPage")
+  .classList.add("active");
+
+ document.getElementById("walletSaldo")
+  .textContent=rupiah(saldo);
+
+}
+
+
+/* ================= PROFILE ================= */
+
+function openProfile(){
+
+ hidePages();
+
+ document.getElementById("profilePage")
+  .classList.add("active");
+
+}
+
+
+/* ================= NAV ================= */
+
+function navHome(el){
+
+ document.querySelectorAll(".nav-item")
+  .forEach(x=>
+   x.classList.remove("active")
+  );
+
+ el.classList.add("active");
+
+ backHome();
+
+}
+
+
+function navActivity(el){
+
+ document.querySelectorAll(".nav-item")
+  .forEach(x=>
+   x.classList.remove("active")
+  );
+
+ el.classList.add("active");
+
+ openActivity();
+
+}
+
+
+function navWallet(el){
+
+ document.querySelectorAll(".nav-item")
+  .forEach(x=>
+   x.classList.remove("active")
+  );
+
+ el.classList.add("active");
+
+ openWallet();
+
+}
+
+
+function navProfile(el){
+
+ document.querySelectorAll(".nav-item")
+  .forEach(x=>
+   x.classList.remove("active")
+  );
+
+ el.classList.add("active");
+
+ openProfile();
+
+}
+
+
+function payDemo(){
+
+ alert(
+  "QR Pay belum terhubung ke pembayaran nyata."
+ );
+
+}
+
+
+/* ================= SUCCESS ================= */
+
+function showSuccess(text){
+
+ const s=
+  document.getElementById("success");
+
+ s.textContent=text;
+
+ s.style.display="block";
+
+
+ setTimeout(()=>{
+
+  s.style.display="none";
+
+ },3000);
+
+}
+
+</script>
+
+</body>
+</html>
