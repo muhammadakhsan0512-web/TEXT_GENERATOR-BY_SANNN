@@ -3,158 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SanPay</title>
+<title>SannnPay</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
 body{
-  background:#f3f7ff;
-  color:#202124;
-  max-width:480px;
+  background:#f4f7fb;
+  color:#172033;
+  max-width:500px;
   margin:auto;
   min-height:100vh;
 }
 
-/* ================= LOGIN ================= */
+button,input,select,textarea{
+  font:inherit;
+}
 
-#auth{
+/* AUTH */
+#authPage{
   position:fixed;
   inset:0;
-  background:linear-gradient(145deg,#087cf0,#0057d9);
+  z-index:9999;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:999;
   overflow:hidden;
+  background:linear-gradient(145deg,#0866e8,#12a5ff);
 }
 
-.auth-circle{
+.authBubble{
   position:absolute;
   border-radius:50%;
-  background:#ffffff15;
-  animation:circleMove 5s infinite alternate ease-in-out;
+  background:#ffffff18;
+  animation:floatBubble 6s infinite alternate ease-in-out;
 }
 
-.c1{
-  width:220px;
-  height:220px;
-  left:-80px;
-  top:-60px;
+.b1{
+  width:250px;
+  height:250px;
+  top:-100px;
+  left:-90px;
 }
 
-.c2{
-  width:280px;
-  height:280px;
-  right:-120px;
-  bottom:-100px;
+.b2{
+  width:320px;
+  height:320px;
+  right:-150px;
+  bottom:-130px;
   animation-delay:1s;
 }
 
-.auth-box{
+.authCard{
   width:90%;
-  max-width:380px;
+  max-width:390px;
   background:white;
-  border-radius:25px;
-  padding:28px;
-  box-shadow:0 20px 60px #003b8a66;
+  border-radius:28px;
+  padding:28px 24px;
   position:relative;
   z-index:2;
-  animation:authIn .6s ease;
+  box-shadow:0 20px 70px #003d8c66;
+  animation:cardIn .5s ease;
 }
 
-.auth-logo{
-  width:72px;
-  height:72px;
-  border-radius:21px;
-  background:#087cf0;
+.authLogo{
+  width:75px;
+  height:75px;
+  margin:auto;
+  border-radius:24px;
+  background:linear-gradient(135deg,#0866e8,#14b8ff);
   color:white;
   display:flex;
   justify-content:center;
   align-items:center;
-  margin:auto;
-  font-size:32px;
+  font-size:30px;
   font-weight:bold;
-  box-shadow:0 8px 20px #087cf044;
+  box-shadow:0 10px 25px #0875e855;
 }
 
-.auth-box h1{
+.authTitle{
   text-align:center;
-  color:#087cf0;
-  margin-top:13px;
+  margin-top:15px;
+  font-size:25px;
+  color:#0866e8;
 }
 
-.auth-sub{
+.authText{
   text-align:center;
-  color:#888;
+  color:#8792a5;
   font-size:12px;
-  margin:7px 0 22px;
+  margin:8px 0 22px;
 }
 
-.auth-box input{
+.inputBox{
   width:100%;
-  height:48px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:0 14px;
+  height:50px;
+  border:1px solid #dfe5ee;
+  border-radius:14px;
   margin-bottom:11px;
+  padding:0 14px;
   outline:none;
-  transition:.25s;
+  transition:.2s;
 }
 
-.auth-box input:focus{
-  border-color:#087cf0;
-  box-shadow:0 0 0 3px #087cf014;
-  transform:translateY(-1px);
+.inputBox:focus{
+  border-color:#0875e8;
+  box-shadow:0 0 0 3px #0875e815;
 }
 
-.auth-btn{
+.primaryBtn{
   width:100%;
-  height:48px;
   border:0;
-  border-radius:12px;
-  background:#087cf0;
+  height:50px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#0866e8,#129df5);
   color:white;
   font-weight:bold;
   cursor:pointer;
   transition:.2s;
 }
 
-.auth-btn:active{
+.primaryBtn:active{
   transform:scale(.97);
 }
 
-.switch{
+.authSwitch{
   text-align:center;
-  margin-top:17px;
+  margin-top:18px;
   font-size:12px;
-  color:#777;
+  color:#7d8797;
 }
 
-.switch span{
-  color:#087cf0;
+.authSwitch span{
+  color:#0866e8;
   font-weight:bold;
   cursor:pointer;
 }
 
-.auth-error{
+.errorBox{
   display:none;
-  background:#fff0f0;
-  color:#d93025;
-  border-radius:10px;
-  padding:10px;
   margin-bottom:12px;
-  font-size:12px;
+  padding:10px;
   text-align:center;
-  animation:shake .35s;
+  color:#d83232;
+  background:#fff0f0;
+  border-radius:10px;
+  font-size:12px;
 }
 
-/* ================= HEADER ================= */
+/* APP */
+#app{
+  display:none;
+  min-height:100vh;
+  padding-bottom:85px;
+}
 
 header{
-  background:#087cf0;
   color:white;
-  padding:18px;
+  padding:18px 18px 35px;
+  background:linear-gradient(145deg,#0866e8,#159df7);
+  border-radius:0 0 28px 28px;
   position:relative;
   overflow:hidden;
 }
@@ -162,15 +175,15 @@ header{
 header:after{
   content:"";
   position:absolute;
-  width:190px;
-  height:190px;
+  width:240px;
+  height:240px;
+  right:-110px;
+  top:-150px;
   border-radius:50%;
-  background:#ffffff12;
-  right:-70px;
-  top:-100px;
+  background:#ffffff14;
 }
 
-.top{
+.headerTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -179,24 +192,37 @@ header:after{
 }
 
 .brand{
-  font-size:23px;
+  font-size:24px;
   font-weight:800;
 }
 
-.header-right{
-  display:flex;
-  gap:10px;
-  align-items:center;
+.headerUser{
+  font-size:12px;
+  background:#ffffff20;
+  padding:8px 10px;
+  border-radius:12px;
 }
 
-.money{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#ffffff22;
+.balanceCard{
+  position:relative;
+  z-index:2;
+  margin-top:25px;
+}
+
+.balanceLabel{
+  font-size:12px;
+  opacity:.85;
+}
+
+.balanceRow{
   display:flex;
   align-items:center;
-  justify-content:center;
+  gap:9px;
+  margin-top:5px;
+}
+
+.balance{
+  font-size:30px;
 }
 
 .eye{
@@ -204,87 +230,56 @@ header:after{
   font-size:20px;
 }
 
-.balance{
-  margin-top:20px;
+.content{
+  padding:15px;
+}
+
+.quickMenu{
+  background:white;
+  border-radius:20px;
+  padding:14px;
+  margin-top:-27px;
   position:relative;
-  z-index:2;
-}
-
-.balance small{
-  font-size:12px;
-  opacity:.85;
-}
-
-.balance-row{
-  display:flex;
-  align-items:center;
+  z-index:4;
+  box-shadow:0 8px 25px #10204012;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
   gap:8px;
 }
 
-.balance h1{
-  font-size:29px;
-}
-
-/* ================= HOME ================= */
-
-main{
-  padding-bottom:85px;
-}
-
-.section{
-  padding:16px;
-}
-
 .quick{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-}
-
-.quick-item{
   text-align:center;
-  font-size:11px;
+  font-size:10px;
   cursor:pointer;
 }
 
-.quick-icon{
-  height:55px;
-  background:white;
-  border:1px solid #e2eaf7;
+.quickIcon{
+  height:48px;
+  width:48px;
+  margin:auto auto 6px;
   border-radius:15px;
+  background:#eef6ff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:23px;
-  margin-bottom:6px;
-  box-shadow:0 4px 12px #1257a510;
+  font-size:22px;
   transition:.2s;
 }
 
-.quick-item:active .quick-icon{
-  transform:scale(.92);
+.quick:active .quickIcon{
+  transform:scale(.9);
 }
 
 .banner{
-  height:105px;
-  border-radius:18px;
-  background:linear-gradient(100deg,#075ce0,#42a5ff);
-  color:white;
+  margin-top:17px;
+  min-height:110px;
+  border-radius:20px;
   padding:18px;
-  position:relative;
+  color:white;
   overflow:hidden;
-  animation:float 3s infinite ease-in-out;
-}
-
-.banner:after{
-  content:"";
-  position:absolute;
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  background:#ffffff18;
-  right:-30px;
-  top:-50px;
+  position:relative;
+  background:linear-gradient(120deg,#6146e8,#a06cf7);
+  animation:softFloat 3s infinite ease-in-out;
 }
 
 .banner h2{
@@ -292,1840 +287,1684 @@ main{
 }
 
 .banner p{
-  font-size:11px;
   margin-top:7px;
+  font-size:12px;
+  opacity:.9;
+  max-width:220px;
 }
 
-.shape{
+.bannerShape{
   position:absolute;
-  right:25px;
-  bottom:-20px;
-  width:80px;
-  height:55px;
-  border-radius:15px;
-  background:#ffffff22;
-  transform:rotate(-10deg);
+  width:100px;
+  height:100px;
+  border-radius:25px;
+  background:#ffffff18;
+  right:18px;
+  bottom:-35px;
+  transform:rotate(25deg);
 }
 
-.menu-grid{
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:22px 2px 12px;
+}
+
+.sectionTitle h3{
+  font-size:16px;
+}
+
+.sectionTitle span{
+  color:#0875e8;
+  font-size:11px;
+}
+
+.serviceGrid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:16px 8px;
+  gap:12px 6px;
 }
 
-.menu-item{
+.service{
   text-align:center;
-  font-size:11px;
-  opacity:.65;
+  font-size:10px;
+  cursor:pointer;
 }
 
-.micon{
-  height:43px;
+.serviceIcon{
+  width:50px;
+  height:50px;
+  margin:auto auto 6px;
+  border-radius:16px;
+  background:white;
+  box-shadow:0 5px 15px #1a335010;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:25px;
+  font-size:23px;
+  transition:.2s;
 }
 
-/* ================= PAGES ================= */
+.service:active .serviceIcon{
+  transform:translateY(2px);
+}
 
+.smallNote{
+  margin:20px 0;
+  padding:14px;
+  border-radius:15px;
+  background:#fff9e9;
+  color:#876700;
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* PAGES */
 .page{
   display:none;
-  padding:18px;
   min-height:100vh;
+  background:#f4f7fb;
+  padding:18px;
   padding-bottom:90px;
+  animation:pageIn .25s ease;
 }
 
 .page.active{
   display:block;
-  animation:pageIn .25s ease;
 }
 
-.page-title{
+.pageHead{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.backBtn{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.pageTitle{
   font-size:21px;
   font-weight:bold;
-  margin-bottom:18px;
 }
 
-.back{
-  color:#087cf0;
-  font-size:13px;
-  margin-bottom:15px;
-  cursor:pointer;
-}
-
-.search{
-  width:100%;
-  height:45px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:0 15px;
-  outline:none;
-  margin-bottom:20px;
+.card{
   background:white;
+  border-radius:19px;
+  padding:17px;
+  margin-bottom:14px;
+  box-shadow:0 5px 18px #1522380c;
 }
 
-.pay-section,
-.amount-box{
-  background:white;
-  border-radius:16px;
-  margin-bottom:15px;
-  overflow:hidden;
-  box-shadow:0 3px 12px #00000008;
-}
-
-.pay-title{
-  padding:15px;
-  font-weight:bold;
+.cardTitle{
   font-size:14px;
-  border-bottom:1px solid #eee;
-}
-
-.bank-row{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  padding:12px;
-}
-
-.bank{
-  padding:16px;
-  background:#f7f9fc;
-  border-radius:11px;
-  text-align:center;
   font-weight:bold;
+  margin-bottom:13px;
+}
+
+.option{
+  padding:14px 0;
+  border-bottom:1px solid #eef1f5;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:11px;
   font-size:13px;
 }
 
-.cash{
-  padding:15px;
+.option:last-child{
+  border-bottom:0;
 }
 
-.store{
-  padding:16px;
-  background:#f7f9fc;
-  border-radius:11px;
-  margin-bottom:10px;
-  font-weight:bold;
-  cursor:pointer;
+.optionIcon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#eef6ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.amount-box{
-  padding:18px;
-}
-
-.amount-box input{
+.bigInput{
   width:100%;
-  height:48px;
-  border:1px solid #ddd;
-  border-radius:11px;
-  padding:0 13px;
-  margin-top:8px;
+  height:52px;
+  padding:0 14px;
+  border:1px solid #dce3ec;
+  border-radius:14px;
+  outline:none;
+  margin-bottom:11px;
+}
+
+.bigInput:focus{
+  border-color:#0875e8;
+}
+
+/* ACTIVITY */
+.activity{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #eef1f5;
+}
+
+.activity:last-child{
+  border-bottom:0;
+}
+
+.activityIcon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eef6ff;
+  font-size:20px;
+}
+
+.activityMain{
+  flex:1;
+}
+
+.activityMain b{
+  font-size:13px;
+}
+
+.activityMain p{
+  font-size:10px;
+  color:#8490a2;
+  margin-top:4px;
+}
+
+.plus{
+  color:#20a451;
+}
+
+.minus{
+  color:#e14343;
+}
+
+/* SUGGESTION */
+textarea{
+  width:100%;
+  min-height:120px;
+  resize:none;
+  border:1px solid #dce3ec;
+  border-radius:15px;
+  padding:14px;
   outline:none;
 }
 
-.amount-btn{
-  width:100%;
-  height:48px;
-  border:0;
-  border-radius:11px;
-  background:#087cf0;
-  color:white;
-  font-weight:bold;
-  margin-top:12px;
+textarea:focus{
+  border-color:#0875e8;
 }
 
-/* ================= ACTIVITY ================= */
+/* TRAVEL */
+#voyager{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  background:#f5f8fc;
+  overflow-y:auto;
+  animation:travelIn .3s ease;
+}
 
-.activity-item{
-  background:white;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:10px;
+.voyagerTop{
+  padding:20px;
+  color:white;
+  background:linear-gradient(135deg,#102c58,#1579d5);
+}
+
+.voyagerHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.voyagerLogo{
+  font-size:19px;
+  font-weight:bold;
+}
+
+.closeTravel{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:0;
+  color:white;
+  background:#ffffff22;
+  font-size:21px;
+  cursor:pointer;
+}
+
+.traveler{
+  margin-top:24px;
   display:flex;
   align-items:center;
   gap:12px;
-  box-shadow:0 3px 10px #00000008;
 }
 
-.activity-icon{
-  width:43px;
-  height:43px;
-  border-radius:13px;
+.travelerPP{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#ffffff;
+  color:#1579d5;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:21px;
+  font-weight:bold;
 }
 
-/* ================= BOTTOM ================= */
+.traveler small{
+  opacity:.75;
+  font-size:11px;
+}
 
-.bottom{
+.traveler h3{
+  margin-top:3px;
+}
+
+.travelContent{
+  padding:18px;
+}
+
+.travelTabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:-10px;
+}
+
+.travelTab{
+  border:0;
+  background:white;
+  border-radius:15px;
+  min-height:70px;
+  padding:8px 4px;
+  font-size:10px;
+  box-shadow:0 6px 20px #142f500d;
+  cursor:pointer;
+}
+
+.travelTab.active{
+  color:#0875e8;
+  outline:2px solid #0875e8;
+}
+
+.travelForm{
+  margin-top:20px;
+  background:white;
+  padding:18px;
+  border-radius:21px;
+}
+
+.travelForm h2{
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.travelForm p{
+  color:#8792a4;
+  font-size:11px;
+  margin-bottom:17px;
+}
+
+.fieldLabel{
+  font-size:11px;
+  color:#657084;
+  display:block;
+  margin:11px 0 6px;
+}
+
+.travelSelect{
+  width:100%;
+  height:50px;
+  border:1px solid #dde5ef;
+  border-radius:13px;
+  padding:0 12px;
+  background:white;
+}
+
+.travelSearch{
+  margin-top:17px;
+}
+
+.travelResult{
+  display:none;
+  margin-top:18px;
+  animation:cardIn .3s ease;
+}
+
+.ticket{
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 8px 25px #152b4d0e;
+  overflow:hidden;
+}
+
+.ticketHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.ticketBrand{
+  color:#0875e8;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.ticketStatus{
+  font-size:10px;
+  color:#18a550;
+  background:#e9f9ef;
+  padding:7px 9px;
+  border-radius:9px;
+}
+
+.ticketRoute{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:22px 0;
+}
+
+.city{
+  width:38%;
+}
+
+.city b{
+  font-size:18px;
+}
+
+.city span{
+  display:block;
+  color:#8792a4;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.routeLine{
+  flex:1;
+  text-align:center;
+  color:#0875e8;
+}
+
+.ticketInfo{
+  border-top:1px dashed #ccd5e2;
+  padding-top:14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.ticketInfo small{
+  display:block;
+  color:#8993a2;
+  font-size:10px;
+}
+
+.ticketInfo b{
+  font-size:12px;
+  margin-top:3px;
+  display:block;
+}
+
+.ticketPrice{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px dashed #ccd5e2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.ticketPrice span{
+  font-size:11px;
+  color:#768194;
+}
+
+.ticketPrice b{
+  color:#0875e8;
+  font-size:17px;
+}
+
+/* NAV */
+.bottomNav{
   position:fixed;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
+  max-width:500px;
   width:100%;
-  max-width:480px;
-  height:68px;
+  height:72px;
   background:white;
-  border-top:1px solid #e5e5e5;
+  border-top:1px solid #edf0f4;
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  z-index:50;
+  z-index:1000;
 }
 
-.nav-item{
+.nav{
   text-align:center;
   padding-top:9px;
   font-size:10px;
-  color:#777;
+  color:#8490a1;
   cursor:pointer;
 }
 
-.nav-icon{
-  height:29px;
-  font-size:22px;
+.navIcon{
+  font-size:21px;
+  margin-bottom:4px;
 }
 
-.nav-item.active{
-  color:#087cf0;
+.nav.active{
+  color:#0875e8;
   font-weight:bold;
 }
 
-/* ================= RECEIPT ================= */
-
-.overlay{
-  display:none;
+/* TOAST */
+#toast{
   position:fixed;
-  inset:0;
-  background:#0007;
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.receipt-box{
-  background:white;
-  width:100%;
-  max-width:360px;
-  border-radius:18px;
-  padding:22px;
-  animation:authIn .4s ease;
-}
-
-.receipt-head{
-  text-align:center;
-  padding-bottom:15px;
-  border-bottom:1px dashed #ccc;
-}
-
-.receipt-head h2{
-  color:#087cf0;
-}
-
-.receipt-row{
-  display:flex;
-  justify-content:space-between;
-  padding:9px 0;
-  font-size:13px;
-}
-
-.receipt-code{
-  background:#eef6ff;
-  color:#087cf0;
-  padding:10px;
-  border-radius:9px;
-  text-align:center;
-  font-weight:bold;
-  margin:10px 0;
-}
-
-.success{
-  display:none;
-  position:fixed;
-  top:75px;
+  z-index:10000;
+  top:20px;
   left:50%;
-  transform:translateX(-50%);
-  background:#20a447;
+  transform:translateX(-50%) translateY(-100px);
+  background:#172033;
   color:white;
-  padding:13px 22px;
-  border-radius:12px;
-  font-size:13px;
-  font-weight:bold;
-  z-index:200;
-  box-shadow:0 8px 20px #0003;
-  animation:authIn .4s;
+  padding:13px 19px;
+  border-radius:14px;
+  font-size:12px;
+  box-shadow:0 10px 30px #0003;
+  transition:.35s;
 }
 
-/* ================= ANIMATION ================= */
+#toast.show{
+  transform:translateX(-50%) translateY(0);
+}
 
-@keyframes authIn{
+@keyframes cardIn{
   from{
     opacity:0;
-    transform:translateY(25px) scale(.97);
+    transform:translateY(20px) scale(.97);
   }
   to{
     opacity:1;
-    transform:translateY(0) scale(1);
+    transform:none;
   }
 }
 
 @keyframes pageIn{
   from{
     opacity:0;
-    transform:translateX(12px);
+    transform:translateX(15px);
   }
   to{
     opacity:1;
-    transform:translateX(0);
+    transform:none;
   }
 }
 
-@keyframes float{
+@keyframes floatBubble{
+  from{transform:translate(0,0)}
+  to{transform:translate(20px,25px)}
+}
+
+@keyframes softFloat{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-3px)}
 }
 
-@keyframes circleMove{
-  from{transform:translate(0,0)}
-  to{transform:translate(20px,20px)}
+@keyframes travelIn{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
 
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  75%{transform:translateX(5px)}
-}
+@media(max-width:370px){
+  .serviceGrid{
+    gap:10px 3px;
+  }
 
-@media(max-width:380px){
-  .quick{gap:5px}
-  .quick-icon{height:48px}
+  .serviceIcon{
+    width:46px;
+    height:46px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= AUTH ================= -->
+<div id="toast"></div>
 
-<div id="auth">
-
-  <div class="auth-circle c1"></div>
-  <div class="auth-circle c2"></div>
+<!-- AUTH -->
+<div id="authPage">
+  <div class="authBubble b1"></div>
+  <div class="authBubble b2"></div>
 
   <!-- REGISTER -->
-  <div class="auth-box" id="registerBox">
+  <div class="authCard" id="registerBox">
+    <div class="authLogo">S</div>
+    <h1 class="authTitle">SannnPay</h1>
+    <p class="authText">Buat akun baru dan mulai dengan saldo Rp0</p>
 
-    <div class="auth-logo">S</div>
+    <div class="errorBox" id="registerError"></div>
 
-    <h1>SanPay</h1>
+    <input class="inputBox" id="regUsername"
+      placeholder="Username">
 
-    <div class="auth-sub">
-      Buat akun SanPay kamu
-    </div>
+    <input class="inputBox" id="regName"
+      placeholder="Nama panggilan">
 
-    <div class="auth-error" id="regError"></div>
+    <input class="inputBox" id="regPassword"
+      type="password" placeholder="Password">
 
-    <input
-      id="regUser"
-      type="text"
-      placeholder="Username"
-      autocomplete="off"
-    >
+    <input class="inputBox" id="regConfirm"
+      type="password" placeholder="Confirm password">
 
-    <input
-      id="regPass"
-      type="password"
-      placeholder="Password"
-    >
-
-    <input
-      id="regConfirm"
-      type="password"
-      placeholder="Confirm pass"
-    >
-
-    <button
-      class="auth-btn"
-      onclick="register()"
-    >
-      Daftar
+    <button class="primaryBtn" onclick="register()">
+      Buat Akun
     </button>
 
-    <div class="switch">
+    <div class="authSwitch">
       Sudah punya akun?
-      <span onclick="showLogin()">
-        Login
-      </span>
+      <span onclick="showLogin()">Login</span>
     </div>
-
   </div>
 
-
   <!-- LOGIN -->
-  <div
-    class="auth-box"
-    id="loginBox"
-    style="display:none"
-  >
+  <div class="authCard" id="loginBox" style="display:none">
+    <div class="authLogo">S</div>
+    <h1 class="authTitle">Selamat Datang</h1>
+    <p class="authText">Login ke akun SannnPay kamu</p>
 
-    <div class="auth-logo">S</div>
+    <div class="errorBox" id="loginError"></div>
 
-    <h1>SanPay</h1>
+    <input class="inputBox" id="loginUsername"
+      placeholder="Username">
 
-    <div class="auth-sub">
-      Login ke akun SanPay
-    </div>
+    <input class="inputBox" id="loginPassword"
+      type="password" placeholder="Password">
 
-    <div class="auth-error" id="loginError"></div>
-
-    <input
-      id="loginUser"
-      type="text"
-      placeholder="Username"
-      autocomplete="off"
-    >
-
-    <input
-      id="loginPass"
-      type="password"
-      placeholder="Password"
-    >
-
-    <button
-      class="auth-btn"
-      onclick="login()"
-    >
+    <button class="primaryBtn" onclick="login()">
       Login
     </button>
 
-    <div class="switch">
+    <div class="authSwitch">
       Belum punya akun?
-      <span onclick="showRegister()">
-        Daftar
-      </span>
+      <span onclick="showRegister()">Daftar</span>
     </div>
-
   </div>
-
 </div>
 
-
-<!-- ================= HOME ================= -->
-
-<div id="home" style="display:none">
+<!-- APP -->
+<div id="app">
 
 <header>
-
-  <div class="top">
-
-    <div class="brand">
-      SanPay
-    </div>
-
-    <div class="header-right">
-
-      <span style="font-size:11px">
-        Rp
-      </span>
-
-      <div class="money">
-        💰
-      </div>
-
-      <div
-        class="eye"
-        onclick="toggleSaldo()"
-      >
-        👁️
-      </div>
-
-    </div>
-
+  <div class="headerTop">
+    <div class="brand">SannnPay</div>
+    <div class="headerUser" id="headerUsername">👤 Pengguna</div>
   </div>
 
-  <div class="balance">
+  <div class="balanceCard">
+    <div class="balanceLabel">Total Saldo</div>
 
-    <small>
-      Saldo SanPay
-    </small>
-
-    <div class="balance-row">
-
-      <span style="font-size:13px">
-        Rp
-      </span>
-
-      <h1 id="saldo">
-        100.000
-      </h1>
-
+    <div class="balanceRow">
+      <div class="balance" id="balanceText">Rp0</div>
+      <div class="eye" onclick="toggleBalance()">👁️</div>
     </div>
-
   </div>
-
 </header>
 
+<div class="content">
 
-<main>
-
-<section class="section">
-
-  <div class="quick">
-
-    <div
-      class="quick-item"
-      onclick="openTopup()"
-    >
-      <div class="quick-icon">＋</div>
+  <div class="quickMenu">
+    <div class="quick" onclick="openPage('topupPage')">
+      <div class="quickIcon">＋</div>
       Isi Saldo
     </div>
 
-    <div class="quick-item">
-      <div class="quick-icon">💵</div>
-      Minta
-    </div>
-
-    <div
-      class="quick-item"
-      onclick="openSend()"
-    >
-      <div class="quick-icon">💸</div>
+    <div class="quick" onclick="openPage('sendPage')">
+      <div class="quickIcon">💸</div>
       Kirim
     </div>
 
-    <div class="quick-item">
-      <div class="quick-icon">✉️</div>
-      Pesan
+    <div class="quick" onclick="showToast('Fitur minta saldo akan hadir nanti')">
+      <div class="quickIcon">💵</div>
+      Minta
     </div>
 
+    <div class="quick" onclick="openPage('suggestionPage')">
+      <div class="quickIcon">💬</div>
+      Saran
+    </div>
   </div>
-
-</section>
-
-
-<section class="section">
 
   <div class="banner">
-
-    <h2>
-      Gojo Special Zone
-    </h2>
-
-    <p>
-      Temukan berbagai promo dan layanan SanPay.
-    </p>
-
-    <div class="shape"></div>
-
+    <h2>✨ SannnPay Experience</h2>
+    <p>Kelola saldo, aktivitas, dan berbagai fitur dalam satu aplikasi.</p>
+    <div class="bannerShape"></div>
   </div>
 
-</section>
+  <div class="sectionTitle">
+    <h3>Jelajahi Layanan</h3>
+    <span>Lebih banyak</span>
+  </div>
 
+  <div class="serviceGrid">
 
-<section class="section">
-
-  <div class="menu-grid">
-
-    <div class="menu-item">
-      <div class="micon">▶️</div>
-      Google Play Zone
-    </div>
-
-    <div class="menu-item">
-      <div class="micon">A+</div>
-      A+ Rewards
-    </div>
-
-    <div class="menu-item">
-      <div class="micon">🤝</div>
-      Affiliate
-    </div>
-
-    <div class="menu-item">
-      <div class="micon">📱</div>
-      Pulsa / Data
-    </div>
-
-    <div class="menu-item">
-      <div class="micon">G</div>
-      Google
-    </div>
-
-    <div class="menu-item">
-      <div class="micon">💡</div>
-      Listrik
-    </div>
-
-    <div class="menu-item">
-      <div class="micon">✈️</div>
+    <div class="service" onclick="openVoyager()">
+      <div class="serviceIcon">✈️</div>
       Travel
     </div>
 
-    <div class="menu-item">
-      <div class="micon">🎁</div>
-      SanPay Kaget
+    <div class="service" onclick="openVoyager()">
+      <div class="serviceIcon">🚆</div>
+      Tiket
     </div>
 
-    <div class="menu-item">
-      <div class="micon">•••</div>
-      Lihat Semua
+    <div class="service" onclick="openVoyager()">
+      <div class="serviceIcon">🏨</div>
+      Hotel
+    </div>
+
+    <div class="service" onclick="showToast('Pulsa & Data akan hadir')">
+      <div class="serviceIcon">📱</div>
+      Pulsa
+    </div>
+
+    <div class="service" onclick="openPage('ojkPage')">
+      <div class="serviceIcon">⚖️</div>
+      OJK
+    </div>
+
+    <div class="service" onclick="showToast('Pembayaran listrik belum tersedia')">
+      <div class="serviceIcon">💡</div>
+      Listrik
+    </div>
+
+    <div class="service" onclick="showToast('Promo akan segera hadir')">
+      <div class="serviceIcon">🎁</div>
+      Promo
+    </div>
+
+    <div class="service" onclick="openPage('suggestionPage')">
+      <div class="serviceIcon">💭</div>
+      Kesan
     </div>
 
   </div>
 
-</section>
+  <div class="smallNote">
+    <b>Catatan:</b> SannnPay ini adalah proyek aplikasi/simulasi.
+    Saldo dan transaksi disimpan secara lokal pada browser perangkat.
+  </div>
 
+</div>
+</div>
 
-<section class="section">
+<!-- TOPUP -->
+<div class="page" id="topupPage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Isi Saldo</div>
+  </div>
 
-  <div class="banner">
+  <div class="card">
+    <div class="cardTitle">Pilih Nominal</div>
 
-    <h2>
-      ✨ SanPay
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+      <button class="primaryBtn" style="height:42px" onclick="setAmount(10000)">10rb</button>
+      <button class="primaryBtn" style="height:42px" onclick="setAmount(20000)">20rb</button>
+      <button class="primaryBtn" style="height:42px" onclick="setAmount(50000)">50rb</button>
+      <button class="primaryBtn" style="height:42px" onclick="setAmount(100000)">100rb</button>
+      <button class="primaryBtn" style="height:42px" onclick="setAmount(250000)">250rb</button>
+      <button class="primaryBtn" style="height:42px" onclick="setAmount(500000)">500rb</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardTitle">Nominal Lainnya</div>
+
+    <input class="bigInput" id="topupAmount"
+      type="number" placeholder="Masukkan nominal">
+
+    <button class="primaryBtn" onclick="topup()">
+      Isi Saldo
+    </button>
+  </div>
+</div>
+
+<!-- SEND -->
+<div class="page" id="sendPage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Kirim Saldo</div>
+  </div>
+
+  <div class="card">
+    <div class="cardTitle">Tujuan Pengiriman</div>
+
+    <input class="bigInput" id="sendTo"
+      placeholder="Username atau nomor tujuan">
+
+    <input class="bigInput" id="sendAmount"
+      type="number" placeholder="Nominal">
+
+    <button class="primaryBtn" onclick="sendMoney()">
+      Kirim Sekarang
+    </button>
+  </div>
+</div>
+
+<!-- ACTIVITY -->
+<div class="page" id="activityPage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Aktivitas</div>
+  </div>
+
+  <div class="card" id="activityList"></div>
+</div>
+
+<!-- WALLET -->
+<div class="page" id="walletPage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Dompet</div>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <div style="font-size:42px">👛</div>
+    <p style="font-size:11px;color:#8792a4;margin-top:10px">Saldo Saat Ini</p>
+    <h1 style="color:#0875e8;margin:6px 0" id="walletBalance">Rp0</h1>
+
+    <button class="primaryBtn" onclick="openPage('topupPage')">
+      Isi Saldo
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="option">
+      <div class="optionIcon">🔒</div>
+      Keamanan akun
+    </div>
+
+    <div class="option">
+      <div class="optionIcon">📊</div>
+      Informasi saldo
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="profilePage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Saya</div>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <div id="profilePP"
+      style="width:70px;height:70px;border-radius:50%;margin:auto;
+      background:linear-gradient(135deg,#0875e8,#16b4ff);
+      color:white;display:flex;align-items:center;justify-content:center;
+      font-size:30px;font-weight:bold">
+      S
+    </div>
+
+    <h2 id="profileName" style="margin-top:12px">Pengguna</h2>
+    <p id="profileUser" style="font-size:11px;color:#8792a4;margin-top:5px">@username</p>
+  </div>
+
+  <div class="card">
+    <div class="option" onclick="openPage('suggestionPage')">
+      <div class="optionIcon">💬</div>
+      Saran / Kesan
+    </div>
+
+    <div class="option" onclick="openPage('ojkPage')">
+      <div class="optionIcon">⚖️</div>
+      Informasi OJK
+    </div>
+
+    <div class="option" onclick="logout()">
+      <div class="optionIcon">🚪</div>
+      Keluar
+    </div>
+  </div>
+</div>
+
+<!-- SUGGESTION -->
+<div class="page" id="suggestionPage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Saran / Kesan</div>
+  </div>
+
+  <div class="card">
+    <div class="cardTitle">Bagaimana pendapatmu tentang SannnPay?</div>
+
+    <p style="font-size:11px;color:#8792a4;line-height:1.5;margin-bottom:15px">
+      Kirimkan saran, kesan, atau ide fitur baru untuk pengembangan SannnPay.
+    </p>
+
+    <textarea id="suggestionText"
+      placeholder="Tulis saran atau kesan kamu di sini..."></textarea>
+
+    <button class="primaryBtn" style="margin-top:12px"
+      onclick="sendSuggestion()">
+      Kirim Saran
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="cardTitle">Saran yang tersimpan</div>
+    <div id="suggestionList"
+      style="font-size:12px;color:#657084">
+      Belum ada saran.
+    </div>
+  </div>
+</div>
+
+<!-- OJK INFO -->
+<div class="page" id="ojkPage">
+  <div class="pageHead">
+    <div class="backBtn" onclick="backHome()">←</div>
+    <div class="pageTitle">Informasi OJK</div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:38px;text-align:center">⚖️</div>
+
+    <h2 style="text-align:center;font-size:18px;margin-top:10px">
+      Edukasi Keuangan
     </h2>
 
-    <p>
-      Nikmati pengalaman pembayaran yang sederhana.
+    <p style="font-size:12px;color:#657084;line-height:1.6;margin-top:15px">
+      Menu ini dibuat sebagai bagian informasi dan edukasi keuangan.
+      SannnPay adalah proyek/simulasi lokal dan tidak boleh dianggap
+      sebagai pernyataan bahwa aplikasi ini merupakan layanan keuangan
+      resmi atau terdaftar pada regulator.
     </p>
-
-    <div class="shape"></div>
-
   </div>
 
-</section>
+  <div class="card">
+    <div class="cardTitle">Tips aman</div>
 
-</main>
-
-</div>
-
-
-<!-- ================= TOP UP ================= -->
-
-<div id="topupPage" class="page">
-
-  <div
-    class="back"
-    onclick="backHome()"
-  >
-    ‹ Kembali
-  </div>
-
-  <div class="page-title">
-    Isi Saldo
-  </div>
-
-  <input
-    class="search"
-    placeholder="🔍 Cari metode isi saldo"
-  >
-
-  <div class="pay-section">
-
-    <div class="pay-title">
-      Transfer Bank
+    <div class="option">
+      <div class="optionIcon">🔐</div>
+      Jangan membagikan password kepada siapa pun.
     </div>
 
-    <div class="bank-row">
+    <div class="option">
+      <div class="optionIcon">🕵️</div>
+      Periksa kembali informasi sebelum melakukan transaksi.
+    </div>
 
-      <div class="bank">
-        BI FAST
+    <div class="option">
+      <div class="optionIcon">📚</div>
+      Pelajari informasi keuangan dari sumber resmi.
+    </div>
+  </div>
+</div>
+
+<!-- TRAVEL -->
+<div id="voyager">
+
+  <div class="voyagerTop">
+
+    <div class="voyagerHead">
+      <div class="voyagerLogo">SannnPay | Voyager</div>
+
+      <button class="closeTravel" onclick="closeVoyager()">
+        ×
+      </button>
+    </div>
+
+    <div class="traveler">
+      <div class="travelerPP" id="voyagerPP">H</div>
+
+      <div>
+        <small>Selamat datang kembali</small>
+        <h3 id="voyagerName">Hai, Pengelana</h3>
       </div>
-
-      <div class="bank">
-        BRI
-      </div>
-
-      <div class="bank">
-        CIMB NIAGA
-      </div>
-
     </div>
 
   </div>
 
+  <div class="travelContent">
 
-  <div class="pay-section">
+    <div class="travelTabs">
+      <button class="travelTab active" onclick="chooseTravel('train',this)">
+        🚆<br>Kereta Api
+      </button>
 
-    <div class="pay-title">
-      Uang Tunai
+      <button class="travelTab" onclick="chooseTravel('plane',this)">
+        ✈️<br>Pesawat
+      </button>
+
+      <button class="travelTab" onclick="chooseTravel('hotel',this)">
+        🏨<br>Hotel
+      </button>
+
+      <button class="travelTab" onclick="chooseTravel('rides',this)">
+        🚗<br>Rides
+      </button>
     </div>
 
-    <div class="cash">
+    <div class="travelForm">
+      <h2 id="travelTitle">Cari Tiket Kereta</h2>
 
-      <div
-        class="store"
-        onclick="indomaret()"
-      >
-        🏪 Indomaret
-      </div>
+      <p id="travelDesc">
+        Temukan perjalanan yang sesuai untukmu.
+      </p>
 
-      <div class="store">
-        🏪 Alfamart
-      </div>
+      <div id="travelFields"></div>
 
+      <button class="primaryBtn travelSearch" onclick="searchTravel()">
+        Cari Sekarang
+      </button>
     </div>
 
-  </div>
-
-
-  <div
-    id="amountBox"
-    class="amount-box"
-    style="display:none"
-  >
-
-    <h3>
-      Nominal Isi Saldo
-    </h3>
-
-    <input
-      id="amount"
-      type="number"
-      placeholder="Contoh: 50000"
-    >
-
-    <button
-      class="amount-btn"
-      onclick="buatStruk()"
-    >
-      Lanjutkan
-    </button>
+    <div class="travelResult" id="travelResult"></div>
 
   </div>
-
 </div>
 
-
-<!-- ================= SEND ================= -->
-
-<div id="sendPage" class="page">
-
-  <div
-    class="back"
-    onclick="backHome()"
-  >
-    ‹ Kembali
-  </div>
-
-  <div class="page-title">
-    Kirim Saldo
-  </div>
-
-  <div class="amount-box">
-
-    <div style="
-      text-align:center;
-      font-size:40px;
-    ">
-      💸
-    </div>
-
-    <h2 style="
-      text-align:center;
-      margin-top:8px;
-    ">
-      Kirim Saldo
-    </h2>
-
-    <p style="
-      text-align:center;
-      color:#888;
-      font-size:12px;
-      margin:5px 0 18px;
-    ">
-      Kirim saldo secara lokal.
-    </p>
-
-    <b style="font-size:13px">
-      Nomor Tujuan
-    </b>
-
-    <input
-      id="sendNumber"
-      type="tel"
-      placeholder="08xxxxxxxxxx"
-    >
-
-    <b style="
-      display:block;
-      margin-top:15px;
-      font-size:13px;
-    ">
-      Nominal
-    </b>
-
-    <input
-      id="sendAmount"
-      type="number"
-      placeholder="Rp10.000"
-    >
-
-    <button
-      class="amount-btn"
-      onclick="kirimSaldo()"
-    >
-      KIRIM SEKARANG
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- ================= ACTIVITY ================= -->
-
-<div id="activityPage" class="page">
-
-  <div
-    class="back"
-    onclick="backHome()"
-  >
-    ‹ Kembali
-  </div>
-
-  <div class="page-title">
-    Aktivitas
-  </div>
-
-  <div id="activityList"></div>
-
-</div>
-
-
-<!-- ================= WALLET ================= -->
-
-<div id="walletPage" class="page">
-
-  <div
-    class="back"
-    onclick="backHome()"
-  >
-    ‹ Kembali
-  </div>
-
-  <div class="page-title">
-    Dompet
-  </div>
-
-  <div
-    class="amount-box"
-    style="text-align:center"
-  >
-
-    <div style="font-size:40px">
-      👛
-    </div>
-
-    <p style="
-      color:#888;
-      font-size:12px;
-      margin-top:7px;
-    ">
-      Total Saldo
-    </p>
-
-    <h1
-      id="walletSaldo"
-      style="
-      color:#087cf0;
-      margin-top:5px;
-      "
-    >
-      Rp100.000
-    </h1>
-
-    <button
-      class="amount-btn"
-      onclick="openTopup()"
-    >
-      ISI SALDO
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- ================= PROFILE ================= -->
-
-<div id="profilePage" class="page">
-
-  <div
-    class="back"
-    onclick="backHome()"
-  >
-    ‹ Kembali
-  </div>
-
-  <div class="page-title">
-    Saya
-  </div>
-
-  <div
-    class="amount-box"
-    style="text-align:center"
-  >
-
-    <div class="profile-avatar">
-      A
-    </div>
-
-    <h2 style="margin-top:12px">
-      <span id="profileUsername">
-        Akhsan
-      </span>
-    </h2>
-
-    <p style="
-      color:#888;
-      font-size:12px;
-      margin-top:5px;
-    ">
-      Pengguna SanPay
-    </p>
-
-  </div>
-
-  <div class="amount-box">
-
-    <div class="profile-option">
-      ⚙️ Pengaturan
-    </div>
-
-    <div class="profile-option">
-      🔔 Notifikasi
-    </div>
-
-    <div class="profile-option">
-      🛡️ Keamanan
-    </div>
-
-    <div class="profile-option">
-      ℹ️ Tentang SanPay
-    </div>
-
-    <div
-      class="profile-option"
-      onclick="logout()"
-      style="color:#e53935;cursor:pointer"
-    >
-      🚪 Keluar
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= BOTTOM ================= -->
-
-<div class="bottom">
-
-  <div
-    class="nav-item active"
-    onclick="navHome(this)"
-  >
-    <div class="nav-icon">⌂</div>
+<!-- NAV -->
+<div class="bottomNav">
+  <div class="nav active" onclick="navHome(this)">
+    <div class="navIcon">⌂</div>
     Beranda
   </div>
 
-  <div
-    class="nav-item"
-    onclick="navActivity(this)"
-  >
-    <div class="nav-icon">◷</div>
+  <div class="nav" onclick="navActivity(this)">
+    <div class="navIcon">◷</div>
     Aktivitas
   </div>
 
-  <div
-    class="nav-item"
-    onclick="payDemo()"
-  >
-    <div class="nav-icon">▣</div>
-    Pay
+  <div class="nav" onclick="openVoyager()">
+    <div class="navIcon">✈</div>
+    Voyager
   </div>
 
-  <div
-    class="nav-item"
-    onclick="navWallet(this)"
-  >
-    <div class="nav-icon">▢</div>
+  <div class="nav" onclick="navWallet(this)">
+    <div class="navIcon">👛</div>
     Dompet
   </div>
 
-  <div
-    class="nav-item"
-    onclick="navProfile(this)"
-  >
-    <div class="nav-icon">👤</div>
+  <div class="nav" onclick="navProfile(this)">
+    <div class="navIcon">👤</div>
     Saya
   </div>
-
 </div>
-
-
-<!-- ================= TOPUP RECEIPT ================= -->
-
-<div id="receipt" class="overlay">
-
-  <div class="receipt-box">
-
-    <div class="receipt-head">
-      <h2>SanPay</h2>
-
-      <p style="
-        font-size:12px;
-        color:#777;
-        margin-top:5px;
-      ">
-        Bukti Isi Saldo
-      </p>
-    </div>
-
-    <div class="receipt-row">
-      <span>Nama</span>
-      <b id="receiptName">Akhsan</b>
-    </div>
-
-    <div class="receipt-row">
-      <span>Metode</span>
-      <b>Indomaret</b>
-    </div>
-
-    <div class="receipt-row">
-      <span>Nominal</span>
-      <b id="receiptAmount">Rp0</b>
-    </div>
-
-    <div class="receipt-row">
-      <span>Tanggal</span>
-      <b id="receiptDate"></b>
-    </div>
-
-    <div class="receipt-code">
-      Kode Isi Saldo<br>
-      <span id="receiptCode"></span>
-    </div>
-
-    <div class="receipt-row">
-      <span>Status</span>
-      <b style="color:#20a447">
-        BERHASIL
-      </b>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= SEND RECEIPT ================= -->
-
-<div id="sendReceipt" class="overlay">
-
-  <div class="receipt-box">
-
-    <div class="receipt-head">
-      <h2>SanPay</h2>
-
-      <p style="
-        font-size:12px;
-        color:#777;
-        margin-top:5px;
-      ">
-        Bukti Kirim Saldo
-      </p>
-    </div>
-
-    <div class="receipt-row">
-      <span>Pengirim</span>
-      <b id="sendReceiptName">
-        Akhsan
-      </b>
-    </div>
-
-    <div class="receipt-row">
-      <span>Tujuan</span>
-      <b id="sendReceiptNumber"></b>
-    </div>
-
-    <div class="receipt-row">
-      <span>Nominal</span>
-      <b id="sendReceiptAmount"></b>
-    </div>
-
-    <div class="receipt-row">
-      <span>Tanggal</span>
-      <b id="sendReceiptDate"></b>
-    </div>
-
-    <div class="receipt-code">
-      Kode Transaksi<br>
-      <span id="sendReceiptCode"></span>
-    </div>
-
-    <div class="receipt-row">
-      <span>Status</span>
-      <b style="color:#20a447">
-        BERHASIL
-      </b>
-    </div>
-
-  </div>
-
-</div>
-
-
-<div
-  id="success"
-  class="success"
->
-  ✓ Berhasil
-</div>
-
 
 <script>
+let currentAccount = null;
+let balanceVisible = true;
+let travelType = "train";
 
-/* ================= DATA ================= */
-
-let account =
- JSON.parse(localStorage.getItem("sanpayAccount"));
-
-let saldo=100000;
-
-let saldoVisible=true;
-
-let aktivitas=[];
-
-
-/* ================= AUTH SCREEN ================= */
-
-if(account){
-
- showLogin();
-
+function getAccounts(){
+  return JSON.parse(localStorage.getItem("sannnpay_accounts") || "[]");
 }
 
+function saveAccounts(data){
+  localStorage.setItem("sannnpay_accounts", JSON.stringify(data));
+}
 
-/* REGISTER */
+function getCurrentUsername(){
+  return localStorage.getItem("sannnpay_current_user");
+}
+
+function setCurrentUsername(username){
+  localStorage.setItem("sannnpay_current_user", username);
+}
+
 function showRegister(){
-
- document.getElementById("loginBox")
-  .style.display="none";
-
- document.getElementById("registerBox")
-  .style.display="block";
-
+  document.getElementById("registerBox").style.display = "block";
+  document.getElementById("loginBox").style.display = "none";
 }
 
-
-/* LOGIN SCREEN */
 function showLogin(){
-
- document.getElementById("registerBox")
-  .style.display="none";
-
- document.getElementById("loginBox")
-  .style.display="block";
-
+  document.getElementById("registerBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
 }
 
-
-/* REGISTER */
 function register(){
-
- const user=
-  document.getElementById("regUser")
-   .value.trim();
-
- const pass=
-  document.getElementById("regPass")
-   .value;
-
- const confirm=
-  document.getElementById("regConfirm")
-   .value;
-
- const error=
-  document.getElementById("regError");
-
-
- error.style.display="none";
-
-
- if(user.length<3){
-
-  error.textContent=
-   "Username minimal 3 karakter.";
-
-  error.style.display="block";
-
-  return;
-
- }
-
-
- if(pass.length<4){
-
-  error.textContent=
-   "Password minimal 4 karakter.";
-
-  error.style.display="block";
-
-  return;
-
- }
-
-
- if(pass!==confirm){
-
-  error.textContent=
-   "Confirm pass tidak sama.";
-
-  error.style.display="block";
-
-  return;
-
- }
-
-
- account={
-  username:user,
-  password:pass
- };
-
-
- localStorage.setItem(
-  "sanpayAccount",
-  JSON.stringify(account)
- );
-
-
- document.getElementById("loginUser")
-  .value=user;
-
- document.getElementById("regUser")
-  .value="";
-
- document.getElementById("regPass")
-  .value="";
-
- document.getElementById("regConfirm")
-  .value="";
-
-
- showLogin();
-
-}
-
-
-/* LOGIN */
-function login(){
-
- const user=
-  document.getElementById("loginUser")
-   .value.trim();
-
- const pass=
-  document.getElementById("loginPass")
-   .value;
-
- const error=
-  document.getElementById("loginError");
-
-
- error.style.display="none";
-
-
- if(!account){
-
-  showRegister();
-
-  return;
-
- }
-
-
- if(
-  user===account.username &&
-  pass===account.password
- ){
-
-  document.getElementById("auth")
-   .style.display="none";
-
-  document.getElementById("home")
-   .style.display="block";
-
-  document.getElementById("profileUsername")
-   .textContent=account.username;
-
- }else{
-
-  error.textContent=
-   "Username atau password salah.";
-
-  error.style.display="block";
-
- }
-
-}
-
-
-/* LOGOUT */
-function logout(){
-
- document.getElementById("home")
-  .style.display="none";
-
- document.querySelectorAll(".page")
-  .forEach(x=>x.classList.remove("active"));
-
- document.getElementById("auth")
-  .style.display="flex";
-
- showLogin();
-
-}
-
-
-/* ================= SALDO ================= */
-
-function rupiah(n){
- return "Rp"+Number(n).toLocaleString("id-ID");
-}
-
-function updateSaldo(){
-
- document.getElementById("saldo")
-  .textContent=
-  saldoVisible
-  ? saldo.toLocaleString("id-ID")
-  : "••••••";
-
-}
-
-
-function toggleSaldo(){
-
- saldoVisible=!saldoVisible;
-
- updateSaldo();
-
-}
-
-
-/* ================= PAGES ================= */
-
-function hidePages(){
-
- document.getElementById("home")
-  .style.display="none";
-
- [
-  "topupPage",
-  "sendPage",
-  "activityPage",
-  "walletPage",
-  "profilePage"
- ].forEach(id=>{
-
-  const el=document.getElementById(id);
-
-  if(el)
-   el.classList.remove("active");
-
- });
-
-}
-
-
-function backHome(){
-
- hidePages();
-
- document.getElementById("home")
-  .style.display="block";
-
-}
-
-
-/* ================= TOPUP ================= */
-
-function openTopup(){
-
- hidePages();
-
- document.getElementById("topupPage")
-  .classList.add("active");
-
-}
-
-
-function indomaret(){
-
- document.getElementById("amountBox")
-  .style.display="block";
-
- document.getElementById("amountBox")
-  .scrollIntoView({
-   behavior:"smooth",
-   block:"center"
+  const username = document.getElementById("regUsername").value.trim();
+  const name = document.getElementById("regName").value.trim();
+  const password = document.getElementById("regPassword").value;
+  const confirm = document.getElementById("regConfirm").value;
+  const error = document.getElementById("registerError");
+
+  error.style.display = "none";
+
+  if(username.length < 3){
+    error.textContent = "Username minimal 3 karakter.";
+    error.style.display = "block";
+    return;
+  }
+
+  if(name.length < 2){
+    error.textContent = "Masukkan nama panggilan.";
+    error.style.display = "block";
+    return;
+  }
+
+  if(password.length < 4){
+    error.textContent = "Password minimal 4 karakter.";
+    error.style.display = "block";
+    return;
+  }
+
+  if(password !== confirm){
+    error.textContent = "Confirm password tidak sama.";
+    error.style.display = "block";
+    return;
+  }
+
+  const accounts = getAccounts();
+
+  if(accounts.some(a => a.username.toLowerCase() === username.toLowerCase())){
+    error.textContent = "Username sudah digunakan di perangkat ini.";
+    error.style.display = "block";
+    return;
+  }
+
+  accounts.push({
+    username: username,
+    name: name,
+    password: password,
+    balance: 0,
+    activities: [],
+    suggestions: []
   });
 
+  saveAccounts(accounts);
+
+  document.getElementById("loginUsername").value = username;
+
+  showLogin();
+
+  showToast("Akun berhasil dibuat. Saldo awal Rp0.");
 }
 
+function login(){
+  const username = document.getElementById("loginUsername").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const error = document.getElementById("loginError");
 
-function randomCode(){
+  error.style.display = "none";
 
- const chars=
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const accounts = getAccounts();
 
- let code="";
-
- for(let i=0;i<12;i++){
-
-  code+=chars[
-   Math.floor(Math.random()*chars.length)
-  ];
-
- }
-
- return code;
-
-}
-
-
-function buatStruk(){
-
- const amount=
-  Number(document.getElementById("amount").value);
-
-
- if(!amount || amount<=0){
-
-  alert("Masukkan nominal isi saldo.");
-
-  return;
-
- }
-
-
- saldo+=amount;
-
-
- aktivitas.unshift({
-
-  type:"topup",
-
-  title:"Isi Saldo",
-
-  detail:"Indomaret",
-
-  amount:amount,
-
-  date:new Date()
-
- });
-
-
- updateSaldo();
-
-
- document.getElementById("walletSaldo")
-  .textContent=rupiah(saldo);
-
-
- document.getElementById("receiptAmount")
-  .textContent=rupiah(amount);
-
-
- document.getElementById("receiptCode")
-  .textContent=randomCode();
-
-
- document.getElementById("receiptDate")
-  .textContent=
-   new Date().toLocaleString("id-ID");
-
-
- document.getElementById("receipt")
-  .style.display="flex";
-
-
- setTimeout(()=>{
-
-  document.getElementById("receipt")
-   .style.display="none";
-
-  showSuccess(
-   "✓ Isi saldo berhasil"
+  const account = accounts.find(a =>
+    a.username.toLowerCase() === username.toLowerCase() &&
+    a.password === password
   );
 
- },6000);
+  if(!account){
+    error.textContent = "Username atau password salah.";
+    error.style.display = "block";
+    return;
+  }
 
+  currentAccount = account;
+  setCurrentUsername(account.username);
+
+  startApp();
 }
 
+function loadCurrentAccount(){
+  const username = getCurrentUsername();
 
-/* ================= SEND ================= */
+  if(!username) return null;
 
-function openSend(){
-
- hidePages();
-
- document.getElementById("sendPage")
-  .classList.add("active");
-
+  return getAccounts().find(a => a.username === username) || null;
 }
 
+function saveCurrentAccount(){
+  if(!currentAccount) return;
 
-function kirimSaldo(){
-
- const tujuan=
-  document.getElementById("sendNumber")
-   .value.trim();
-
- const amount=
-  Number(document.getElementById("sendAmount").value);
-
-
- if(tujuan.length<5){
-
-  alert("Masukkan nomor tujuan.");
-
-  return;
-
- }
-
-
- if(!amount || amount<=0){
-
-  alert("Masukkan nominal.");
-
-  return;
-
- }
-
-
- if(amount>saldo){
-
-  alert(
-   "Saldo SanPay tidak mencukupi."
+  const accounts = getAccounts();
+  const index = accounts.findIndex(a =>
+    a.username === currentAccount.username
   );
 
-  return;
+  if(index !== -1){
+    accounts[index] = currentAccount;
+    saveAccounts(accounts);
+  }
+}
 
- }
+function startApp(){
+  document.getElementById("authPage").style.display = "none";
+  document.getElementById("app").style.display = "block";
 
+  updateUI();
+  renderSuggestions();
+}
 
- saldo-=amount;
+function updateUI(){
+  if(!currentAccount) return;
 
+  document.getElementById("headerUsername").textContent =
+    "👤 " + currentAccount.name;
 
- aktivitas.unshift({
+  document.getElementById("profileName").textContent =
+    currentAccount.name;
 
-  type:"send",
+  document.getElementById("profileUser").textContent =
+    "@" + currentAccount.username;
 
-  title:"Kirim Saldo",
+  document.getElementById("profilePP").textContent =
+    currentAccount.name.charAt(0).toUpperCase();
 
-  detail:tujuan,
+  document.getElementById("voyagerPP").textContent =
+    currentAccount.name.charAt(0).toUpperCase();
 
-  amount:amount,
+  document.getElementById("voyagerName").textContent =
+    "Hai, " + currentAccount.name;
 
-  date:new Date()
+  updateBalance();
+}
 
- });
+function updateBalance(){
+  const text = balanceVisible
+    ? formatRupiah(currentAccount.balance)
+    : "Rp••••••";
 
+  document.getElementById("balanceText").textContent = text;
+  document.getElementById("walletBalance").textContent =
+    formatRupiah(currentAccount.balance);
+}
 
- updateSaldo();
+function toggleBalance(){
+  balanceVisible = !balanceVisible;
+  updateBalance();
+}
 
+function formatRupiah(number){
+  return "Rp" + Number(number).toLocaleString("id-ID");
+}
 
- document.getElementById("walletSaldo")
-  .textContent=rupiah(saldo);
+function showToast(text){
+  const toast = document.getElementById("toast");
 
+  toast.textContent = text;
+  toast.classList.add("show");
 
- document.getElementById("sendReceiptNumber")
-  .textContent=tujuan;
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2800);
+}
 
+function hideAllPages(){
+  document.getElementById("app").style.display = "none";
 
- document.getElementById("sendReceiptAmount")
-  .textContent=rupiah(amount);
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+}
 
+function openPage(id){
+  hideAllPages();
 
- document.getElementById("sendReceiptDate")
-  .textContent=
-   new Date().toLocaleString("id-ID");
+  document.getElementById(id).classList.add("active");
 
+  if(id === "activityPage") renderActivities();
+  if(id === "walletPage") updateBalance();
+  if(id === "suggestionPage") renderSuggestions();
+}
 
- document.getElementById("sendReceiptCode")
-  .textContent=randomCode();
+function backHome(){
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
 
+  document.getElementById("app").style.display = "block";
+}
 
- document.getElementById("sendReceipt")
-  .style.display="flex";
+function setAmount(amount){
+  document.getElementById("topupAmount").value = amount;
+}
 
-
- document.getElementById("sendNumber")
-  .value="";
-
- document.getElementById("sendAmount")
-  .value="";
-
-
- setTimeout(()=>{
-
-  document.getElementById("sendReceipt")
-   .style.display="none";
-
-  showSuccess(
-   "✓ Saldo berhasil dikirim"
+function topup(){
+  const amount = Number(
+    document.getElementById("topupAmount").value
   );
 
- },5000);
+  if(!amount || amount <= 0){
+    showToast("Masukkan nominal yang benar.");
+    return;
+  }
 
+  currentAccount.balance += amount;
+
+  currentAccount.activities.unshift({
+    type: "topup",
+    title: "Isi Saldo",
+    detail: "Saldo bertambah",
+    amount: amount,
+    date: new Date().toLocaleString("id-ID")
+  });
+
+  saveCurrentAccount();
+  updateBalance();
+
+  document.getElementById("topupAmount").value = "";
+
+  showToast("✓ Isi saldo berhasil");
 }
 
+function sendMoney(){
+  const to = document.getElementById("sendTo").value.trim();
+  const amount = Number(
+    document.getElementById("sendAmount").value
+  );
 
-/* ================= ACTIVITY ================= */
+  if(to.length < 3){
+    showToast("Masukkan tujuan pengiriman.");
+    return;
+  }
 
-function openActivity(){
+  if(!amount || amount <= 0){
+    showToast("Masukkan nominal yang benar.");
+    return;
+  }
 
- hidePages();
+  if(amount > currentAccount.balance){
+    showToast("Saldo tidak mencukupi.");
+    return;
+  }
 
- document.getElementById("activityPage")
-  .classList.add("active");
+  currentAccount.balance -= amount;
 
- renderActivity();
+  currentAccount.activities.unshift({
+    type: "send",
+    title: "Kirim Saldo",
+    detail: "Ke " + to,
+    amount: amount,
+    date: new Date().toLocaleString("id-ID")
+  });
 
+  saveCurrentAccount();
+  updateBalance();
+
+  document.getElementById("sendTo").value = "";
+  document.getElementById("sendAmount").value = "";
+
+  showToast("✓ Saldo berhasil dikirim");
 }
 
+function renderActivities(){
+  const box = document.getElementById("activityList");
 
-function renderActivity(){
+  if(!currentAccount.activities.length){
+    box.innerHTML = `
+      <div style="text-align:center;padding:30px 10px">
+        <div style="font-size:40px">📋</div>
+        <p style="font-size:12px;color:#8792a4;margin-top:10px">
+          Belum ada aktivitas
+        </p>
+      </div>
+    `;
+    return;
+  }
 
- const box=
-  document.getElementById("activityList");
+  box.innerHTML = "";
 
+  currentAccount.activities.forEach(item => {
+    const plus = item.type === "topup";
 
- if(!aktivitas.length){
+    box.innerHTML += `
+      <div class="activity">
+        <div class="activityIcon">
+          ${plus ? "＋" : "↗"}
+        </div>
 
-  box.innerHTML=`
+        <div class="activityMain">
+          <b>${item.title}</b>
+          <p>${item.detail}</p>
+          <p>${item.date}</p>
+        </div>
 
-   <div class="amount-box"
-        style="text-align:center">
+        <b class="${plus ? "plus" : "minus"}">
+          ${plus ? "+" : "-"}${formatRupiah(item.amount)}
+        </b>
+      </div>
+    `;
+  });
+}
 
-    <div style="font-size:42px">
-     📋
-    </div>
+function sendSuggestion(){
+  const text =
+    document.getElementById("suggestionText").value.trim();
 
-    <p style="
-     margin-top:10px;
-     color:#888;
-     font-size:13px;
+  if(text.length < 3){
+    showToast("Tulis saran atau kesan terlebih dahulu.");
+    return;
+  }
+
+  currentAccount.suggestions.unshift({
+    text: text,
+    date: new Date().toLocaleString("id-ID")
+  });
+
+  saveCurrentAccount();
+
+  document.getElementById("suggestionText").value = "";
+
+  renderSuggestions();
+  showToast("Terima kasih atas saranmu! 💙");
+}
+
+function renderSuggestions(){
+  const box = document.getElementById("suggestionList");
+
+  if(!currentAccount || !currentAccount.suggestions.length){
+    box.textContent = "Belum ada saran.";
+    return;
+  }
+
+  box.innerHTML = currentAccount.suggestions.map(s => `
+    <div style="
+      padding:11px 0;
+      border-bottom:1px solid #edf0f4;
+      line-height:1.5
     ">
-     Belum ada aktivitas
-    </p>
+      <b style="font-size:12px">${s.text}</b>
+      <div style="font-size:10px;color:#9aa3b0;margin-top:4px">
+        ${s.date}
+      </div>
+    </div>
+  `).join("");
+}
 
-   </div>
+function openVoyager(){
+  document.getElementById("voyager").style.display = "block";
 
+  if(currentAccount){
+    document.getElementById("voyagerName").textContent =
+      "Hai, " + currentAccount.name;
+
+    document.getElementById("voyagerPP").textContent =
+      currentAccount.name.charAt(0).toUpperCase();
+  }
+
+  chooseTravel("train");
+}
+
+function closeVoyager(){
+  document.getElementById("voyager").style.display = "none";
+}
+
+function chooseTravel(type, element){
+  travelType = type;
+
+  document.querySelectorAll(".travelTab").forEach(tab => {
+    tab.classList.remove("active");
+  });
+
+  if(element) element.classList.add("active");
+
+  const title = document.getElementById("travelTitle");
+  const desc = document.getElementById("travelDesc");
+  const fields = document.getElementById("travelFields");
+  const result = document.getElementById("travelResult");
+
+  result.style.display = "none";
+
+  if(type === "train"){
+    title.textContent = "Cari Tiket Kereta";
+    desc.textContent = "Pilih rute dan jadwal perjalananmu.";
+
+    fields.innerHTML = `
+      <label class="fieldLabel">Dari</label>
+      <input class="bigInput" id="from" placeholder="Contoh: Batam">
+
+      <label class="fieldLabel">Ke</label>
+      <input class="bigInput" id="to" placeholder="Contoh: Jakarta">
+
+      <label class="fieldLabel">Tanggal</label>
+      <input class="bigInput" id="travelDate" type="date">
+    `;
+  }
+
+  if(type === "plane"){
+    title.textContent = "Cari Tiket Pesawat";
+    desc.textContent = "Temukan penerbangan sesuai tujuanmu.";
+
+    fields.innerHTML = `
+      <label class="fieldLabel">Dari</label>
+      <input class="bigInput" id="from" placeholder="Bandara asal">
+
+      <label class="fieldLabel">Ke</label>
+      <input class="bigInput" id="to" placeholder="Bandara tujuan">
+
+      <label class="fieldLabel">Tanggal Berangkat</label>
+      <input class="bigInput" id="travelDate" type="date">
+    `;
+  }
+
+  if(type === "hotel"){
+    title.textContent = "Cari Hotel";
+    desc.textContent = "Pilih tempat menginap untuk perjalananmu.";
+
+    fields.innerHTML = `
+      <label class="fieldLabel">Kota Tujuan</label>
+      <input class="bigInput" id="hotelCity" placeholder="Contoh: Batam">
+
+      <label class="fieldLabel">Check-in</label>
+      <input class="bigInput" id="travelDate" type="date">
+
+      <label class="fieldLabel">Jumlah Tamu</label>
+      <select class="travelSelect" id="guest">
+        <option>1 Tamu</option>
+        <option>2 Tamu</option>
+        <option>3 Tamu</option>
+        <option>4+ Tamu</option>
+      </select>
+    `;
+  }
+
+  if(type === "rides"){
+    title.textContent = "Cari Rides";
+    desc.textContent = "Atur perjalanan dari satu tempat ke tempat lain.";
+
+    fields.innerHTML = `
+      <label class="fieldLabel">Lokasi Jemput</label>
+      <input class="bigInput" id="from" placeholder="Masukkan lokasi">
+
+      <label class="fieldLabel">Tujuan</label>
+      <input class="bigInput" id="to" placeholder="Mau ke mana?">
+
+      <label class="fieldLabel">Jenis Kendaraan</label>
+      <select class="travelSelect" id="rideType">
+        <option>Mobil</option>
+        <option>Motor</option>
+        <option>Van</option>
+      </select>
+    `;
+  }
+}
+
+function searchTravel(){
+  const result = document.getElementById("travelResult");
+
+  let from = document.getElementById("from")
+    ? document.getElementById("from").value || "Lokasi Awal"
+    : "Kota";
+
+  let to = document.getElementById("to")
+    ? document.getElementById("to").value || "Tujuan"
+    : "";
+
+  let price = 0;
+  let typeText = "";
+
+  if(travelType === "train"){
+    typeText = "Kereta Api Voyager";
+    price = 185000;
+  }
+
+  if(travelType === "plane"){
+    typeText = "Penerbangan Voyager";
+    price = 650000;
+  }
+
+  if(travelType === "hotel"){
+    from = document.getElementById("hotelCity").value || "Kota Pilihan";
+    to = "Hotel";
+    typeText = "Voyager Hotel";
+    price = 420000;
+  }
+
+  if(travelType === "rides"){
+    typeText = "Voyager Rides";
+    price = 35000;
+  }
+
+  result.innerHTML = `
+    <div class="ticket">
+
+      <div class="ticketHead">
+        <div class="ticketBrand">${typeText}</div>
+        <div class="ticketStatus">Tersedia</div>
+      </div>
+
+      <div class="ticketRoute">
+
+        <div class="city">
+          <b>${from}</b>
+          <span>Dari</span>
+        </div>
+
+        <div class="routeLine">
+          ─── ✈ ───
+        </div>
+
+        <div class="city" style="text-align:right">
+          <b>${to || "Pilihanmu"}</b>
+          <span>Ke</span>
+        </div>
+
+      </div>
+
+      <div class="ticketInfo">
+        <div>
+          <small>Jenis</small>
+          <b>${typeText}</b>
+        </div>
+
+        <div>
+          <small>Status</small>
+          <b>Tersedia</b>
+        </div>
+
+        <div>
+          <small>Penumpang</small>
+          <b>1 Orang</b>
+        </div>
+
+        <div>
+          <small>Catatan</small>
+          <b>Simulasi</b>
+        </div>
+      </div>
+
+      <div class="ticketPrice">
+        <span>Harga mulai dari</span>
+        <b>${formatRupiah(price)}</b>
+      </div>
+
+    </div>
   `;
 
-  return;
+  result.style.display = "block";
 
- }
-
-
- box.innerHTML="";
-
-
- aktivitas.forEach(item=>{
-
-  const topup=
-   item.type==="topup";
-
-
-  const div=
-   document.createElement("div");
-
-
-  div.className=
-   "activity-item";
-
-
-  div.innerHTML=`
-
-   <div
-    class="activity-icon"
-    style="
-     background:
-     ${topup
-      ? "#e9f8ed"
-      : "#fff0ef"};
-    "
-   >
-    ${topup ? "＋":"↗"}
-   </div>
-
-   <div style="flex:1">
-
-    <b>
-     ${item.title}
-    </b>
-
-    <div style="
-     font-size:11px;
-     color:#888;
-     margin-top:4px
-    ">
-     ${item.detail}
-    </div>
-
-    <div style="
-     font-size:10px;
-     color:#aaa;
-     margin-top:3px
-    ">
-     ${item.date.toLocaleString("id-ID")}
-    </div>
-
-   </div>
-
-   <b style="
-    color:
-    ${topup
-     ? "#20a447"
-     : "#e53935"};
-    font-size:13px
-   ">
-    ${topup?"+":"-"}
-    ${rupiah(item.amount)}
-   </b>
-
-  `;
-
-
-  box.appendChild(div);
-
- });
-
+  result.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
 }
 
-
-/* ================= WALLET ================= */
-
-function openWallet(){
-
- hidePages();
-
- document.getElementById("walletPage")
-  .classList.add("active");
-
- document.getElementById("walletSaldo")
-  .textContent=rupiah(saldo);
-
+function navClear(){
+  document.querySelectorAll(".nav").forEach(n => {
+    n.classList.remove("active");
+  });
 }
-
-
-/* ================= PROFILE ================= */
-
-function openProfile(){
-
- hidePages();
-
- document.getElementById("profilePage")
-  .classList.add("active");
-
-}
-
-
-/* ================= NAV ================= */
 
 function navHome(el){
-
- document.querySelectorAll(".nav-item")
-  .forEach(x=>
-   x.classList.remove("active")
-  );
-
- el.classList.add("active");
-
- backHome();
-
+  navClear();
+  el.classList.add("active");
+  backHome();
 }
-
 
 function navActivity(el){
-
- document.querySelectorAll(".nav-item")
-  .forEach(x=>
-   x.classList.remove("active")
-  );
-
- el.classList.add("active");
-
- openActivity();
-
+  navClear();
+  el.classList.add("active");
+  openPage("activityPage");
 }
-
 
 function navWallet(el){
-
- document.querySelectorAll(".nav-item")
-  .forEach(x=>
-   x.classList.remove("active")
-  );
-
- el.classList.add("active");
-
- openWallet();
-
+  navClear();
+  el.classList.add("active");
+  openPage("walletPage");
 }
-
 
 function navProfile(el){
-
- document.querySelectorAll(".nav-item")
-  .forEach(x=>
-   x.classList.remove("active")
-  );
-
- el.classList.add("active");
-
- openProfile();
-
+  navClear();
+  el.classList.add("active");
+  openPage("profilePage");
 }
 
+function logout(){
+  currentAccount = null;
+  localStorage.removeItem("sannnpay_current_user");
 
-function payDemo(){
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
 
- alert(
-  "QR Pay belum terhubung ke pembayaran nyata."
- );
+  document.getElementById("app").style.display = "none";
+  document.getElementById("authPage").style.display = "flex";
 
+  showLogin();
+  showToast("Kamu sudah keluar dari akun.");
 }
 
+/* AUTO LOGIN */
+window.onload = function(){
+  const saved = loadCurrentAccount();
 
-/* ================= SUCCESS ================= */
-
-function showSuccess(text){
-
- const s=
-  document.getElementById("success");
-
- s.textContent=text;
-
- s.style.display="block";
-
-
- setTimeout(()=>{
-
-  s.style.display="none";
-
- },3000);
-
-}
-
+  if(saved){
+    currentAccount = saved;
+    startApp();
+  }
+};
 </script>
 
 </body>
