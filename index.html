@@ -2,1970 +2,399 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SannnPay</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
-
-body{
-  background:#f4f7fb;
-  color:#172033;
-  max-width:500px;
-  margin:auto;
-  min-height:100vh;
-}
-
-button,input,select,textarea{
-  font:inherit;
-}
-
-/* AUTH */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f7fb;color:#172033;max-width:500px;margin:auto;min-height:100vh}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 #authPage{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  background:linear-gradient(145deg,#0866e8,#12a5ff);
-}
-
-.authBubble{
-  position:absolute;
-  border-radius:50%;
-  background:#ffffff18;
-  animation:floatBubble 6s infinite alternate ease-in-out;
-}
-
-.b1{
-  width:250px;
-  height:250px;
-  top:-100px;
-  left:-90px;
-}
-
-.b2{
-  width:320px;
-  height:320px;
-  right:-150px;
-  bottom:-130px;
-  animation-delay:1s;
-}
-
-.authCard{
-  width:90%;
-  max-width:390px;
-  background:white;
-  border-radius:28px;
-  padding:28px 24px;
-  position:relative;
-  z-index:2;
-  box-shadow:0 20px 70px #003d8c66;
-  animation:cardIn .5s ease;
-}
-
-.authLogo{
-  width:75px;
-  height:75px;
-  margin:auto;
-  border-radius:24px;
-  background:linear-gradient(135deg,#0866e8,#14b8ff);
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-  font-weight:bold;
-  box-shadow:0 10px 25px #0875e855;
-}
-
-.authTitle{
-  text-align:center;
-  margin-top:15px;
-  font-size:25px;
-  color:#0866e8;
-}
-
-.authText{
-  text-align:center;
-  color:#8792a5;
-  font-size:12px;
-  margin:8px 0 22px;
-}
-
-.inputBox{
-  width:100%;
-  height:50px;
-  border:1px solid #dfe5ee;
-  border-radius:14px;
-  margin-bottom:11px;
-  padding:0 14px;
-  outline:none;
-  transition:.2s;
-}
-
-.inputBox:focus{
-  border-color:#0875e8;
-  box-shadow:0 0 0 3px #0875e815;
-}
-
-.primaryBtn{
-  width:100%;
-  border:0;
-  height:50px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#0866e8,#129df5);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.primaryBtn:active{
-  transform:scale(.97);
-}
-
-.authSwitch{
-  text-align:center;
-  margin-top:18px;
-  font-size:12px;
-  color:#7d8797;
-}
-
-.authSwitch span{
-  color:#0866e8;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.errorBox{
-  display:none;
-  margin-bottom:12px;
-  padding:10px;
-  text-align:center;
-  color:#d83232;
-  background:#fff0f0;
-  border-radius:10px;
-  font-size:12px;
-}
-
-/* APP */
-#app{
-  display:none;
-  min-height:100vh;
-  padding-bottom:85px;
-}
-
-header{
-  color:white;
-  padding:18px 18px 35px;
-  background:linear-gradient(145deg,#0866e8,#159df7);
-  border-radius:0 0 28px 28px;
-  position:relative;
-  overflow:hidden;
-}
-
-header:after{
-  content:"";
-  position:absolute;
-  width:240px;
-  height:240px;
-  right:-110px;
-  top:-150px;
-  border-radius:50%;
-  background:#ffffff14;
-}
-
-.headerTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:relative;
-  z-index:2;
-}
-
-.brand{
-  font-size:24px;
-  font-weight:800;
-}
-
-.headerUser{
-  font-size:12px;
-  background:#ffffff20;
-  padding:8px 10px;
-  border-radius:12px;
-}
-
-.balanceCard{
-  position:relative;
-  z-index:2;
-  margin-top:25px;
-}
-
-.balanceLabel{
-  font-size:12px;
-  opacity:.85;
-}
-
-.balanceRow{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin-top:5px;
-}
-
-.balance{
-  font-size:30px;
-}
-
-.eye{
-  cursor:pointer;
-  font-size:20px;
-}
-
-.content{
-  padding:15px;
-}
-
-.quickMenu{
-  background:white;
-  border-radius:20px;
-  padding:14px;
-  margin-top:-27px;
-  position:relative;
-  z-index:4;
-  box-shadow:0 8px 25px #10204012;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-
-.quick{
-  text-align:center;
-  font-size:10px;
-  cursor:pointer;
-}
-
-.quickIcon{
-  height:48px;
-  width:48px;
-  margin:auto auto 6px;
-  border-radius:15px;
-  background:#eef6ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  transition:.2s;
-}
-
-.quick:active .quickIcon{
-  transform:scale(.9);
-}
-
-.banner{
-  margin-top:17px;
-  min-height:110px;
-  border-radius:20px;
-  padding:18px;
-  color:white;
-  overflow:hidden;
-  position:relative;
-  background:linear-gradient(120deg,#6146e8,#a06cf7);
-  animation:softFloat 3s infinite ease-in-out;
-}
-
-.banner h2{
-  font-size:18px;
-}
-
-.banner p{
-  margin-top:7px;
-  font-size:12px;
-  opacity:.9;
-  max-width:220px;
-}
-
-.bannerShape{
-  position:absolute;
-  width:100px;
-  height:100px;
-  border-radius:25px;
-  background:#ffffff18;
-  right:18px;
-  bottom:-35px;
-  transform:rotate(25deg);
-}
-
-.sectionTitle{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:22px 2px 12px;
-}
-
-.sectionTitle h3{
-  font-size:16px;
-}
-
-.sectionTitle span{
-  color:#0875e8;
-  font-size:11px;
-}
-
-.serviceGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px 6px;
-}
-
-.service{
-  text-align:center;
-  font-size:10px;
-  cursor:pointer;
-}
-
-.serviceIcon{
-  width:50px;
-  height:50px;
-  margin:auto auto 6px;
-  border-radius:16px;
-  background:white;
-  box-shadow:0 5px 15px #1a335010;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:23px;
-  transition:.2s;
-}
-
-.service:active .serviceIcon{
-  transform:translateY(2px);
-}
-
-.smallNote{
-  margin:20px 0;
-  padding:14px;
-  border-radius:15px;
-  background:#fff9e9;
-  color:#876700;
-  font-size:11px;
-  line-height:1.5;
-}
-
-/* PAGES */
-.page{
-  display:none;
-  min-height:100vh;
-  background:#f4f7fb;
-  padding:18px;
-  padding-bottom:90px;
-  animation:pageIn .25s ease;
-}
-
-.page.active{
-  display:block;
-}
-
-.pageHead{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:20px;
-}
-
-.backBtn{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.pageTitle{
-  font-size:21px;
-  font-weight:bold;
-}
-
-.card{
-  background:white;
-  border-radius:19px;
-  padding:17px;
-  margin-bottom:14px;
-  box-shadow:0 5px 18px #1522380c;
-}
-
-.cardTitle{
-  font-size:14px;
-  font-weight:bold;
-  margin-bottom:13px;
-}
-
-.option{
-  padding:14px 0;
-  border-bottom:1px solid #eef1f5;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:11px;
-  font-size:13px;
-}
-
-.option:last-child{
-  border-bottom:0;
-}
-
-.optionIcon{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:#eef6ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.bigInput{
-  width:100%;
-  height:52px;
-  padding:0 14px;
-  border:1px solid #dce3ec;
-  border-radius:14px;
-  outline:none;
-  margin-bottom:11px;
-}
-
-.bigInput:focus{
-  border-color:#0875e8;
-}
-
-/* ACTIVITY */
-.activity{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  padding:13px 0;
-  border-bottom:1px solid #eef1f5;
-}
-
-.activity:last-child{
-  border-bottom:0;
-}
-
-.activityIcon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#eef6ff;
-  font-size:20px;
-}
-
-.activityMain{
-  flex:1;
-}
-
-.activityMain b{
-  font-size:13px;
-}
-
-.activityMain p{
-  font-size:10px;
-  color:#8490a2;
-  margin-top:4px;
-}
-
-.plus{
-  color:#20a451;
-}
-
-.minus{
-  color:#e14343;
-}
-
-/* SUGGESTION */
-textarea{
-  width:100%;
-  min-height:120px;
-  resize:none;
-  border:1px solid #dce3ec;
-  border-radius:15px;
-  padding:14px;
-  outline:none;
-}
-
-textarea:focus{
-  border-color:#0875e8;
-}
-
-/* TRAVEL */
-#voyager{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  background:#f5f8fc;
-  overflow-y:auto;
-  animation:travelIn .3s ease;
-}
-
-.voyagerTop{
-  padding:20px;
-  color:white;
-  background:linear-gradient(135deg,#102c58,#1579d5);
-}
-
-.voyagerHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.voyagerLogo{
-  font-size:19px;
-  font-weight:bold;
-}
-
-.closeTravel{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  border:0;
-  color:white;
-  background:#ffffff22;
-  font-size:21px;
-  cursor:pointer;
-}
-
-.traveler{
-  margin-top:24px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.travelerPP{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#ffffff;
-  color:#1579d5;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:21px;
-  font-weight:bold;
-}
-
-.traveler small{
-  opacity:.75;
-  font-size:11px;
-}
-
-.traveler h3{
-  margin-top:3px;
-}
-
-.travelContent{
-  padding:18px;
-}
-
-.travelTabs{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-top:-10px;
-}
-
-.travelTab{
-  border:0;
-  background:white;
-  border-radius:15px;
-  min-height:70px;
-  padding:8px 4px;
-  font-size:10px;
-  box-shadow:0 6px 20px #142f500d;
-  cursor:pointer;
-}
-
-.travelTab.active{
-  color:#0875e8;
-  outline:2px solid #0875e8;
-}
-
-.travelForm{
-  margin-top:20px;
-  background:white;
-  padding:18px;
-  border-radius:21px;
-}
-
-.travelForm h2{
-  font-size:18px;
-  margin-bottom:5px;
-}
-
-.travelForm p{
-  color:#8792a4;
-  font-size:11px;
-  margin-bottom:17px;
-}
-
-.fieldLabel{
-  font-size:11px;
-  color:#657084;
-  display:block;
-  margin:11px 0 6px;
-}
-
-.travelSelect{
-  width:100%;
-  height:50px;
-  border:1px solid #dde5ef;
-  border-radius:13px;
-  padding:0 12px;
-  background:white;
-}
-
-.travelSearch{
-  margin-top:17px;
-}
-
-.travelResult{
-  display:none;
-  margin-top:18px;
-  animation:cardIn .3s ease;
-}
-
-.ticket{
-  background:white;
-  border-radius:20px;
-  padding:18px;
-  box-shadow:0 8px 25px #152b4d0e;
-  overflow:hidden;
-}
-
-.ticketHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.ticketBrand{
-  color:#0875e8;
-  font-weight:bold;
-  font-size:13px;
-}
-
-.ticketStatus{
-  font-size:10px;
-  color:#18a550;
-  background:#e9f9ef;
-  padding:7px 9px;
-  border-radius:9px;
-}
-
-.ticketRoute{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:22px 0;
-}
-
-.city{
-  width:38%;
-}
-
-.city b{
-  font-size:18px;
-}
-
-.city span{
-  display:block;
-  color:#8792a4;
-  font-size:10px;
-  margin-top:4px;
-}
-
-.routeLine{
-  flex:1;
-  text-align:center;
-  color:#0875e8;
-}
-
-.ticketInfo{
-  border-top:1px dashed #ccd5e2;
-  padding-top:14px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
-}
-
-.ticketInfo small{
-  display:block;
-  color:#8993a2;
-  font-size:10px;
-}
-
-.ticketInfo b{
-  font-size:12px;
-  margin-top:3px;
-  display:block;
-}
-
-.ticketPrice{
-  margin-top:18px;
-  padding-top:14px;
-  border-top:1px dashed #ccd5e2;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.ticketPrice span{
-  font-size:11px;
-  color:#768194;
-}
-
-.ticketPrice b{
-  color:#0875e8;
-  font-size:17px;
-}
-
-/* NAV */
-.bottomNav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  max-width:500px;
-  width:100%;
-  height:72px;
-  background:white;
-  border-top:1px solid #edf0f4;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  z-index:1000;
-}
-
-.nav{
-  text-align:center;
-  padding-top:9px;
-  font-size:10px;
-  color:#8490a1;
-  cursor:pointer;
-}
-
-.navIcon{
-  font-size:21px;
-  margin-bottom:4px;
-}
-
-.nav.active{
-  color:#0875e8;
-  font-weight:bold;
-}
-
-/* TOAST */
-#toast{
-  position:fixed;
-  z-index:10000;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%) translateY(-100px);
-  background:#172033;
-  color:white;
-  padding:13px 19px;
-  border-radius:14px;
-  font-size:12px;
-  box-shadow:0 10px 30px #0003;
-  transition:.35s;
-}
-
-#toast.show{
-  transform:translateX(-50%) translateY(0);
-}
-
-@keyframes cardIn{
-  from{
-    opacity:0;
-    transform:translateY(20px) scale(.97);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateX(15px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@keyframes floatBubble{
-  from{transform:translate(0,0)}
-  to{transform:translate(20px,25px)}
-}
-
-@keyframes softFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-3px)}
-}
-
-@keyframes travelIn{
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@media(max-width:370px){
-  .serviceGrid{
-    gap:10px 3px;
-  }
-
-  .serviceIcon{
-    width:46px;
-    height:46px;
-  }
-}
+ position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(145deg,#0768e8,#16a7ff);overflow:hidden
+}
+.authBubble{position:absolute;border-radius:50%;background:#ffffff18;animation:float 5s infinite alternate}
+.b1{width:260px;height:260px;top:-100px;left:-100px}.b2{width:330px;height:330px;bottom:-160px;right:-130px}
+.authCard{width:90%;max-width:390px;background:#fff;border-radius:28px;padding:28px 24px;z-index:2;box-shadow:0 20px 60px #003b8c66;animation:pop .4s}
+.authLogo{width:72px;height:72px;margin:auto;border-radius:23px;background:linear-gradient(135deg,#0866e8,#17b3ff);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold}
+.authTitle{text-align:center;color:#0870e8;margin-top:14px}.authText{text-align:center;font-size:12px;color:#8792a4;margin:8px 0 20px}
+.inputBox,.bigInput{width:100%;height:51px;border:1px solid #dce3ec;border-radius:14px;padding:0 14px;outline:none;margin-bottom:11px;background:#fff}
+.inputBox:focus,.bigInput:focus{border-color:#0875e8;box-shadow:0 0 0 3px #0875e815}
+.primaryBtn{width:100%;height:50px;border:0;border-radius:14px;background:linear-gradient(135deg,#0866e8,#159df7);color:#fff;font-weight:bold}
+.primaryBtn:active{transform:scale(.98)}
+.authSwitch{text-align:center;font-size:12px;color:#8490a0;margin-top:16px}.authSwitch span{color:#0875e8;font-weight:bold}
+.errorBox{display:none;background:#fff0f0;color:#d83232;border-radius:10px;padding:10px;font-size:12px;text-align:center;margin-bottom:10px}
+
+#app{display:none;min-height:100vh;padding-bottom:85px}
+header{padding:18px 18px 36px;color:#fff;background:linear-gradient(145deg,#0866e8,#159df7);border-radius:0 0 30px 30px;overflow:hidden;position:relative}
+header:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:#ffffff13;right:-100px;top:-140px}
+.headerTop,.balanceCard{position:relative;z-index:2}.headerTop{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:24px;font-weight:800}.headerUser{font-size:11px;padding:8px 10px;border-radius:11px;background:#ffffff22}
+.balanceCard{margin-top:24px}.balanceLabel{font-size:12px;opacity:.85}.balanceRow{display:flex;gap:9px;align-items:center;margin-top:6px}.balance{font-size:29px;font-weight:bold}.eye{font-size:19px}
+.content{padding:15px}
+.quickMenu{background:#fff;border-radius:20px;padding:14px;margin-top:-27px;position:relative;z-index:3;box-shadow:0 8px 25px #10204012;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.quick{text-align:center;font-size:10px}.quickIcon{width:48px;height:48px;border-radius:15px;background:#eef6ff;margin:auto auto 6px;display:flex;align-items:center;justify-content:center;font-size:21px}
+.banner{margin-top:17px;min-height:110px;padding:18px;border-radius:20px;color:#fff;background:linear-gradient(120deg,#6246e8,#9e6af7);position:relative;overflow:hidden;animation:soft 3s infinite}
+.banner h2{font-size:18px}.banner p{font-size:12px;margin-top:7px;max-width:230px}.banner:after{content:"";position:absolute;width:100px;height:100px;border-radius:25px;background:#ffffff18;right:20px;bottom:-35px;transform:rotate(25deg)}
+.sectionTitle{display:flex;justify-content:space-between;margin:22px 2px 12px}.sectionTitle h3{font-size:16px}.sectionTitle span{font-size:11px;color:#0875e8}
+.serviceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 6px}.service{text-align:center;font-size:10px}.serviceIcon{width:50px;height:50px;border-radius:16px;background:#fff;box-shadow:0 5px 15px #1a335010;margin:auto auto 6px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.smallNote{margin:20px 0;padding:14px;background:#fff9e9;border-radius:15px;font-size:11px;color:#876700;line-height:1.5}
+
+.page{display:none;min-height:100vh;background:#f4f7fb;padding:18px;padding-bottom:90px;animation:slide .25s}.page.active{display:block}
+.pageHead{display:flex;align-items:center;gap:14px;margin-bottom:20px}.backBtn{width:38px;height:38px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center}.pageTitle{font-size:21px;font-weight:bold}
+.card{background:#fff;border-radius:19px;padding:17px;margin-bottom:14px;box-shadow:0 5px 18px #1522380c}.cardTitle{font-size:14px;font-weight:bold;margin-bottom:13px}
+.option{padding:14px 0;border-bottom:1px solid #edf0f4;display:flex;align-items:center;gap:11px;font-size:13px}.option:last-child{border:0}.optionIcon{width:40px;height:40px;border-radius:12px;background:#eef6ff;display:flex;align-items:center;justify-content:center}
+textarea{width:100%;min-height:120px;border:1px solid #dce3ec;border-radius:14px;padding:13px;outline:none}
+
+.bottomNav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;height:72px;background:#fff;border-top:1px solid #edf0f4;display:grid;grid-template-columns:repeat(5,1fr);z-index:1000}
+.nav{text-align:center;padding-top:9px;font-size:10px;color:#8490a1}.navIcon{font-size:21px;margin-bottom:4px}.nav.active{color:#0875e8;font-weight:bold}
+
+#voyager{display:none;position:fixed;inset:0;z-index:5000;background:#f5f8fc;overflow-y:auto;animation:slide .3s}
+.voyagerTop{padding:20px;color:#fff;background:linear-gradient(135deg,#102c58,#1579d5)}.voyagerHead{display:flex;justify-content:space-between;align-items:center}.voyagerLogo{font-size:19px;font-weight:bold}
+.closeTravel{width:38px;height:38px;border:0;border-radius:50%;background:#ffffff22;color:#fff;font-size:22px}.traveler{display:flex;gap:12px;align-items:center;margin-top:24px}.travelerPP{width:48px;height:48px;border-radius:50%;background:#fff;color:#1579d5;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:bold}.traveler small{font-size:11px;opacity:.75}
+.travelContent{padding:18px}.travelTabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:-10px}.travelTab{min-height:70px;background:#fff;border:0;border-radius:15px;font-size:10px;box-shadow:0 6px 20px #142f500d}.travelTab.active{color:#0875e8;outline:2px solid #0875e8}
+.travelForm{background:#fff;border-radius:21px;padding:18px;margin-top:20px}.travelForm h2{font-size:18px}.travelForm p{font-size:11px;color:#8792a4;margin:5px 0 16px}.fieldLabel{display:block;font-size:11px;color:#657084;margin:11px 0 6px}.travelSelect{width:100%;height:50px;border:1px solid #dde5ef;border-radius:13px;padding:0 12px;background:#fff}.travelResult{display:none;margin-top:18px;animation:pop .3s}
+.ticket{background:#fff;border-radius:20px;padding:18px;box-shadow:0 8px 25px #152b4d0e}.ticketHead,.ticketPrice{display:flex;justify-content:space-between;align-items:center}.ticketBrand{color:#0875e8;font-weight:bold;font-size:13px}.ticketStatus{font-size:10px;background:#e9f9ef;color:#18a550;padding:7px 9px;border-radius:9px}
+.ticketRoute{display:flex;justify-content:space-between;align-items:center;margin:22px 0}.city{width:38%}.city b{font-size:16px}.city span{display:block;font-size:10px;color:#8792a4;margin-top:4px}.routeLine{flex:1;text-align:center;color:#0875e8}.ticketInfo{border-top:1px dashed #ccd5e2;padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:13px}.ticketInfo small{display:block;color:#8993a2;font-size:10px}.ticketInfo b{font-size:12px;display:block;margin-top:3px}.ticketPrice{margin-top:18px;padding-top:14px;border-top:1px dashed #ccd5e2}.ticketPrice span{font-size:11px;color:#768194}.ticketPrice b{color:#0875e8;font-size:17px}
+
+#receiptOverlay,#successOverlay,#ticketOverlay{display:none;position:fixed;inset:0;z-index:9000;background:#0008;align-items:center;justify-content:center;padding:20px}
+.receiptBox,.successBox,.ticketSuccess{width:100%;max-width:380px;background:#fff;border-radius:25px;padding:25px;text-align:center;animation:pop .35s}
+.receiptLogo{width:55px;height:55px;border-radius:18px;background:#0875e8;color:#fff;display:flex;align-items:center;justify-content:center;margin:auto;font-size:25px;font-weight:bold}.receiptBox h2{margin:12px 0;font-size:20px}.receiptRow{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #dce3ec;font-size:12px}.receiptRow span{color:#8792a4}
+.successCheck{width:85px;height:85px;border-radius:50%;background:#21b458;color:#fff;margin:auto;display:flex;align-items:center;justify-content:center;font-size:42px;animation:check .5s}.successBox h2,.ticketSuccess h2{color:#1d9e4e;margin:16px 0 7px}.successBox p,.ticketSuccess p{font-size:12px;color:#687588}
+.loadingDots{font-size:30px;letter-spacing:5px;color:#0875e8;animation:blink 1s infinite}.ticketSuccess .ready{margin-top:17px;padding:13px;border-radius:14px;background:#eefaf2;color:#188846;font-size:13px;font-weight:bold}
+.activity{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #eef1f5}.activityIcon{width:44px;height:44px;border-radius:14px;background:#eef6ff;display:flex;align-items:center;justify-content:center}.activityMain{flex:1}.activityMain b{font-size:13px}.activityMain p{font-size:10px;color:#8490a2;margin-top:3px}.plus{color:#20a451}.minus{color:#e14343}
+
+#toast{position:fixed;z-index:10000;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:#172033;color:#fff;padding:13px 19px;border-radius:14px;font-size:12px;transition:.35s}#toast.show{transform:translateX(-50%) translateY(0)}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}@keyframes slide{from{opacity:0;transform:translateX(15px)}to{opacity:1;transform:none}}@keyframes float{to{transform:translate(20px,25px)}}@keyframes soft{50%{transform:translateY(-3px)}}@keyframes check{from{transform:scale(0)}80%{transform:scale(1.12)}to{transform:scale(1)}}@keyframes blink{50%{opacity:.25}}
 </style>
 </head>
-
 <body>
 
 <div id="toast"></div>
 
-<!-- AUTH -->
 <div id="authPage">
-  <div class="authBubble b1"></div>
-  <div class="authBubble b2"></div>
+ <div class="authBubble b1"></div><div class="authBubble b2"></div>
+ <div class="authCard" id="registerBox">
+  <div class="authLogo">S</div><h1 class="authTitle">SannnPay</h1>
+  <p class="authText">Buat akun baru — saldo awal Rp0</p>
+  <div class="errorBox" id="registerError"></div>
+  <input class="inputBox" id="regUsername" placeholder="Username">
+  <input class="inputBox" id="regName" placeholder="Nama panggilan">
+  <input class="inputBox" id="regPassword" type="password" placeholder="Password">
+  <input class="inputBox" id="regConfirm" type="password" placeholder="Confirm password">
+  <button class="primaryBtn" onclick="register()">Buat Akun</button>
+  <div class="authSwitch">Sudah punya akun? <span onclick="showLogin()">Login</span></div>
+ </div>
 
-  <!-- REGISTER -->
-  <div class="authCard" id="registerBox">
-    <div class="authLogo">S</div>
-    <h1 class="authTitle">SannnPay</h1>
-    <p class="authText">Buat akun baru dan mulai dengan saldo Rp0</p>
-
-    <div class="errorBox" id="registerError"></div>
-
-    <input class="inputBox" id="regUsername"
-      placeholder="Username">
-
-    <input class="inputBox" id="regName"
-      placeholder="Nama panggilan">
-
-    <input class="inputBox" id="regPassword"
-      type="password" placeholder="Password">
-
-    <input class="inputBox" id="regConfirm"
-      type="password" placeholder="Confirm password">
-
-    <button class="primaryBtn" onclick="register()">
-      Buat Akun
-    </button>
-
-    <div class="authSwitch">
-      Sudah punya akun?
-      <span onclick="showLogin()">Login</span>
-    </div>
-  </div>
-
-  <!-- LOGIN -->
-  <div class="authCard" id="loginBox" style="display:none">
-    <div class="authLogo">S</div>
-    <h1 class="authTitle">Selamat Datang</h1>
-    <p class="authText">Login ke akun SannnPay kamu</p>
-
-    <div class="errorBox" id="loginError"></div>
-
-    <input class="inputBox" id="loginUsername"
-      placeholder="Username">
-
-    <input class="inputBox" id="loginPassword"
-      type="password" placeholder="Password">
-
-    <button class="primaryBtn" onclick="login()">
-      Login
-    </button>
-
-    <div class="authSwitch">
-      Belum punya akun?
-      <span onclick="showRegister()">Daftar</span>
-    </div>
-  </div>
+ <div class="authCard" id="loginBox" style="display:none">
+  <div class="authLogo">S</div><h1 class="authTitle">Selamat Datang</h1>
+  <p class="authText">Login ke akun SannnPay kamu</p>
+  <div class="errorBox" id="loginError"></div>
+  <input class="inputBox" id="loginUsername" placeholder="Username">
+  <input class="inputBox" id="loginPassword" type="password" placeholder="Password">
+  <button class="primaryBtn" onclick="login()">Login</button>
+  <div class="authSwitch">Belum punya akun? <span onclick="showRegister()">Daftar</span></div>
+ </div>
 </div>
 
-<!-- APP -->
 <div id="app">
-
 <header>
-  <div class="headerTop">
-    <div class="brand">SannnPay</div>
-    <div class="headerUser" id="headerUsername">👤 Pengguna</div>
-  </div>
-
-  <div class="balanceCard">
-    <div class="balanceLabel">Total Saldo</div>
-
-    <div class="balanceRow">
-      <div class="balance" id="balanceText">Rp0</div>
-      <div class="eye" onclick="toggleBalance()">👁️</div>
-    </div>
-  </div>
+ <div class="headerTop"><div class="brand">SannnPay</div><div class="headerUser" id="headerUsername">👤 Pengguna</div></div>
+ <div class="balanceCard"><div class="balanceLabel">Total Saldo</div><div class="balanceRow"><div class="balance" id="balanceText">Rp0</div><div class="eye" onclick="toggleBalance()">👁️</div></div></div>
 </header>
 
 <div class="content">
+ <div class="quickMenu">
+  <div class="quick" onclick="openPage('topupPage')"><div class="quickIcon">＋</div>Isi Saldo</div>
+  <div class="quick" onclick="openPage('sendPage')"><div class="quickIcon">💸</div>Kirim</div>
+  <div class="quick" onclick="showToast('Fitur minta saldo akan hadir')"><div class="quickIcon">💵</div>Minta</div>
+  <div class="quick" onclick="openPage('suggestionPage')"><div class="quickIcon">💬</div>Saran</div>
+ </div>
 
-  <div class="quickMenu">
-    <div class="quick" onclick="openPage('topupPage')">
-      <div class="quickIcon">＋</div>
-      Isi Saldo
-    </div>
+ <div class="banner"><h2>✨ SannnPay Experience</h2><p>Kelola saldo dan jelajahi berbagai fitur dalam satu aplikasi.</p></div>
+ <div class="sectionTitle"><h3>Jelajahi Layanan</h3><span>Lebih banyak</span></div>
 
-    <div class="quick" onclick="openPage('sendPage')">
-      <div class="quickIcon">💸</div>
-      Kirim
-    </div>
-
-    <div class="quick" onclick="showToast('Fitur minta saldo akan hadir nanti')">
-      <div class="quickIcon">💵</div>
-      Minta
-    </div>
-
-    <div class="quick" onclick="openPage('suggestionPage')">
-      <div class="quickIcon">💬</div>
-      Saran
-    </div>
-  </div>
-
-  <div class="banner">
-    <h2>✨ SannnPay Experience</h2>
-    <p>Kelola saldo, aktivitas, dan berbagai fitur dalam satu aplikasi.</p>
-    <div class="bannerShape"></div>
-  </div>
-
-  <div class="sectionTitle">
-    <h3>Jelajahi Layanan</h3>
-    <span>Lebih banyak</span>
-  </div>
-
-  <div class="serviceGrid">
-
-    <div class="service" onclick="openVoyager()">
-      <div class="serviceIcon">✈️</div>
-      Travel
-    </div>
-
-    <div class="service" onclick="openVoyager()">
-      <div class="serviceIcon">🚆</div>
-      Tiket
-    </div>
-
-    <div class="service" onclick="openVoyager()">
-      <div class="serviceIcon">🏨</div>
-      Hotel
-    </div>
-
-    <div class="service" onclick="showToast('Pulsa & Data akan hadir')">
-      <div class="serviceIcon">📱</div>
-      Pulsa
-    </div>
-
-    <div class="service" onclick="openPage('ojkPage')">
-      <div class="serviceIcon">⚖️</div>
-      OJK
-    </div>
-
-    <div class="service" onclick="showToast('Pembayaran listrik belum tersedia')">
-      <div class="serviceIcon">💡</div>
-      Listrik
-    </div>
-
-    <div class="service" onclick="showToast('Promo akan segera hadir')">
-      <div class="serviceIcon">🎁</div>
-      Promo
-    </div>
-
-    <div class="service" onclick="openPage('suggestionPage')">
-      <div class="serviceIcon">💭</div>
-      Kesan
-    </div>
-
-  </div>
-
-  <div class="smallNote">
-    <b>Catatan:</b> SannnPay ini adalah proyek aplikasi/simulasi.
-    Saldo dan transaksi disimpan secara lokal pada browser perangkat.
-  </div>
-
+ <div class="serviceGrid">
+  <div class="service" onclick="openVoyager()"><div class="serviceIcon">✈️</div>Travel</div>
+  <div class="service" onclick="openVoyager()"><div class="serviceIcon">🚆</div>Tiket</div>
+  <div class="service" onclick="openVoyager()"><div class="serviceIcon">🏨</div>Hotel</div>
+  <div class="service" onclick="showToast('Pulsa akan hadir')"><div class="serviceIcon">📱</div>Pulsa</div>
+  <div class="service" onclick="openPage('ojkPage')"><div class="serviceIcon">⚖️</div>OJK</div>
+  <div class="service" onclick="showToast('Belum tersedia')"><div class="serviceIcon">💡</div>Listrik</div>
+  <div class="service" onclick="showToast('Promo akan hadir')"><div class="serviceIcon">🎁</div>Promo</div>
+  <div class="service" onclick="openPage('suggestionPage')"><div class="serviceIcon">💭</div>Kesan</div>
+ </div>
+ <div class="smallNote"><b>Catatan:</b> Data akun dan saldo tersimpan secara lokal di browser perangkat ini.</div>
 </div>
 </div>
 
-<!-- TOPUP -->
+<!-- ISI SALDO LAMA -->
 <div class="page" id="topupPage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Isi Saldo</div>
-  </div>
-
-  <div class="card">
-    <div class="cardTitle">Pilih Nominal</div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-      <button class="primaryBtn" style="height:42px" onclick="setAmount(10000)">10rb</button>
-      <button class="primaryBtn" style="height:42px" onclick="setAmount(20000)">20rb</button>
-      <button class="primaryBtn" style="height:42px" onclick="setAmount(50000)">50rb</button>
-      <button class="primaryBtn" style="height:42px" onclick="setAmount(100000)">100rb</button>
-      <button class="primaryBtn" style="height:42px" onclick="setAmount(250000)">250rb</button>
-      <button class="primaryBtn" style="height:42px" onclick="setAmount(500000)">500rb</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cardTitle">Nominal Lainnya</div>
-
-    <input class="bigInput" id="topupAmount"
-      type="number" placeholder="Masukkan nominal">
-
-    <button class="primaryBtn" onclick="topup()">
-      Isi Saldo
-    </button>
-  </div>
+ <div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Isi Saldo</div></div>
+ <div class="card">
+  <div class="cardTitle">🔎 Cari metode pembayaran</div>
+  <input class="bigInput" placeholder="Search" oninput="filterMethods(this.value)">
+ </div>
+ <div class="card" id="methodList">
+  <div class="cardTitle">Transfer Bank</div>
+  <div class="option"><div class="optionIcon">🏦</div>BI-FAST</div>
+  <div class="option"><div class="optionIcon">BRI</div>Bank BRI</div>
+  <div class="option"><div class="optionIcon">C</div>CIMB Niaga</div>
+ </div>
+ <div class="card">
+  <div class="cardTitle">Uang Tunai</div>
+  <div class="option" onclick="showToast('Metode ini belum tersedia')"><div class="optionIcon">D</div>DANA</div>
+  <div class="option" onclick="openIndomaret()"><div class="optionIcon">🛒</div><b>Indomaret</b></div>
+  <div class="option" onclick="showToast('Metode ini belum tersedia')"><div class="optionIcon">🛍️</div>Alfamaret</div>
+ </div>
 </div>
 
-<!-- SEND -->
+<div class="page" id="indomaretPage">
+ <div class="pageHead"><div class="backBtn" onclick="openPage('topupPage')">←</div><div class="pageTitle">Top Up Indomaret</div></div>
+ <div class="card">
+  <div class="cardTitle">Top Up Amount</div>
+  <p style="font-size:11px;color:#8792a4;margin-bottom:14px">Masukkan jumlah saldo yang ingin ditambahkan.</p>
+  <input class="bigInput" id="topupAmount" type="number" placeholder="Contoh: 100000">
+  <button class="primaryBtn" onclick="createReceipt()">Lanjutkan</button>
+ </div>
+</div>
+
 <div class="page" id="sendPage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Kirim Saldo</div>
-  </div>
-
-  <div class="card">
-    <div class="cardTitle">Tujuan Pengiriman</div>
-
-    <input class="bigInput" id="sendTo"
-      placeholder="Username atau nomor tujuan">
-
-    <input class="bigInput" id="sendAmount"
-      type="number" placeholder="Nominal">
-
-    <button class="primaryBtn" onclick="sendMoney()">
-      Kirim Sekarang
-    </button>
-  </div>
+ <div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Kirim Saldo</div></div>
+ <div class="card"><div class="cardTitle">Tujuan Pengiriman</div>
+  <input class="bigInput" id="sendTo" placeholder="Username tujuan">
+  <input class="bigInput" id="sendAmount" type="number" placeholder="Nominal">
+  <button class="primaryBtn" onclick="sendMoney()">Kirim Sekarang</button>
+ </div>
 </div>
 
-<!-- ACTIVITY -->
-<div class="page" id="activityPage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Aktivitas</div>
-  </div>
+<div class="page" id="activityPage"><div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Aktivitas</div></div><div class="card" id="activityList"></div></div>
 
-  <div class="card" id="activityList"></div>
+<div class="page" id="walletPage"><div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Dompet</div></div>
+ <div class="card" style="text-align:center"><div style="font-size:42px">👛</div><p style="font-size:11px;color:#8792a4;margin-top:10px">Saldo Saat Ini</p><h1 style="color:#0875e8;margin:6px 0" id="walletBalance">Rp0</h1><button class="primaryBtn" onclick="openPage('topupPage')">Isi Saldo</button></div>
 </div>
 
-<!-- WALLET -->
-<div class="page" id="walletPage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Dompet</div>
-  </div>
-
-  <div class="card" style="text-align:center">
-    <div style="font-size:42px">👛</div>
-    <p style="font-size:11px;color:#8792a4;margin-top:10px">Saldo Saat Ini</p>
-    <h1 style="color:#0875e8;margin:6px 0" id="walletBalance">Rp0</h1>
-
-    <button class="primaryBtn" onclick="openPage('topupPage')">
-      Isi Saldo
-    </button>
-  </div>
-
-  <div class="card">
-    <div class="option">
-      <div class="optionIcon">🔒</div>
-      Keamanan akun
-    </div>
-
-    <div class="option">
-      <div class="optionIcon">📊</div>
-      Informasi saldo
-    </div>
-  </div>
+<div class="page" id="profilePage"><div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Saya</div></div>
+ <div class="card" style="text-align:center"><div id="profilePP" style="width:70px;height:70px;border-radius:50%;margin:auto;background:linear-gradient(135deg,#0875e8,#16b4ff);color:white;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold">S</div><h2 id="profileName" style="margin-top:12px">Pengguna</h2><p id="profileUser" style="font-size:11px;color:#8792a4">@username</p></div>
+ <div class="card">
+  <div class="option" onclick="openPage('suggestionPage')"><div class="optionIcon">💬</div>Saran / Kesan</div>
+  <div class="option" onclick="openPage('ojkPage')"><div class="optionIcon">⚖️</div>Informasi OJK</div>
+  <div class="option" onclick="logout()"><div class="optionIcon">🚪</div>Keluar</div>
+ </div>
 </div>
 
-<!-- PROFILE -->
-<div class="page" id="profilePage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Saya</div>
-  </div>
-
-  <div class="card" style="text-align:center">
-    <div id="profilePP"
-      style="width:70px;height:70px;border-radius:50%;margin:auto;
-      background:linear-gradient(135deg,#0875e8,#16b4ff);
-      color:white;display:flex;align-items:center;justify-content:center;
-      font-size:30px;font-weight:bold">
-      S
-    </div>
-
-    <h2 id="profileName" style="margin-top:12px">Pengguna</h2>
-    <p id="profileUser" style="font-size:11px;color:#8792a4;margin-top:5px">@username</p>
-  </div>
-
-  <div class="card">
-    <div class="option" onclick="openPage('suggestionPage')">
-      <div class="optionIcon">💬</div>
-      Saran / Kesan
-    </div>
-
-    <div class="option" onclick="openPage('ojkPage')">
-      <div class="optionIcon">⚖️</div>
-      Informasi OJK
-    </div>
-
-    <div class="option" onclick="logout()">
-      <div class="optionIcon">🚪</div>
-      Keluar
-    </div>
-  </div>
+<div class="page" id="suggestionPage"><div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Saran / Kesan</div></div>
+ <div class="card"><div class="cardTitle">Pendapatmu tentang SannnPay</div><textarea id="suggestionText" placeholder="Tulis saran atau kesan..."></textarea><button class="primaryBtn" style="margin-top:12px" onclick="sendSuggestion()">Kirim Saran</button></div>
+ <div class="card"><div class="cardTitle">Saran tersimpan</div><div id="suggestionList" style="font-size:12px;color:#657084">Belum ada saran.</div></div>
 </div>
 
-<!-- SUGGESTION -->
-<div class="page" id="suggestionPage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Saran / Kesan</div>
-  </div>
-
-  <div class="card">
-    <div class="cardTitle">Bagaimana pendapatmu tentang SannnPay?</div>
-
-    <p style="font-size:11px;color:#8792a4;line-height:1.5;margin-bottom:15px">
-      Kirimkan saran, kesan, atau ide fitur baru untuk pengembangan SannnPay.
-    </p>
-
-    <textarea id="suggestionText"
-      placeholder="Tulis saran atau kesan kamu di sini..."></textarea>
-
-    <button class="primaryBtn" style="margin-top:12px"
-      onclick="sendSuggestion()">
-      Kirim Saran
-    </button>
-  </div>
-
-  <div class="card">
-    <div class="cardTitle">Saran yang tersimpan</div>
-    <div id="suggestionList"
-      style="font-size:12px;color:#657084">
-      Belum ada saran.
-    </div>
-  </div>
+<div class="page" id="ojkPage"><div class="pageHead"><div class="backBtn" onclick="backHome()">←</div><div class="pageTitle">Informasi OJK</div></div>
+ <div class="card"><div style="font-size:38px;text-align:center">⚖️</div><h2 style="text-align:center;margin:10px 0">Edukasi Keuangan</h2><p style="font-size:12px;color:#657084;line-height:1.6">SannnPay adalah proyek simulasi lokal. Menu ini hanya berisi edukasi keamanan keuangan dan bukan pernyataan bahwa SannnPay terdaftar atau diawasi OJK.</p></div>
 </div>
 
-<!-- OJK INFO -->
-<div class="page" id="ojkPage">
-  <div class="pageHead">
-    <div class="backBtn" onclick="backHome()">←</div>
-    <div class="pageTitle">Informasi OJK</div>
-  </div>
-
-  <div class="card">
-    <div style="font-size:38px;text-align:center">⚖️</div>
-
-    <h2 style="text-align:center;font-size:18px;margin-top:10px">
-      Edukasi Keuangan
-    </h2>
-
-    <p style="font-size:12px;color:#657084;line-height:1.6;margin-top:15px">
-      Menu ini dibuat sebagai bagian informasi dan edukasi keuangan.
-      SannnPay adalah proyek/simulasi lokal dan tidak boleh dianggap
-      sebagai pernyataan bahwa aplikasi ini merupakan layanan keuangan
-      resmi atau terdaftar pada regulator.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="cardTitle">Tips aman</div>
-
-    <div class="option">
-      <div class="optionIcon">🔐</div>
-      Jangan membagikan password kepada siapa pun.
-    </div>
-
-    <div class="option">
-      <div class="optionIcon">🕵️</div>
-      Periksa kembali informasi sebelum melakukan transaksi.
-    </div>
-
-    <div class="option">
-      <div class="optionIcon">📚</div>
-      Pelajari informasi keuangan dari sumber resmi.
-    </div>
-  </div>
-</div>
-
-<!-- TRAVEL -->
+<!-- VOYAGER -->
 <div id="voyager">
-
-  <div class="voyagerTop">
-
-    <div class="voyagerHead">
-      <div class="voyagerLogo">SannnPay | Voyager</div>
-
-      <button class="closeTravel" onclick="closeVoyager()">
-        ×
-      </button>
-    </div>
-
-    <div class="traveler">
-      <div class="travelerPP" id="voyagerPP">H</div>
-
-      <div>
-        <small>Selamat datang kembali</small>
-        <h3 id="voyagerName">Hai, Pengelana</h3>
-      </div>
-    </div>
-
+ <div class="voyagerTop">
+  <div class="voyagerHead"><div class="voyagerLogo">SannnPay | Voyager</div><button class="closeTravel" onclick="closeVoyager()">×</button></div>
+  <div class="traveler"><div class="travelerPP" id="voyagerPP">H</div><div><small>Selamat datang kembali</small><h3 id="voyagerName">Hai, Pengelana</h3></div></div>
+ </div>
+ <div class="travelContent">
+  <div class="travelTabs">
+   <button class="travelTab active" onclick="chooseTravel('train',this)">🚆<br>Kereta Api</button>
+   <button class="travelTab" onclick="chooseTravel('plane',this)">✈️<br>Pesawat</button>
+   <button class="travelTab" onclick="chooseTravel('hotel',this)">🏨<br>Hotel</button>
+   <button class="travelTab" onclick="chooseTravel('rides',this)">🚗<br>Rides</button>
   </div>
-
-  <div class="travelContent">
-
-    <div class="travelTabs">
-      <button class="travelTab active" onclick="chooseTravel('train',this)">
-        🚆<br>Kereta Api
-      </button>
-
-      <button class="travelTab" onclick="chooseTravel('plane',this)">
-        ✈️<br>Pesawat
-      </button>
-
-      <button class="travelTab" onclick="chooseTravel('hotel',this)">
-        🏨<br>Hotel
-      </button>
-
-      <button class="travelTab" onclick="chooseTravel('rides',this)">
-        🚗<br>Rides
-      </button>
-    </div>
-
-    <div class="travelForm">
-      <h2 id="travelTitle">Cari Tiket Kereta</h2>
-
-      <p id="travelDesc">
-        Temukan perjalanan yang sesuai untukmu.
-      </p>
-
-      <div id="travelFields"></div>
-
-      <button class="primaryBtn travelSearch" onclick="searchTravel()">
-        Cari Sekarang
-      </button>
-    </div>
-
-    <div class="travelResult" id="travelResult"></div>
-
-  </div>
+  <div class="travelForm"><h2 id="travelTitle">Cari Tiket Kereta</h2><p id="travelDesc">Temukan perjalanan yang sesuai untukmu.</p><div id="travelFields"></div><button class="primaryBtn" style="margin-top:17px" onclick="searchTravel()">Cari Sekarang</button></div>
+  <div class="travelResult" id="travelResult"></div>
+ </div>
 </div>
 
-<!-- NAV -->
+<!-- STRUK -->
+<div id="receiptOverlay">
+ <div class="receiptBox">
+  <div class="receiptLogo">S</div><h2>Struk Isi Saldo</h2>
+  <div class="receiptRow"><span>Nama</span><b id="receiptName">Akhsan</b></div>
+  <div class="receiptRow"><span>Kode Isi Dana</span><b id="receiptCode">SP-000000</b></div>
+  <div class="receiptRow"><span>Metode</span><b>Indomaret</b></div>
+  <div class="receiptRow"><span>Nominal</span><b id="receiptAmount">Rp0</b></div>
+  <div class="receiptRow"><span>Status</span><b style="color:#e49a00">Diproses...</b></div>
+  <p style="font-size:10px;color:#8792a4;margin-top:16px">Mohon tunggu, saldo sedang diproses.</p>
+ </div>
+</div>
+
+<div id="successOverlay"><div class="successBox"><div class="successCheck">✓</div><h2>Isi Saldo Berhasil!</h2><p id="successText">Saldo berhasil ditambahkan.</p></div></div>
+
+<div id="ticketOverlay"><div class="ticketSuccess" id="ticketSuccessContent"><div class="loadingDots">•••</div><h2 id="ticketStatusTitle" style="color:#172033">Sedang membeli tiket...</h2><p id="ticketStatusText">Mohon tunggu sebentar</p></div></div>
+
 <div class="bottomNav">
-  <div class="nav active" onclick="navHome(this)">
-    <div class="navIcon">⌂</div>
-    Beranda
-  </div>
-
-  <div class="nav" onclick="navActivity(this)">
-    <div class="navIcon">◷</div>
-    Aktivitas
-  </div>
-
-  <div class="nav" onclick="openVoyager()">
-    <div class="navIcon">✈</div>
-    Voyager
-  </div>
-
-  <div class="nav" onclick="navWallet(this)">
-    <div class="navIcon">👛</div>
-    Dompet
-  </div>
-
-  <div class="nav" onclick="navProfile(this)">
-    <div class="navIcon">👤</div>
-    Saya
-  </div>
+ <div class="nav active" onclick="navHome(this)"><div class="navIcon">⌂</div>Beranda</div>
+ <div class="nav" onclick="navActivity(this)"><div class="navIcon">◷</div>Aktivitas</div>
+ <div class="nav" onclick="openVoyager()"><div class="navIcon">✈</div>Voyager</div>
+ <div class="nav" onclick="navWallet(this)"><div class="navIcon">👛</div>Dompet</div>
+ <div class="nav" onclick="navProfile(this)"><div class="navIcon">👤</div>Saya</div>
 </div>
 
 <script>
-let currentAccount = null;
-let balanceVisible = true;
-let travelType = "train";
+let currentAccount=null,balanceVisible=true,travelType="train",selectedTicket=null;
 
-function getAccounts(){
-  return JSON.parse(localStorage.getItem("sannnpay_accounts") || "[]");
-}
+const getAccounts=()=>JSON.parse(localStorage.getItem("sannnpay_accounts")||"[]");
+const saveAccounts=a=>localStorage.setItem("sannnpay_accounts",JSON.stringify(a));
+const formatRupiah=n=>"Rp"+Number(n).toLocaleString("id-ID");
 
-function saveAccounts(data){
-  localStorage.setItem("sannnpay_accounts", JSON.stringify(data));
+function showToast(t){
+ const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");
+ setTimeout(()=>x.classList.remove("show"),2800);
 }
-
-function getCurrentUsername(){
-  return localStorage.getItem("sannnpay_current_user");
-}
-
-function setCurrentUsername(username){
-  localStorage.setItem("sannnpay_current_user", username);
-}
-
-function showRegister(){
-  document.getElementById("registerBox").style.display = "block";
-  document.getElementById("loginBox").style.display = "none";
-}
-
-function showLogin(){
-  document.getElementById("registerBox").style.display = "none";
-  document.getElementById("loginBox").style.display = "block";
-}
+function showRegister(){registerBox.style.display="block";loginBox.style.display="none"}
+function showLogin(){registerBox.style.display="none";loginBox.style.display="block"}
 
 function register(){
-  const username = document.getElementById("regUsername").value.trim();
-  const name = document.getElementById("regName").value.trim();
-  const password = document.getElementById("regPassword").value;
-  const confirm = document.getElementById("regConfirm").value;
-  const error = document.getElementById("registerError");
-
-  error.style.display = "none";
-
-  if(username.length < 3){
-    error.textContent = "Username minimal 3 karakter.";
-    error.style.display = "block";
-    return;
-  }
-
-  if(name.length < 2){
-    error.textContent = "Masukkan nama panggilan.";
-    error.style.display = "block";
-    return;
-  }
-
-  if(password.length < 4){
-    error.textContent = "Password minimal 4 karakter.";
-    error.style.display = "block";
-    return;
-  }
-
-  if(password !== confirm){
-    error.textContent = "Confirm password tidak sama.";
-    error.style.display = "block";
-    return;
-  }
-
-  const accounts = getAccounts();
-
-  if(accounts.some(a => a.username.toLowerCase() === username.toLowerCase())){
-    error.textContent = "Username sudah digunakan di perangkat ini.";
-    error.style.display = "block";
-    return;
-  }
-
-  accounts.push({
-    username: username,
-    name: name,
-    password: password,
-    balance: 0,
-    activities: [],
-    suggestions: []
-  });
-
-  saveAccounts(accounts);
-
-  document.getElementById("loginUsername").value = username;
-
-  showLogin();
-
-  showToast("Akun berhasil dibuat. Saldo awal Rp0.");
+ const u=regUsername.value.trim(),n=regName.value.trim(),p=regPassword.value,c=regConfirm.value;
+ const e=registerError;e.style.display="none";
+ if(u.length<3||n.length<2||p.length<4){e.textContent="Isi data dengan benar.";e.style.display="block";return}
+ if(p!==c){e.textContent="Confirm password tidak sama.";e.style.display="block";return}
+ let a=getAccounts();
+ if(a.some(x=>x.username.toLowerCase()==u.toLowerCase())){e.textContent="Username sudah digunakan.";e.style.display="block";return}
+ a.push({username:u,name:n,password:p,balance:0,activities:[],suggestions:[]});saveAccounts(a);
+ loginUsername.value=u;showLogin();showToast("Akun berhasil dibuat. Saldo awal Rp0.");
 }
 
 function login(){
-  const username = document.getElementById("loginUsername").value.trim();
-  const password = document.getElementById("loginPassword").value;
-  const error = document.getElementById("loginError");
-
-  error.style.display = "none";
-
-  const accounts = getAccounts();
-
-  const account = accounts.find(a =>
-    a.username.toLowerCase() === username.toLowerCase() &&
-    a.password === password
-  );
-
-  if(!account){
-    error.textContent = "Username atau password salah.";
-    error.style.display = "block";
-    return;
-  }
-
-  currentAccount = account;
-  setCurrentUsername(account.username);
-
-  startApp();
+ const a=getAccounts(),u=loginUsername.value.trim(),p=loginPassword.value;
+ currentAccount=a.find(x=>x.username.toLowerCase()==u.toLowerCase()&&x.password===p);
+ if(!currentAccount){loginError.textContent="Username atau password salah.";loginError.style.display="block";return}
+ localStorage.setItem("sannnpay_current_user",currentAccount.username);startApp();
 }
-
-function loadCurrentAccount(){
-  const username = getCurrentUsername();
-
-  if(!username) return null;
-
-  return getAccounts().find(a => a.username === username) || null;
+function saveCurrent(){
+ let a=getAccounts(),i=a.findIndex(x=>x.username===currentAccount.username);
+ if(i>=0){a[i]=currentAccount;saveAccounts(a)}
 }
-
-function saveCurrentAccount(){
-  if(!currentAccount) return;
-
-  const accounts = getAccounts();
-  const index = accounts.findIndex(a =>
-    a.username === currentAccount.username
-  );
-
-  if(index !== -1){
-    accounts[index] = currentAccount;
-    saveAccounts(accounts);
-  }
-}
-
-function startApp(){
-  document.getElementById("authPage").style.display = "none";
-  document.getElementById("app").style.display = "block";
-
-  updateUI();
-  renderSuggestions();
-}
-
+function startApp(){authPage.style.display="none";app.style.display="block";updateUI();renderSuggestions()}
 function updateUI(){
-  if(!currentAccount) return;
-
-  document.getElementById("headerUsername").textContent =
-    "👤 " + currentAccount.name;
-
-  document.getElementById("profileName").textContent =
-    currentAccount.name;
-
-  document.getElementById("profileUser").textContent =
-    "@" + currentAccount.username;
-
-  document.getElementById("profilePP").textContent =
-    currentAccount.name.charAt(0).toUpperCase();
-
-  document.getElementById("voyagerPP").textContent =
-    currentAccount.name.charAt(0).toUpperCase();
-
-  document.getElementById("voyagerName").textContent =
-    "Hai, " + currentAccount.name;
-
-  updateBalance();
+ if(!currentAccount)return;
+ headerUsername.textContent="👤 "+currentAccount.name;
+ profileName.textContent=currentAccount.name;profileUser.textContent="@"+currentAccount.username;
+ profilePP.textContent=currentAccount.name[0].toUpperCase();voyagerPP.textContent=currentAccount.name[0].toUpperCase();
+ voyagerName.textContent="Hai, "+currentAccount.name;updateBalance();
 }
-
 function updateBalance(){
-  const text = balanceVisible
-    ? formatRupiah(currentAccount.balance)
-    : "Rp••••••";
-
-  document.getElementById("balanceText").textContent = text;
-  document.getElementById("walletBalance").textContent =
-    formatRupiah(currentAccount.balance);
+ balanceText.textContent=balanceVisible?formatRupiah(currentAccount.balance):"Rp••••••";
+ walletBalance.textContent=formatRupiah(currentAccount.balance);
 }
+function toggleBalance(){balanceVisible=!balanceVisible;updateBalance()}
+function hideAllPages(){app.style.display="none";document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"))}
+function openPage(id){hideAllPages();document.getElementById(id).classList.add("active");if(id==="activityPage")renderActivities();if(id==="suggestionPage")renderSuggestions()}
+function backHome(){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));app.style.display="block"}
 
-function toggleBalance(){
-  balanceVisible = !balanceVisible;
-  updateBalance();
-}
+function openIndomaret(){openPage("indomaretPage")}
+function filterMethods(v){}
 
-function formatRupiah(number){
-  return "Rp" + Number(number).toLocaleString("id-ID");
-}
-
-function showToast(text){
-  const toast = document.getElementById("toast");
-
-  toast.textContent = text;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2800);
-}
-
-function hideAllPages(){
-  document.getElementById("app").style.display = "none";
-
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.remove("active");
-  });
-}
-
-function openPage(id){
-  hideAllPages();
-
-  document.getElementById(id).classList.add("active");
-
-  if(id === "activityPage") renderActivities();
-  if(id === "walletPage") updateBalance();
-  if(id === "suggestionPage") renderSuggestions();
-}
-
-function backHome(){
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.remove("active");
-  });
-
-  document.getElementById("app").style.display = "block";
-}
-
-function setAmount(amount){
-  document.getElementById("topupAmount").value = amount;
-}
-
-function topup(){
-  const amount = Number(
-    document.getElementById("topupAmount").value
-  );
-
-  if(!amount || amount <= 0){
-    showToast("Masukkan nominal yang benar.");
-    return;
-  }
-
-  currentAccount.balance += amount;
-
-  currentAccount.activities.unshift({
-    type: "topup",
-    title: "Isi Saldo",
-    detail: "Saldo bertambah",
-    amount: amount,
-    date: new Date().toLocaleString("id-ID")
-  });
-
-  saveCurrentAccount();
-  updateBalance();
-
-  document.getElementById("topupAmount").value = "";
-
-  showToast("✓ Isi saldo berhasil");
+function createReceipt(){
+ const amount=Number(topupAmount.value);
+ if(!amount||amount<=0){showToast("Masukkan nominal yang benar.");return}
+ currentAccount.pendingTopup=amount;
+ receiptName.textContent=currentAccount.name;
+ receiptAmount.textContent=formatRupiah(amount);
+ receiptCode.textContent="SP-"+Math.floor(100000+Math.random()*900000);
+ receiptOverlay.style.display="flex";
+ setTimeout(()=>{
+  receiptOverlay.style.display="none";
+  currentAccount.balance+=amount;
+  currentAccount.activities.unshift({type:"topup",title:"Isi Saldo",detail:"Melalui Indomaret",amount,date:new Date().toLocaleString("id-ID")});
+  delete currentAccount.pendingTopup;saveCurrent();updateBalance();
+  successText.textContent=formatRupiah(amount)+" berhasil ditambahkan ke saldo.";
+  successOverlay.style.display="flex";
+  setTimeout(()=>{successOverlay.style.display="none";backHome()},2500);
+ },6000);
 }
 
 function sendMoney(){
-  const to = document.getElementById("sendTo").value.trim();
-  const amount = Number(
-    document.getElementById("sendAmount").value
-  );
-
-  if(to.length < 3){
-    showToast("Masukkan tujuan pengiriman.");
-    return;
-  }
-
-  if(!amount || amount <= 0){
-    showToast("Masukkan nominal yang benar.");
-    return;
-  }
-
-  if(amount > currentAccount.balance){
-    showToast("Saldo tidak mencukupi.");
-    return;
-  }
-
-  currentAccount.balance -= amount;
-
-  currentAccount.activities.unshift({
-    type: "send",
-    title: "Kirim Saldo",
-    detail: "Ke " + to,
-    amount: amount,
-    date: new Date().toLocaleString("id-ID")
-  });
-
-  saveCurrentAccount();
-  updateBalance();
-
-  document.getElementById("sendTo").value = "";
-  document.getElementById("sendAmount").value = "";
-
-  showToast("✓ Saldo berhasil dikirim");
+ const to=sendTo.value.trim(),amount=Number(sendAmount.value);
+ if(to.length<3){showToast("Masukkan username tujuan.");return}
+ if(!amount||amount<=0){showToast("Masukkan nominal yang benar.");return}
+ if(amount>currentAccount.balance){showToast("Saldo tidak mencukupi.");return}
+ currentAccount.balance-=amount;
+ currentAccount.activities.unshift({type:"send",title:"Kirim Saldo",detail:"Ke "+to,amount,date:new Date().toLocaleString("id-ID")});
+ saveCurrent();updateBalance();sendTo.value="";sendAmount.value="";showToast("✓ Saldo berhasil dikirim");
 }
 
 function renderActivities(){
-  const box = document.getElementById("activityList");
-
-  if(!currentAccount.activities.length){
-    box.innerHTML = `
-      <div style="text-align:center;padding:30px 10px">
-        <div style="font-size:40px">📋</div>
-        <p style="font-size:12px;color:#8792a4;margin-top:10px">
-          Belum ada aktivitas
-        </p>
-      </div>
-    `;
-    return;
-  }
-
-  box.innerHTML = "";
-
-  currentAccount.activities.forEach(item => {
-    const plus = item.type === "topup";
-
-    box.innerHTML += `
-      <div class="activity">
-        <div class="activityIcon">
-          ${plus ? "＋" : "↗"}
-        </div>
-
-        <div class="activityMain">
-          <b>${item.title}</b>
-          <p>${item.detail}</p>
-          <p>${item.date}</p>
-        </div>
-
-        <b class="${plus ? "plus" : "minus"}">
-          ${plus ? "+" : "-"}${formatRupiah(item.amount)}
-        </b>
-      </div>
-    `;
-  });
+ if(!currentAccount.activities.length){activityList.innerHTML='<div style="text-align:center;padding:30px;font-size:12px;color:#8792a4">📋<br><br>Belum ada aktivitas</div>';return}
+ activityList.innerHTML=currentAccount.activities.map(x=>`
+ <div class="activity"><div class="activityIcon">${x.type==="topup"?"＋":"↗"}</div>
+ <div class="activityMain"><b>${x.title}</b><p>${x.detail}</p><p>${x.date}</p></div>
+ <b class="${x.type==="topup"?"plus":"minus"}">${x.type==="topup"?"+":"-"}${formatRupiah(x.amount)}</b></div>`).join("");
 }
-
 function sendSuggestion(){
-  const text =
-    document.getElementById("suggestionText").value.trim();
-
-  if(text.length < 3){
-    showToast("Tulis saran atau kesan terlebih dahulu.");
-    return;
-  }
-
-  currentAccount.suggestions.unshift({
-    text: text,
-    date: new Date().toLocaleString("id-ID")
-  });
-
-  saveCurrentAccount();
-
-  document.getElementById("suggestionText").value = "";
-
-  renderSuggestions();
-  showToast("Terima kasih atas saranmu! 💙");
+ const t=suggestionText.value.trim();if(t.length<3){showToast("Tulis saran terlebih dahulu.");return}
+ currentAccount.suggestions.unshift({text:t,date:new Date().toLocaleString("id-ID")});saveCurrent();suggestionText.value="";renderSuggestions();showToast("Terima kasih atas saranmu! 💙")
 }
-
 function renderSuggestions(){
-  const box = document.getElementById("suggestionList");
-
-  if(!currentAccount || !currentAccount.suggestions.length){
-    box.textContent = "Belum ada saran.";
-    return;
-  }
-
-  box.innerHTML = currentAccount.suggestions.map(s => `
-    <div style="
-      padding:11px 0;
-      border-bottom:1px solid #edf0f4;
-      line-height:1.5
-    ">
-      <b style="font-size:12px">${s.text}</b>
-      <div style="font-size:10px;color:#9aa3b0;margin-top:4px">
-        ${s.date}
-      </div>
-    </div>
-  `).join("");
+ if(!currentAccount)return;
+ suggestionList.innerHTML=currentAccount.suggestions.length?currentAccount.suggestions.map(x=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${x.text}</b><div style="font-size:10px;color:#9aa3b0;margin-top:4px">${x.date}</div></div>`).join(""):"Belum ada saran.";
 }
 
 function openVoyager(){
-  document.getElementById("voyager").style.display = "block";
-
-  if(currentAccount){
-    document.getElementById("voyagerName").textContent =
-      "Hai, " + currentAccount.name;
-
-    document.getElementById("voyagerPP").textContent =
-      currentAccount.name.charAt(0).toUpperCase();
-  }
-
-  chooseTravel("train");
+ voyager.style.display="block";if(currentAccount){voyagerName.textContent="Hai, "+currentAccount.name;voyagerPP.textContent=currentAccount.name[0].toUpperCase()}chooseTravel("train");
 }
-
-function closeVoyager(){
-  document.getElementById("voyager").style.display = "none";
+function closeVoyager(){voyager.style.display="none"}
+function chooseTravel(type,el){
+ travelType=type;document.querySelectorAll(".travelTab").forEach(x=>x.classList.remove("active"));
+ if(el)el.classList.add("active");else document.querySelector(".travelTab").classList.add("active");
+ travelResult.style.display="none";
+ if(type==="train"){travelTitle.textContent="Cari Tiket Kereta";travelDesc.textContent="Pilih rute dan jadwal perjalananmu.";travelFields.innerHTML=fields("Contoh: Batam","Contoh: Jakarta")}
+ if(type==="plane"){travelTitle.textContent="Cari Tiket Pesawat";travelDesc.textContent="Temukan penerbangan sesuai tujuanmu.";travelFields.innerHTML=fields("Bandara asal","Bandara tujuan")}
+ if(type==="hotel"){travelTitle.textContent="Cari Hotel";travelDesc.textContent="Pilih tempat menginap.";travelFields.innerHTML='<label class="fieldLabel">Kota Tujuan</label><input class="bigInput" id="from" placeholder="Contoh: Batam"><label class="fieldLabel">Check-in</label><input class="bigInput" id="travelDate" type="date">'}
+ if(type==="rides"){travelTitle.textContent="Cari Rides";travelDesc.textContent="Atur perjalananmu.";travelFields.innerHTML=fields("Lokasi jemput","Tujuan")}
 }
-
-function chooseTravel(type, element){
-  travelType = type;
-
-  document.querySelectorAll(".travelTab").forEach(tab => {
-    tab.classList.remove("active");
-  });
-
-  if(element) element.classList.add("active");
-
-  const title = document.getElementById("travelTitle");
-  const desc = document.getElementById("travelDesc");
-  const fields = document.getElementById("travelFields");
-  const result = document.getElementById("travelResult");
-
-  result.style.display = "none";
-
-  if(type === "train"){
-    title.textContent = "Cari Tiket Kereta";
-    desc.textContent = "Pilih rute dan jadwal perjalananmu.";
-
-    fields.innerHTML = `
-      <label class="fieldLabel">Dari</label>
-      <input class="bigInput" id="from" placeholder="Contoh: Batam">
-
-      <label class="fieldLabel">Ke</label>
-      <input class="bigInput" id="to" placeholder="Contoh: Jakarta">
-
-      <label class="fieldLabel">Tanggal</label>
-      <input class="bigInput" id="travelDate" type="date">
-    `;
-  }
-
-  if(type === "plane"){
-    title.textContent = "Cari Tiket Pesawat";
-    desc.textContent = "Temukan penerbangan sesuai tujuanmu.";
-
-    fields.innerHTML = `
-      <label class="fieldLabel">Dari</label>
-      <input class="bigInput" id="from" placeholder="Bandara asal">
-
-      <label class="fieldLabel">Ke</label>
-      <input class="bigInput" id="to" placeholder="Bandara tujuan">
-
-      <label class="fieldLabel">Tanggal Berangkat</label>
-      <input class="bigInput" id="travelDate" type="date">
-    `;
-  }
-
-  if(type === "hotel"){
-    title.textContent = "Cari Hotel";
-    desc.textContent = "Pilih tempat menginap untuk perjalananmu.";
-
-    fields.innerHTML = `
-      <label class="fieldLabel">Kota Tujuan</label>
-      <input class="bigInput" id="hotelCity" placeholder="Contoh: Batam">
-
-      <label class="fieldLabel">Check-in</label>
-      <input class="bigInput" id="travelDate" type="date">
-
-      <label class="fieldLabel">Jumlah Tamu</label>
-      <select class="travelSelect" id="guest">
-        <option>1 Tamu</option>
-        <option>2 Tamu</option>
-        <option>3 Tamu</option>
-        <option>4+ Tamu</option>
-      </select>
-    `;
-  }
-
-  if(type === "rides"){
-    title.textContent = "Cari Rides";
-    desc.textContent = "Atur perjalanan dari satu tempat ke tempat lain.";
-
-    fields.innerHTML = `
-      <label class="fieldLabel">Lokasi Jemput</label>
-      <input class="bigInput" id="from" placeholder="Masukkan lokasi">
-
-      <label class="fieldLabel">Tujuan</label>
-      <input class="bigInput" id="to" placeholder="Mau ke mana?">
-
-      <label class="fieldLabel">Jenis Kendaraan</label>
-      <select class="travelSelect" id="rideType">
-        <option>Mobil</option>
-        <option>Motor</option>
-        <option>Van</option>
-      </select>
-    `;
-  }
-}
+function fields(a,b){return `<label class="fieldLabel">Dari</label><input class="bigInput" id="from" placeholder="${a}"><label class="fieldLabel">Ke</label><input class="bigInput" id="to" placeholder="${b}"><label class="fieldLabel">Tanggal</label><input class="bigInput" id="travelDate" type="date">`}
 
 function searchTravel(){
-  const result = document.getElementById("travelResult");
-
-  let from = document.getElementById("from")
-    ? document.getElementById("from").value || "Lokasi Awal"
-    : "Kota";
-
-  let to = document.getElementById("to")
-    ? document.getElementById("to").value || "Tujuan"
-    : "";
-
-  let price = 0;
-  let typeText = "";
-
-  if(travelType === "train"){
-    typeText = "Kereta Api Voyager";
-    price = 185000;
-  }
-
-  if(travelType === "plane"){
-    typeText = "Penerbangan Voyager";
-    price = 650000;
-  }
-
-  if(travelType === "hotel"){
-    from = document.getElementById("hotelCity").value || "Kota Pilihan";
-    to = "Hotel";
-    typeText = "Voyager Hotel";
-    price = 420000;
-  }
-
-  if(travelType === "rides"){
-    typeText = "Voyager Rides";
-    price = 35000;
-  }
-
-  result.innerHTML = `
-    <div class="ticket">
-
-      <div class="ticketHead">
-        <div class="ticketBrand">${typeText}</div>
-        <div class="ticketStatus">Tersedia</div>
-      </div>
-
-      <div class="ticketRoute">
-
-        <div class="city">
-          <b>${from}</b>
-          <span>Dari</span>
-        </div>
-
-        <div class="routeLine">
-          ─── ✈ ───
-        </div>
-
-        <div class="city" style="text-align:right">
-          <b>${to || "Pilihanmu"}</b>
-          <span>Ke</span>
-        </div>
-
-      </div>
-
-      <div class="ticketInfo">
-        <div>
-          <small>Jenis</small>
-          <b>${typeText}</b>
-        </div>
-
-        <div>
-          <small>Status</small>
-          <b>Tersedia</b>
-        </div>
-
-        <div>
-          <small>Penumpang</small>
-          <b>1 Orang</b>
-        </div>
-
-        <div>
-          <small>Catatan</small>
-          <b>Simulasi</b>
-        </div>
-      </div>
-
-      <div class="ticketPrice">
-        <span>Harga mulai dari</span>
-        <b>${formatRupiah(price)}</b>
-      </div>
-
-    </div>
-  `;
-
-  result.style.display = "block";
-
-  result.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
+ let from=document.getElementById("from").value||"Batam";
+ let to=document.getElementById("to")?.value||"Tujuan";
+ let data={
+  train:{name:"Kereta Api Voyager",price:185000,icon:"🚆",ready:"Sudah siap pukul 08.30"},
+  plane:{name:"Penerbangan Voyager",price:650000,icon:"✈️",ready:"Sudah siap pukul 07.00"},
+  hotel:{name:"Voyager Hotel",price:420000,icon:"🏨",ready:"Check-in siap pukul 14.00"},
+  rides:{name:"Voyager Rides",price:35000,icon:"🚗",ready:"Kendaraan siap pukul 09.00"}
+ }[travelType];
+ if(travelType==="hotel")to="Hotel";
+ selectedTicket={from,to,...data,date:document.getElementById("travelDate")?.value||"Hari ini"};
+ travelResult.innerHTML=`<div class="ticket">
+  <div class="ticketHead"><div class="ticketBrand">${data.icon} ${data.name}</div><div class="ticketStatus">Tersedia</div></div>
+  <div class="ticketRoute"><div class="city"><b>${from}</b><span>Dari</span></div><div class="routeLine">─── ➜ ───</div><div class="city" style="text-align:right"><b>${to}</b><span>Ke</span></div></div>
+  <div class="ticketInfo"><div><small>Status</small><b>Tersedia</b></div><div><small>Jadwal</small><b>${data.ready}</b></div><div><small>Penumpang</small><b>1 Orang</b></div><div><small>Tanggal</small><b>${selectedTicket.date}</b></div></div>
+  <div class="ticketPrice"><span>Harga tiket</span><b>${formatRupiah(data.price)}</b></div>
+  <button class="primaryBtn" style="margin-top:16px" onclick="buyTicket()">Beli Tiket</button>
+ </div>`;
+ travelResult.style.display="block";travelResult.scrollIntoView({behavior:"smooth"});
 }
 
-function navClear(){
-  document.querySelectorAll(".nav").forEach(n => {
-    n.classList.remove("active");
-  });
+function buyTicket(){
+ if(!selectedTicket)return;
+ if(currentAccount.balance<selectedTicket.price){showToast("Saldo tidak cukup untuk membeli tiket.");return}
+ ticketOverlay.style.display="flex";
+ ticketSuccessContent.innerHTML='<div class="loadingDots">•••</div><h2 style="color:#172033">Sedang membeli tiket...</h2><p>Mohon tunggu sebentar</p>';
+ setTimeout(()=>{
+  currentAccount.balance-=selectedTicket.price;
+  let code="SV-"+Math.floor(100000+Math.random()*900000);
+  currentAccount.activities.unshift({type:"ticket",title:"Beli Tiket",detail:selectedTicket.name+" • "+code,amount:selectedTicket.price,date:new Date().toLocaleString("id-ID")});
+  saveCurrent();updateBalance();
+  ticketSuccessContent.innerHTML=`<div class="successCheck">✓</div><h2>Berhasil Dibeli!</h2><p>${selectedTicket.icon} ${selectedTicket.name}</p>
+   <div style="margin-top:13px;font-size:12px"><b>${selectedTicket.from} → ${selectedTicket.to}</b><br><span style="color:#8792a4">Kode Tiket: ${code}</span></div>
+   <div class="ready">🕐 ${selectedTicket.ready}</div>`;
+  setTimeout(()=>{ticketOverlay.style.display="none";closeVoyager();showToast("Tiket berhasil dibeli!")},3500);
+ },2200);
 }
 
-function navHome(el){
-  navClear();
-  el.classList.add("active");
-  backHome();
-}
-
-function navActivity(el){
-  navClear();
-  el.classList.add("active");
-  openPage("activityPage");
-}
-
-function navWallet(el){
-  navClear();
-  el.classList.add("active");
-  openPage("walletPage");
-}
-
-function navProfile(el){
-  navClear();
-  el.classList.add("active");
-  openPage("profilePage");
-}
-
-function logout(){
-  currentAccount = null;
-  localStorage.removeItem("sannnpay_current_user");
-
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.remove("active");
-  });
-
-  document.getElementById("app").style.display = "none";
-  document.getElementById("authPage").style.display = "flex";
-
-  showLogin();
-  showToast("Kamu sudah keluar dari akun.");
-}
-
-/* AUTO LOGIN */
-window.onload = function(){
-  const saved = loadCurrentAccount();
-
-  if(saved){
-    currentAccount = saved;
-    startApp();
-  }
-};
+function navClear(){document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"))}
+function navHome(e){navClear();e.classList.add("active");backHome()}
+function navActivity(e){navClear();e.classList.add("active");openPage("activityPage")}
+function navWallet(e){navClear();e.classList.add("active");openPage("walletPage")}
+function navProfile(e){navClear();e.classList.add("active");openPage("profilePage")}
+function logout(){currentAccount=null;localStorage.removeItem("sannnpay_current_user");document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));app.style.display="none";authPage.style.display="flex";showLogin()}
+window.onload=()=>{let u=localStorage.getItem("sannnpay_current_user");if(u){currentAccount=getAccounts().find(x=>x.username===u);if(currentAccount)startApp()}};
 </script>
-
 </body>
 </html>
