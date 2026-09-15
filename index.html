@@ -6,1295 +6,597 @@
 <title>Sann Text Generator</title>
 
 <style>
-*{
-    box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-html,body{
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f3f6f5;
-    color:#222;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f3;
+  color: #222;
 }
 
-body{
-    min-height:100vh;
+header {
+  background: linear-gradient(135deg, #087443, #13a66b);
+  color: white;
+  padding: 22px 16px;
+  text-align: center;
 }
 
-/* HEADER */
-.header{
-    background:linear-gradient(135deg,#087443,#13a66b);
-    color:white;
-    text-align:center;
-    padding:24px 15px;
-    border-radius:0 0 25px 25px;
+header h1 {
+  margin: 0;
+  font-size: 25px;
 }
 
-.header h1{
-    margin:0;
-    font-size:24px;
+header p {
+  margin: 7px 0 0;
+  opacity: .9;
 }
 
-.header p{
-    margin:7px 0 0;
-    font-size:14px;
-    opacity:.9;
+nav {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px #0001;
 }
 
-
-/* CONTAINER */
-.container{
-    width:94%;
-    max-width:700px;
-    margin:18px auto 40px;
+nav button {
+  flex: 1;
+  border: 0;
+  padding: 12px 5px;
+  border-radius: 10px;
+  background: #e8f5ef;
+  color: #087443;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-
-/* MENU */
-.menu{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:15px;
+nav button.active {
+  background: #087443;
+  color: white;
 }
 
-.menu button{
-    border:0;
-    padding:16px 10px;
-    border-radius:16px;
-    background:white;
-    color:#087443;
-    font-weight:bold;
-    font-size:14px;
-    box-shadow:0 4px 15px rgba(0,0,0,.06);
-    cursor:pointer;
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 18px;
 }
 
-.menu button.active{
-    background:#087443;
-    color:white;
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 12px #00000012;
 }
 
-
-/* CARD */
-.card{
-    background:white;
-    border-radius:18px;
-    padding:18px;
-    margin-bottom:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.06);
+label {
+  display: block;
+  font-weight: bold;
+  margin: 12px 0 6px;
 }
 
-.card h2{
-    margin:0 0 15px;
-    font-size:18px;
-}
-
-
-/* INPUT */
-label{
-    display:block;
-    font-size:14px;
-    font-weight:bold;
-    margin:12px 0 7px;
-}
-
-textarea,
 input,
-select{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    background:#fafafa;
-    font-size:15px;
-    outline:none;
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
 }
 
-textarea{
-    min-height:110px;
-    resize:vertical;
+textarea {
+  min-height: 110px;
+  resize: vertical;
 }
 
-textarea:focus,
-input:focus,
-select:focus{
-    border-color:#087443;
+.main-btn {
+  width: 100%;
+  border: 0;
+  padding: 13px;
+  margin-top: 15px;
+  border-radius: 10px;
+  background: #087443;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-
-/* INFO */
-.info{
-    background:#eaf7f0;
-    color:#087443;
-    border-radius:12px;
-    padding:12px;
-    margin-top:12px;
-    font-size:13px;
-    line-height:1.5;
+.main-btn:hover {
+  opacity: .9;
 }
 
-
-/* BUTTON */
-.buttons{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:15px;
+.copy-btn {
+  background: #13a66b;
 }
 
-button.action{
-    border:0;
-    padding:13px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
+.danger-btn {
+  background: #d9534f;
 }
 
-.green{
-    background:#087443;
-    color:white;
+.info {
+  background: #e9f8f1;
+  padding: 12px;
+  border-radius: 10px;
+  color: #087443;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
-.gray{
-    background:#e8eeeb;
-    color:#087443;
+.text-item {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 7px;
+  border-radius: 8px;
+  white-space: pre-wrap;
 }
 
-.blue{
-    background:#1769e0;
-    color:white;
+#copyResult {
+  max-height: 450px;
+  overflow-y: auto;
+  margin-top: 15px;
 }
 
-.red{
-    background:#ffe7e7;
-    color:#c62828;
+#pdfPreview {
+  background: white;
+  padding: 25px;
+  margin-top: 15px;
 }
 
-
-/* RESULT */
-.result-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.pdf-page {
+  page-break-after: always;
 }
 
-.result-title h2{
-    margin:0;
+.pdf-page:last-child {
+  page-break-after: auto;
 }
 
-.badge{
-    background:#eaf7f0;
-    color:#087443;
-    padding:7px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
+.pdf-title {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 
-
-/* TEXT LIST */
-.text-list{
-    margin-top:15px;
-    max-height:450px;
-    overflow:auto;
-    border:1px solid #eee;
-    border-radius:12px;
+.pdf-item {
+  margin-bottom: 9px;
+  line-height: 1.5;
 }
 
-.text-item{
-    padding:11px 13px;
-    border-bottom:1px solid #eee;
-    font-size:14px;
-    line-height:1.5;
-    word-break:break-word;
+.hidden {
+  display: none;
 }
 
-.text-item:last-child{
-    border-bottom:0;
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+  font-size: 13px;
 }
 
+/* =========================
+   KHUSUS SAAT CETAK / PDF
+   ========================= */
+@media print {
 
-/* PDF PREVIEW */
-.pdf-preview{
-    margin-top:15px;
-    background:#f7faf8;
-    border-radius:15px;
-    padding:18px;
-}
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
 
-.pdf-preview h3{
-    margin:0 0 8px;
-}
-
-.pdf-preview p{
-    font-size:13px;
-    color:#666;
-    line-height:1.5;
-}
-
-
-/* FOOTER */
-.footer{
-    text-align:center;
-    color:#888;
-    font-size:12px;
-    padding:10px;
-}
-
-
-/* CETAK */
-@media print{
+  /* SEMUA MENU DAN KONTROL WEBSITE DISEMBUNYIKAN */
   header,
   nav,
+  footer,
   button,
   input,
   select,
   textarea,
-  .menu,
-  .navbar,
+  label,
+  .info,
+  .card:not(#pdfDocument),
   .no-print {
     display: none !important;
   }
 
   body {
     background: white !important;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #pdfDocument {
+    display: block !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   #pdfPreview {
     display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-    }
-
-    body{
-        background:white;
-    }
-
-    .header,
-    .menu,
-    .no-print,
-    .footer{
-        display:none !important;
-    }
-
-    .container{
-        width:100%;
-        max-width:none;
-        margin:0;
-    }
-
-    .card{
-        box-shadow:none;
-        padding:0;
-        margin:0;
-    }
-
-    .result-title{
-        display:none;
-    }
-
-    #hasilPDF{
-        display:block !important;
-    }
-
-    .text-list{
-        max-height:none;
-        overflow:visible;
-        border:0;
-    }
-
-    .text-item{
-        border:0;
-        padding:3px 0;
-        font-size:11pt;
-    }
-}
-
-
-/* MOBILE */
-@media(max-width:500px){
-
-    .menu{
-        grid-template-columns:1fr;
-    }
-
-    .buttons{
-        grid-template-columns:1fr;
-    }
-
-    .header h1{
-        font-size:22px;
-    }
 }
 </style>
 </head>
 
-
 <body>
 
+<header>
+  <h1>📝 Sann Text Generator</h1>
+  <p>Buat teks hingga 10.000 dokumen</p>
+</header>
 
-<!-- HEADER -->
-<div class="header">
+<nav>
+  <button id="menuText" class="active" onclick="showMenu('text')">
+    📝 Salin Teks
+  </button>
 
-    <h1>📝 Sann Text Generator</h1>
-
-    <p>
-        Buat, salin, dan jadikan teks sebagai PDF
-    </p>
-
-</div>
-
+  <button id="menuPdf" onclick="showMenu('pdf')">
+    📄 Dokumen PDF
+  </button>
+</nav>
 
 <div class="container">
 
+  <!-- MENU SALIN TEKS -->
+  <section id="textMenu">
 
-    <!-- MENU -->
-    <div class="menu">
+    <div class="card">
+      <h2>📝 Generator Teks</h2>
 
-        <button
-            id="menuTeks"
-            class="active"
-            onclick="bukaTeks()">
+      <label>Teks</label>
+      <textarea id="textInput"
+        placeholder="Contoh: Maaf ya kak, saya tidak sengaja..."></textarea>
 
-            📝
-            <br>
-            Salin Teks
+      <label>Jumlah teks</label>
+      <select id="textQuantity">
+        <option value="1">1</option>
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="500">500</option>
+        <option value="1000">1.000</option>
+      </select>
 
-        </button>
+      <button class="main-btn" onclick="generateText()">
+        Buat Teks
+      </button>
+
+      <div id="copyResult"></div>
+    </div>
+
+  </section>
 
 
-        <button
-            id="menuPDF"
-            onclick="bukaPDF()">
+  <!-- MENU PDF -->
+  <section id="pdfMenu" class="hidden">
 
-            📄
-            <br>
-            Buat Dokumen PDF
+    <div class="card no-print">
+      <h2>📄 Buat Dokumen PDF</h2>
 
-        </button>
+      <div class="info">
+        Maksimal 10.000 teks. Hasil PDF hanya akan berisi isi dokumen,
+        tanpa menu website.
+      </div>
 
+      <label>Teks awal</label>
+      <textarea id="pdfText"
+        placeholder="Contoh: Ini adalah teks pertama..."></textarea>
+
+      <label>Jumlah teks</label>
+      <select id="pdfQuantity">
+        <option value="1000">1.000</option>
+        <option value="2000">2.000</option>
+        <option value="3000">3.000</option>
+        <option value="5000">5.000</option>
+        <option value="7500">7.500</option>
+        <option value="10000">10.000</option>
+      </select>
+
+      <label>Judul dokumen</label>
+      <input id="pdfTitle" value="Dokumen Sann">
+
+      <label>Teks per halaman</label>
+      <select id="perPage">
+        <option value="30">30 teks</option>
+        <option value="50">50 teks</option>
+        <option value="75">75 teks</option>
+        <option value="100">100 teks</option>
+      </select>
+
+      <button class="main-btn" onclick="createPDF()">
+        📄 Buat Dokumen
+      </button>
+
+      <button class="main-btn copy-btn" onclick="printPDF()">
+        💾 Simpan sebagai PDF
+      </button>
+
+      <button class="main-btn" onclick="sharePDF()">
+        📤 Bagikan PDF
+      </button>
+
+      <button class="main-btn danger-btn" onclick="clearPDF()">
+        🗑️ Hapus Dokumen
+      </button>
     </div>
 
 
-    <!-- ===================== -->
-    <!-- MENU SALIN TEKS -->
-    <!-- ===================== -->
+    <!-- BAGIAN YANG AKAN DICETAK -->
+    <div id="pdfDocument" class="card hidden">
 
-    <div
-        class="card"
-        id="halamanTeks">
-
-        <h2>
-            📝 Generator Teks
-        </h2>
-
-
-        <label>
-            Teks awal
-        </label>
-
-        <textarea
-            id="teks"
-            placeholder="Contoh: Maaf">
-        </textarea>
-
-
-        <label>
-            Jumlah teks
-        </label>
-
-        <input
-            id="jumlah"
-            type="number"
-            min="1"
-            max="1000"
-            value="100">
-
-
-        <label>
-            Format teks
-        </label>
-
-        <select id="format">
-
-            <option value="depan">
-                1. Maaf
-            </option>
-
-            <option value="tanpa">
-                Maaf
-            </option>
-
-            <option value="belakang">
-                Maaf 1
-            </option>
-
-        </select>
-
-
-        <div class="info">
-
-            Maksimal menu ini:
-            <b>1.000 teks</b>.
-
-            Hasil bisa langsung disalin.
-
-        </div>
-
-
-        <div class="buttons">
-
-            <button
-                class="action green"
-                onclick="buatTeks()">
-
-                ✨ Buat Teks
-
-            </button>
-
-
-            <button
-                class="action gray"
-                onclick="resetSemua()">
-
-                🔄 Reset
-
-            </button>
-
-        </div>
+      <div id="pdfPreview"></div>
 
     </div>
 
-
-    <!-- HASIL TEKS -->
-
-    <div
-        class="card"
-        id="hasilTeks"
-        style="display:none;">
-
-        <div class="result-title">
-
-            <h2>
-                📋 Hasil
-            </h2>
-
-            <span
-                class="badge"
-                id="badgeTeks">
-                0 teks
-            </span>
-
-        </div>
-
-
-        <div class="buttons">
-
-            <button
-                class="action green"
-                onclick="salinSemua()">
-
-                📋 Salin Semua
-
-            </button>
-
-
-            <button
-                class="action gray"
-                onclick="salinTanpaNomor()">
-
-                📄 Tanpa Nomor
-
-            </button>
-
-        </div>
-
-
-        <div
-            class="text-list"
-            id="daftarTeks">
-        </div>
-
-    </div>
-
-
-    <!-- ===================== -->
-    <!-- MENU PDF -->
-    <!-- ===================== -->
-
-    <div
-        class="card"
-        id="halamanPDF"
-        style="display:none;">
-
-        <h2>
-            📄 Buat Dokumen PDF
-        </h2>
-
-
-        <label>
-            Teks awal dokumen
-        </label>
-
-        <textarea
-            id="teksPDF"
-            placeholder="Contoh: Maaf">
-        </textarea>
-
-
-        <label>
-            Jumlah teks
-        </label>
-
-        <input
-            id="jumlahPDF"
-            type="number"
-            min="1"
-            max="10000"
-            value="1000">
-
-
-        <label>
-            Format teks
-        </label>
-
-        <select id="formatPDF">
-
-            <option value="depan">
-                1. Maaf
-            </option>
-
-            <option value="tanpa">
-                Maaf
-            </option>
-
-            <option value="belakang">
-                Maaf 1
-            </option>
-
-        </select>
-
-
-        <label>
-            Judul dokumen PDF
-        </label>
-
-        <input
-            id="judulPDF"
-            type="text"
-            value="Sann Text Generator"
-            placeholder="Judul PDF">
-
-
-        <label>
-            Teks per lembar
-        </label>
-
-        <select id="perLembar">
-
-            <option value="30">
-                30 teks / lembar
-            </option>
-
-            <option value="50" selected>
-                50 teks / lembar
-            </option>
-
-            <option value="75">
-                75 teks / lembar
-            </option>
-
-            <option value="100">
-                100 teks / lembar
-            </option>
-
-        </select>
-
-
-        <div class="info">
-
-            📄 Bisa membuat sampai
-            <b>10.000 teks</b>.
-
-            <br><br>
-
-            Contoh:
-
-            <br>
-            Lembar 1 → teks 1–50
-            <br>
-            Lembar 2 → teks 51–100
-            <br>
-            Lembar 3 → teks 101–150
-            <br>
-            dan seterusnya.
-
-        </div>
-
-
-        <div class="buttons">
-
-            <button
-                class="action green"
-                onclick="buatPDF()">
-
-                📄 Buat Dokumen PDF
-
-            </button>
-
-
-            <button
-                class="action gray"
-                onclick="resetPDF()">
-
-                🔄 Reset
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- HASIL PDF -->
-
-    <div
-        class="card"
-        id="hasilPDF"
-        style="display:none;">
-
-        <div class="result-title">
-
-            <h2>
-                📄 Dokumen PDF
-            </h2>
-
-            <span
-                class="badge"
-                id="badgePDF">
-                0 teks
-            </span>
-
-        </div>
-
-
-        <div class="pdf-preview no-print">
-
-            <h3>
-                ✅ Dokumen siap
-            </h3>
-
-            <p id="infoPDF">
-                PDF siap dibuat.
-            </p>
-
-
-            <div class="buttons">
-
-                <button
-                    class="action green"
-                    onclick="cetakPDF()">
-
-                    📄 Simpan sebagai PDF
-
-                </button>
-
-
-                <button
-                    class="action blue"
-                    onclick="bagikanPDF()">
-
-                    📤 Bagikan PDF
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- ISI PDF -->
-        <div
-            class="text-list"
-            id="isiPDF">
-        </div>
-
-    </div>
-
-
-    <div class="footer">
-        Sann Text Generator • by sann
-    </div>
+  </section>
 
 </div>
+
+<footer class="no-print">
+  by sann
+</footer>
 
 
 <script>
 
-/* =========================
-   DATA
-========================= */
+function showMenu(menu) {
 
-let hasil = [];
+  const textMenu = document.getElementById("textMenu");
+  const pdfMenu = document.getElementById("pdfMenu");
 
-let pdfData = [];
+  const menuText = document.getElementById("menuText");
+  const menuPdf = document.getElementById("menuPdf");
 
+  if (menu === "text") {
 
-/* =========================
-   MENU
-========================= */
+    textMenu.classList.remove("hidden");
+    pdfMenu.classList.add("hidden");
 
-function bukaTeks(){
+    menuText.classList.add("active");
+    menuPdf.classList.remove("active");
 
-    document.getElementById("halamanTeks")
-        .style.display = "block";
+  } else {
 
-    document.getElementById("hasilTeks")
-        .style.display = "none";
+    textMenu.classList.add("hidden");
+    pdfMenu.classList.remove("hidden");
 
-    document.getElementById("halamanPDF")
-        .style.display = "none";
-
-    document.getElementById("hasilPDF")
-        .style.display = "none";
-
-
-    document.getElementById("menuTeks")
-        .classList.add("active");
-
-    document.getElementById("menuPDF")
-        .classList.remove("active");
-
-}
-
-
-function bukaPDF(){
-
-    document.getElementById("halamanTeks")
-        .style.display = "none";
-
-    document.getElementById("hasilTeks")
-        .style.display = "none";
-
-    document.getElementById("halamanPDF")
-        .style.display = "block";
-
-    document.getElementById("hasilPDF")
-        .style.display = "none";
-
-
-    document.getElementById("menuTeks")
-        .classList.remove("active");
-
-    document.getElementById("menuPDF")
-        .classList.add("active");
-
+    menuText.classList.remove("active");
+    menuPdf.classList.add("active");
+  }
 }
 
 
 /* =========================
-   BUAT TEKS
-========================= */
+   GENERATOR TEKS
+   ========================= */
 
-function buatTeks(){
+function generateText() {
 
-    let teks =
-        document.getElementById("teks")
-        .value
-        .trim();
+  const text = document.getElementById("textInput").value.trim();
+  const quantity = Number(
+    document.getElementById("textQuantity").value
+  );
 
-    let jumlah =
-        parseInt(
-            document.getElementById("jumlah").value
-        );
+  const result = document.getElementById("copyResult");
 
-    let format =
-        document.getElementById("format").value;
+  if (!text) {
+    alert("Masukkan teks terlebih dahulu.");
+    return;
+  }
 
+  result.innerHTML = "";
 
-    if(!teks){
+  for (let i = 1; i <= quantity; i++) {
 
-        alert("Masukkan teks terlebih dahulu.");
+    const div = document.createElement("div");
 
-        return;
+    div.className = "text-item";
+
+    div.innerHTML =
+      "<b>" + i + ".</b> " +
+      escapeHTML(text);
+
+    result.appendChild(div);
+  }
+
+  const copyButton = document.createElement("button");
+
+  copyButton.className = "main-btn copy-btn";
+  copyButton.textContent = "📋 Salin Semua";
+
+  copyButton.onclick = function() {
+
+    let allText = "";
+
+    for (let i = 1; i <= quantity; i++) {
+      allText += i + ". " + text + "\n";
     }
 
+    navigator.clipboard.writeText(allText);
 
-    if(jumlah < 1){
+    alert("Semua teks berhasil disalin!");
+  };
 
-        alert("Jumlah minimal 1.");
-
-        return;
-    }
-
-
-    if(jumlah > 1000){
-
-        jumlah = 1000;
-
-        alert(
-            "Menu Salin Teks maksimal 1.000 teks."
-        );
-    }
-
-
-    hasil = [];
-
-
-    for(let i=1;i<=jumlah;i++){
-
-        if(format === "depan"){
-
-            hasil.push(
-                i + ". " + teks
-            );
-
-        }
-
-        else if(format === "tanpa"){
-
-            hasil.push(teks);
-
-        }
-
-        else{
-
-            hasil.push(
-                teks + " " + i
-            );
-
-        }
-
-    }
-
-
-    tampilkanTeks();
-
-
-    document.getElementById("hasilTeks")
-        .style.display = "block";
-
-
-    document.getElementById("badgeTeks")
-        .innerText =
-        jumlah.toLocaleString("id-ID") +
-        " teks";
-
-
-    document.getElementById("hasilTeks")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
+  result.prepend(copyButton);
 }
 
 
 /* =========================
-   TAMPILKAN TEKS
-========================= */
+   BUAT DOKUMEN PDF
+   ========================= */
 
-function tampilkanTeks(){
+function createPDF() {
 
-    let box =
-        document.getElementById("daftarTeks");
+  const text = document.getElementById("pdfText").value.trim();
+  const quantity = Number(
+    document.getElementById("pdfQuantity").value
+  );
 
-    box.innerHTML = "";
+  const title =
+    document.getElementById("pdfTitle").value.trim()
+    || "Dokumen Sann";
 
+  const perPage = Number(
+    document.getElementById("perPage").value
+  );
 
-    let fragment =
-        document.createDocumentFragment();
+  if (!text) {
+    alert("Masukkan teks terlebih dahulu.");
+    return;
+  }
 
+  const pdfDocument =
+    document.getElementById("pdfDocument");
 
-    hasil.forEach(function(item){
+  const preview =
+    document.getElementById("pdfPreview");
 
-        let div =
-            document.createElement("div");
+  preview.innerHTML = "";
 
-        div.className = "text-item";
+  const totalPages =
+    Math.ceil(quantity / perPage);
 
-        div.textContent = item;
+  for (let page = 0; page < totalPages; page++) {
 
-        fragment.appendChild(div);
+    const pageDiv = document.createElement("div");
 
-    });
+    pageDiv.className = "pdf-page";
 
+    if (page === 0) {
 
-    box.appendChild(fragment);
+      const titleDiv =
+        document.createElement("div");
+
+      titleDiv.className = "pdf-title";
+
+      titleDiv.textContent = title;
+
+      pageDiv.appendChild(titleDiv);
+    }
+
+    const start =
+      page * perPage + 1;
+
+    const end =
+      Math.min(
+        (page + 1) * perPage,
+        quantity
+      );
+
+    for (let i = start; i <= end; i++) {
+
+      const item =
+        document.createElement("div");
+
+      item.className = "pdf-item";
+
+      item.innerHTML =
+        "<b>" + i + ".</b> " +
+        escapeHTML(text);
+
+      pageDiv.appendChild(item);
+    }
+
+    preview.appendChild(pageDiv);
+  }
+
+  pdfDocument.classList.remove("hidden");
+
+  alert(
+    "Dokumen berhasil dibuat!\n\n" +
+    "Jumlah: " + quantity.toLocaleString("id-ID") +
+    "\nHalaman: " + totalPages.toLocaleString("id-ID")
+  );
+
+  pdfDocument.scrollIntoView({
+    behavior: "smooth"
+  });
 }
 
 
 /* =========================
-   SALIN
-========================= */
+   SIMPAN PDF
+   ========================= */
 
-async function salinSemua(){
+function printPDF() {
 
-    if(!hasil.length){
+  const preview =
+    document.getElementById("pdfPreview");
 
-        alert("Buat teks terlebih dahulu.");
+  if (!preview.innerHTML.trim()) {
+    alert("Buat dokumen terlebih dahulu.");
+    return;
+  }
 
-        return;
-    }
-
-
-    salin(
-        hasil.join("\n")
-    );
-
-}
-
-
-function salinTanpaNomor(){
-
-    if(!hasil.length){
-
-        alert("Buat teks terlebih dahulu.");
-
-        return;
-    }
-
-
-    let teks =
-        document.getElementById("teks")
-        .value
-        .trim();
-
-
-    let jumlah = hasil.length;
-
-    let arr = [];
-
-
-    for(let i=0;i<jumlah;i++){
-
-        arr.push(teks);
-
-    }
-
-
-    salin(arr.join("\n"));
-
-}
-
-
-async function salin(isi){
-
-    try{
-
-        await navigator.clipboard.writeText(isi);
-
-        alert("✅ Berhasil disalin!");
-
-    }
-
-    catch(e){
-
-        let area =
-            document.createElement("textarea");
-
-        area.value = isi;
-
-        area.style.position = "fixed";
-
-        area.style.left = "-9999px";
-
-        document.body.appendChild(area);
-
-        area.select();
-
-        document.execCommand("copy");
-
-        document.body.removeChild(area);
-
-        alert("✅ Berhasil disalin!");
-
-    }
-
-}
-
-
-/* =========================
-   BUAT PDF
-========================= */
-
-function buatPDF(){
-
-    let teks =
-        document.getElementById("teksPDF")
-        .value
-        .trim();
-
-    let jumlah =
-        parseInt(
-            document.getElementById("jumlahPDF").value
-        );
-
-    let format =
-        document.getElementById("formatPDF").value;
-
-    let judul =
-        document.getElementById("judulPDF")
-        .value
-        .trim();
-
-    let perLembar =
-        parseInt(
-            document.getElementById("perLembar").value
-        );
-
-
-    if(!teks){
-
-        alert("Masukkan teks awal dokumen.");
-
-        return;
-    }
-
-
-    if(!jumlah || jumlah < 1){
-
-        alert("Jumlah minimal 1.");
-
-        return;
-    }
-
-
-    if(jumlah > 10000){
-
-        jumlah = 10000;
-
-        document.getElementById("jumlahPDF")
-            .value = 10000;
-
-    }
-
-
-    pdfData = [];
-
-
-    /* Buat teks PDF */
-
-    for(let i=1;i<=jumlah;i++){
-
-        let item;
-
-
-        if(format === "depan"){
-
-            item =
-                i + ". " + teks;
-
-        }
-
-        else if(format === "tanpa"){
-
-            item = teks;
-
-        }
-
-        else{
-
-            item =
-                teks + " " + i;
-
-        }
-
-
-        pdfData.push(item);
-
-    }
-
-
-    /* Tampilkan preview */
-
-    let box =
-        document.getElementById("isiPDF");
-
-    box.innerHTML = "";
-
-
-    let fragment =
-        document.createDocumentFragment();
-
-
-    pdfData.forEach(function(item,index){
-
-        let div =
-            document.createElement("div");
-
-        div.className = "text-item";
-
-        div.textContent = item;
-
-        fragment.appendChild(div);
-
-    });
-
-
-    box.appendChild(fragment);
-
-
-    document.getElementById("hasilPDF")
-        .style.display = "block";
-
-
-    document.getElementById("badgePDF")
-        .innerText =
-        jumlah.toLocaleString("id-ID") +
-        " teks";
-
-
-    let halaman =
-        Math.ceil(jumlah / perLembar);
-
-
-    document.getElementById("infoPDF")
-        .innerHTML =
-        "Judul: <b>" +
-        (judul || "Sann Text Generator") +
-        "</b><br>" +
-        "Jumlah: <b>" +
-        jumlah.toLocaleString("id-ID") +
-        " teks</b><br>" +
-        "Perkiraan lembar: <b>" +
-        halaman.toLocaleString("id-ID") +
-        " halaman</b>";
-
-
-    document.getElementById("hasilPDF")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-
-/* =========================
-   CETAK / SIMPAN PDF
-========================= */
-
-function cetakPDF(){
-
-    if(!pdfData.length){
-
-        alert(
-            "Buat dokumen PDF terlebih dahulu."
-        );
-
-        return;
-    }
-
-
-    /*
-       Browser akan membuka menu cetak.
-
-       Pada Android biasanya pilih:
-       "Simpan sebagai PDF"
-    */
-
-    window.print();
-
+  window.print();
 }
 
 
 /* =========================
    BAGIKAN PDF
-========================= */
+   ========================= */
 
-async function bagikanPDF(){
+async function sharePDF() {
 
-    if(!pdfData.length){
+  const preview =
+    document.getElementById("pdfPreview");
 
-        alert(
-            "Buat dokumen PDF terlebih dahulu."
-        );
+  if (!preview.innerHTML.trim()) {
+    alert("Buat dokumen terlebih dahulu.");
+    return;
+  }
 
-        return;
-    }
+  alert(
+    "Pilih 'Simpan sebagai PDF' terlebih dahulu.\n" +
+    "Setelah file tersimpan, kamu bisa membagikannya melalui WhatsApp, Telegram, Drive, dan lainnya."
+  );
 
-
-    /*
-       Web browser tidak selalu bisa
-       membuat File PDF langsung tanpa
-       library tambahan.
-
-       Jadi kita buka menu cetak terlebih
-       dahulu agar PDF bisa disimpan,
-       kemudian pengguna dapat membagikannya
-       dari file manager.
-    */
-
-    alert(
-        "Simpan PDF terlebih dahulu melalui " +
-        "menu 'Simpan sebagai PDF'. Setelah tersimpan, " +
-        "PDF bisa dibagikan melalui WhatsApp, Telegram, " +
-        "atau aplikasi lainnya."
-    );
-
-    window.print();
-
+  window.print();
 }
 
 
 /* =========================
-   RESET TEKS
-========================= */
+   HAPUS DOKUMEN
+   ========================= */
 
-function resetSemua(){
+function clearPDF() {
 
-    document.getElementById("teks")
-        .value = "";
+  document.getElementById("pdfPreview").innerHTML = "";
 
-    document.getElementById("jumlah")
-        .value = 100;
-
-    document.getElementById("format")
-        .value = "depan";
-
-    document.getElementById("hasilTeks")
-        .style.display = "none";
-
-    document.getElementById("daftarTeks")
-        .innerHTML = "";
-
-    hasil = [];
-
+  document
+    .getElementById("pdfDocument")
+    .classList.add("hidden");
 }
 
 
 /* =========================
-   RESET PDF
-========================= */
+   KEAMANAN HTML
+   ========================= */
 
-function resetPDF(){
+function escapeHTML(text) {
 
-    document.getElementById("teksPDF")
-        .value = "";
+  const div = document.createElement("div");
 
-    document.getElementById("jumlahPDF")
-        .value = 1000;
+  div.textContent = text;
 
-    document.getElementById("formatPDF")
-        .value = "depan";
-
-    document.getElementById("judulPDF")
-        .value = "Sann Text Generator";
-
-    document.getElementById("perLembar")
-        .value = 50;
-
-    document.getElementById("hasilPDF")
-        .style.display = "none";
-
-    document.getElementById("isiPDF")
-        .innerHTML = "";
-
-    pdfData = [];
-
+  return div.innerHTML;
 }
 
 </script>
