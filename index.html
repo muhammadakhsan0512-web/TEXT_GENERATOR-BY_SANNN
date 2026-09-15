@@ -2,1316 +2,1280 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SannnPay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sann Text Generator</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f4f7fb;color:#172033;max-width:500px;margin:auto}
-button,input{font:inherit}
-button{cursor:pointer}
-
-#auth{
- position:fixed;inset:0;background:linear-gradient(145deg,#0867e8,#13a8ff);
- display:flex;align-items:center;justify-content:center;z-index:9999
-}
-.authBox{
- width:90%;padding:25px;background:white;border-radius:25px;
- box-shadow:0 20px 50px #003b8060;animation:pop .35s
-}
-.logo{
- width:65px;height:65px;border-radius:20px;margin:auto;
- background:#0875e8;color:white;display:flex;
- align-items:center;justify-content:center;font-size:30px;font-weight:bold
-}
-.authBox h1{text-align:center;color:#0875e8;margin:12px}
-.authBox p{text-align:center;color:#8993a2;font-size:11px;margin-bottom:18px}
-.input{
- width:100%;height:50px;border:1px solid #dce4ee;
- border-radius:13px;padding:0 14px;margin-bottom:10px;outline:none
-}
-.btn{
- width:100%;height:50px;border:0;border-radius:13px;
- background:linear-gradient(135deg,#0866e8,#159ef7);
- color:white;font-weight:bold
-}
-.switch{text-align:center;font-size:11px;margin-top:14px;color:#687588}
-.switch span{color:#0875e8;font-weight:bold}
-
-#app{display:none;padding-bottom:80px}
-
-header{
- background:linear-gradient(145deg,#0866e8,#14a3f5);
- color:white;padding:20px 18px 40px;border-radius:0 0 30px 30px;
- position:relative;overflow:hidden
-}
-header:after{
- content:"";position:absolute;width:250px;height:250px;
- background:#ffffff12;border-radius:50%;right:-120px;top:-130px
-}
-.top,.balanceBox{position:relative;z-index:2}
-.top{display:flex;justify-content:space-between}
-.brand{font-size:23px;font-weight:bold}
-.userMini{font-size:11px;background:#ffffff20;padding:8px 10px;border-radius:10px}
-.balanceLabel{font-size:11px;opacity:.8;margin-top:25px}
-.balanceRow{display:flex;align-items:center;gap:9px;margin-top:5px}
-.balance{font-size:29px;font-weight:bold}
-.eye{font-size:18px}
-
-.content{padding:15px}
-.quick{
- margin-top:-28px;background:white;border-radius:20px;padding:14px;
- display:grid;grid-template-columns:repeat(4,1fr);
- position:relative;box-shadow:0 7px 22px #152b4012
-}
-.quickItem{text-align:center;font-size:10px}
-.quickIcon{
- width:47px;height:47px;border-radius:15px;background:#eef6ff;
- display:flex;align-items:center;justify-content:center;
- margin:auto auto 6px;font-size:21px
-}
-.banner{
- margin-top:17px;border-radius:20px;padding:18px;
- background:linear-gradient(120deg,#6044e7,#9a67f5);
- color:white;min-height:105px;animation:float 3s infinite
-}
-.banner h2{font-size:17px}.banner p{font-size:11px;margin-top:6px}
-
-.title{
- display:flex;justify-content:space-between;
- margin:21px 2px 12px
-}
-.title h3{font-size:16px}
-.title span{font-size:10px;color:#0875e8}
-
-.grid{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:13px 5px
-}
-.service{text-align:center;font-size:10px}
-.serviceIcon{
- width:50px;height:50px;background:white;border-radius:16px;
- display:flex;align-items:center;justify-content:center;
- margin:auto auto 6px;font-size:22px;
- box-shadow:0 5px 15px #152b4010
+*{
+    box-sizing:border-box;
 }
 
-.page{
- display:none;min-height:100vh;padding:18px;
- background:#f4f7fb;animation:slide .25s
+html,body{
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f6f5;
+    color:#222;
 }
-.page.active{display:block}
-.head{display:flex;align-items:center;gap:13px;margin-bottom:20px}
-.back{
- width:38px;height:38px;border-radius:12px;background:white;
- display:flex;align-items:center;justify-content:center
+
+body{
+    min-height:100vh;
 }
-.head h2{font-size:20px}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#087443,#13a66b);
+    color:white;
+    text-align:center;
+    padding:24px 15px;
+    border-radius:0 0 25px 25px;
+}
+
+.header h1{
+    margin:0;
+    font-size:24px;
+}
+
+.header p{
+    margin:7px 0 0;
+    font-size:14px;
+    opacity:.9;
+}
+
+
+/* CONTAINER */
+.container{
+    width:94%;
+    max-width:700px;
+    margin:18px auto 40px;
+}
+
+
+/* MENU */
+.menu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.menu button{
+    border:0;
+    padding:16px 10px;
+    border-radius:16px;
+    background:white;
+    color:#087443;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+    cursor:pointer;
+}
+
+.menu button.active{
+    background:#087443;
+    color:white;
+}
+
+
+/* CARD */
 .card{
- background:white;border-radius:19px;padding:17px;
- margin-bottom:14px;box-shadow:0 5px 18px #152b400b
-}
-.cardTitle{font-weight:bold;font-size:13px;margin-bottom:13px}
-
-.option{
- display:flex;align-items:center;gap:12px;
- padding:13px 0;border-bottom:1px solid #edf1f5;font-size:12px
-}
-.option:last-child{border:0}
-.optionIcon{
- width:40px;height:40px;border-radius:12px;background:#eef6ff;
- display:flex;align-items:center;justify-content:center
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
 }
 
-.bottom{
- position:fixed;bottom:0;left:50%;transform:translateX(-50%);
- max-width:500px;width:100%;height:72px;background:white;
- border-top:1px solid #e8edf3;display:grid;
- grid-template-columns:repeat(5,1fr);z-index:2000
+.card h2{
+    margin:0 0 15px;
+    font-size:18px;
 }
-.nav{text-align:center;font-size:10px;color:#8792a3;padding-top:9px}
-.navIcon{font-size:22px;margin-bottom:4px}
-.nav.active{color:#0875e8;font-weight:bold}
 
-/* QR */
-.qrBox{
- text-align:center;background:white;border-radius:23px;
- padding:22px;box-shadow:0 7px 25px #152b4010
-}
-.fakeQR{
- width:220px;height:220px;margin:20px auto;
- border:9px solid white;
- background:
- repeating-linear-gradient(90deg,#111 0 6px,#fff 6px 12px),
- repeating-linear-gradient(0deg,transparent 0 7px,#111 7px 13px);
- background-blend-mode:multiply;
- position:relative
-}
-.fakeQR:before,.fakeQR:after{
- content:"";position:absolute;width:48px;height:48px;
- background:white;border:9px solid #111
-}
-.fakeQR:before{left:8px;top:8px}
-.fakeQR:after{right:8px;bottom:8px}
-.qrText{font-size:11px;color:#8993a2}
 
-/* paket */
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.tab{
- height:44px;border:0;border-radius:13px;background:#eef2f7;
- font-weight:bold;color:#657084
+/* INPUT */
+label{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin:12px 0 7px;
 }
-.tab.active{background:#0875e8;color:white}
-.scroll{
- display:flex;gap:12px;overflow-x:auto;padding-bottom:12px
-}
-.package{
- min-width:220px;background:white;border-radius:19px;
- padding:17px;box-shadow:0 6px 20px #152b4010
-}
-.packageTop{display:flex;justify-content:space-between}
-.packageTop b{font-size:19px;color:#0875e8}
-.packageTop span{font-size:10px;background:#eef6ff;color:#0875e8;padding:6px;border-radius:8px}
-.package small{display:block;color:#8993a2;font-size:10px;margin-top:8px}
-.packageInfo{background:#f6f9fc;padding:10px;border-radius:11px;margin-top:15px;font-size:10px}
-.package strong{display:block;margin-top:13px}
 
-/* voyager */
-#voyager{
- display:none;position:fixed;inset:0;z-index:5000;
- background:#f5f8fc;overflow-y:auto
+textarea,
+input,
+select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    background:#fafafa;
+    font-size:15px;
+    outline:none;
 }
-.vHead{
- background:linear-gradient(135deg,#102b57,#1579d5);
- color:white;padding:20px
-}
-.vTop{display:flex;justify-content:space-between}
-.vLogo{font-weight:bold}
-.close{
- border:0;background:#ffffff20;color:white;
- width:38px;height:38px;border-radius:50%;font-size:22px
-}
-.profileTravel{display:flex;gap:12px;align-items:center;margin-top:22px}
-.pp{
- width:48px;height:48px;border-radius:50%;
- background:white;color:#0875e8;
- display:flex;align-items:center;justify-content:center;font-weight:bold
-}
-.vContent{padding:18px}
-.vTabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.vTab{
- min-height:68px;border:0;background:white;border-radius:14px;
- font-size:10px
-}
-.vTab.active{color:#0875e8;outline:2px solid #0875e8}
-.ticket{
- background:white;border-radius:20px;padding:18px;margin-top:17px
-}
-.ticketHead,.ticketPrice{display:flex;justify-content:space-between}
-.ticketRoute{
- display:flex;justify-content:space-between;
- align-items:center;margin:22px 0
-}
-.ticketInfo{
- display:grid;grid-template-columns:1fr 1fr;
- gap:12px;border-top:1px dashed #ccd5e2;padding-top:14px
-}
-.ticketInfo small{display:block;color:#8993a2;font-size:10px}
-.ticketInfo b{font-size:11px}
-.ticketPrice{
- margin-top:17px;padding-top:14px;
- border-top:1px dashed #ccd5e2
-}
-.ticketPrice b{color:#0875e8}
 
-/* overlay */
-.overlay{
- display:none;position:fixed;inset:0;background:#0008;
- z-index:8000;align-items:center;justify-content:center;padding:20px
+textarea{
+    min-height:110px;
+    resize:vertical;
 }
-.modal{
- width:100%;max-width:380px;background:white;border-radius:25px;
- padding:24px;text-align:center;animation:pop .3s
-}
-.success{
- width:85px;height:85px;border-radius:50%;
- background:#21b35a;color:white;font-size:42px;
- display:flex;align-items:center;justify-content:center;margin:auto
-}
-.modal h2{margin:15px 0 6px}
-.modal p{font-size:11px;color:#7f8998}
-.receiptRow{
- display:flex;justify-content:space-between;
- padding:10px 0;border-bottom:1px dashed #ddd;
- font-size:11px
-}
-.receiptRow span{color:#8993a2}
 
-#toast{
- position:fixed;top:20px;left:50%;
- transform:translate(-50%,-100px);
- background:#172033;color:white;padding:13px 18px;
- border-radius:13px;font-size:11px;z-index:10000;
- transition:.3s
+textarea:focus,
+input:focus,
+select:focus{
+    border-color:#087443;
 }
-#toast.show{transform:translate(-50%,0)}
 
-@keyframes pop{from{opacity:0;transform:scale(.94) translateY(15px)}to{opacity:1;transform:none}}
-@keyframes slide{from{opacity:0;transform:translateX(15px)}to{opacity:1;transform:none}}
-@keyframes float{50%{transform:translateY(-3px)}}
+
+/* INFO */
+.info{
+    background:#eaf7f0;
+    color:#087443;
+    border-radius:12px;
+    padding:12px;
+    margin-top:12px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+
+/* BUTTON */
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+button.action{
+    border:0;
+    padding:13px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.green{
+    background:#087443;
+    color:white;
+}
+
+.gray{
+    background:#e8eeeb;
+    color:#087443;
+}
+
+.blue{
+    background:#1769e0;
+    color:white;
+}
+
+.red{
+    background:#ffe7e7;
+    color:#c62828;
+}
+
+
+/* RESULT */
+.result-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.result-title h2{
+    margin:0;
+}
+
+.badge{
+    background:#eaf7f0;
+    color:#087443;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* TEXT LIST */
+.text-list{
+    margin-top:15px;
+    max-height:450px;
+    overflow:auto;
+    border:1px solid #eee;
+    border-radius:12px;
+}
+
+.text-item{
+    padding:11px 13px;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+.text-item:last-child{
+    border-bottom:0;
+}
+
+
+/* PDF PREVIEW */
+.pdf-preview{
+    margin-top:15px;
+    background:#f7faf8;
+    border-radius:15px;
+    padding:18px;
+}
+
+.pdf-preview h3{
+    margin:0 0 8px;
+}
+
+.pdf-preview p{
+    font-size:13px;
+    color:#666;
+    line-height:1.5;
+}
+
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    color:#888;
+    font-size:12px;
+    padding:10px;
+}
+
+
+/* CETAK */
+@media print{
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .menu,
+    .no-print,
+    .footer{
+        display:none !important;
+    }
+
+    .container{
+        width:100%;
+        max-width:none;
+        margin:0;
+    }
+
+    .card{
+        box-shadow:none;
+        padding:0;
+        margin:0;
+    }
+
+    .result-title{
+        display:none;
+    }
+
+    #hasilPDF{
+        display:block !important;
+    }
+
+    .text-list{
+        max-height:none;
+        overflow:visible;
+        border:0;
+    }
+
+    .text-item{
+        border:0;
+        padding:3px 0;
+        font-size:11pt;
+    }
+}
+
+
+/* MOBILE */
+@media(max-width:500px){
+
+    .menu{
+        grid-template-columns:1fr;
+    }
+
+    .buttons{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:22px;
+    }
+}
 </style>
 </head>
 
+
 <body>
 
-<div id="toast"></div>
 
-<!-- LOGIN -->
-<div id="auth">
- <div class="authBox" id="registerBox">
-  <div class="logo">S</div>
-  <h1>SannnPay</h1>
-  <p>Buat akun baru • Saldo awal Rp0</p>
-  <input class="input" id="regUser" placeholder="Username">
-  <input class="input" id="regName" placeholder="Nama">
-  <input class="input" id="regPass" type="password" placeholder="Password">
-  <input class="input" id="regConfirm" type="password" placeholder="Confirm pass">
-  <button class="btn" onclick="register()">Daftar</button>
-  <div class="switch">Sudah punya akun?
-   <span onclick="showLogin()">Login</span>
-  </div>
- </div>
+<!-- HEADER -->
+<div class="header">
 
- <div class="authBox" id="loginBox" style="display:none">
-  <div class="logo">S</div>
-  <h1>SannnPay</h1>
-  <p>Login ke akunmu</p>
-  <input class="input" id="loginUser" placeholder="Username">
-  <input class="input" id="loginPass" type="password" placeholder="Password">
-  <button class="btn" onclick="login()">Login</button>
-  <div class="switch">Belum punya akun?
-   <span onclick="showRegister()">Daftar</span>
-  </div>
- </div>
+    <h1>📝 Sann Text Generator</h1>
+
+    <p>
+        Buat, salin, dan jadikan teks sebagai PDF
+    </p>
+
 </div>
 
-<!-- HOME -->
-<div id="app">
-
-<header>
- <div class="top">
-  <div class="brand">SannnPay</div>
-  <div class="userMini" id="miniUser">👤</div>
- </div>
-
- <div class="balanceBox">
-  <div class="balanceLabel">Saldo</div>
-  <div class="balanceRow">
-   <div class="balance" id="balance">Rp0</div>
-   <div class="eye" onclick="toggleBalance()">👁️</div>
-  </div>
- </div>
-</header>
-
-<div class="content">
-
- <div class="quick">
-  <div class="quickItem" onclick="openPage('topup')">
-   <div class="quickIcon">＋</div>Isi Saldo
-  </div>
-
-  <div class="quickItem" onclick="openPage('send')">
-   <div class="quickIcon">💸</div>Kirim
-  </div>
-
-  <div class="quickItem" onclick="showToast('Fitur minta saldo tersedia segera')">
-   <div class="quickIcon">💵</div>Minta
-  </div>
-
-  <div class="quickItem" onclick="openPage('suggestion')">
-   <div class="quickIcon">✉️</div>Pesan
-  </div>
- </div>
-
- <div class="banner">
-  <h2>✨ SannnPay</h2>
-  <p>Kelola saldo dan nikmati berbagai layanan dalam satu tempat.</p>
- </div>
-
- <div class="title">
-  <h3>Jelajahi Layanan</h3>
-  <span>Lihat semua</span>
- </div>
-
- <div class="grid">
-
-  <div class="service" onclick="openPulsa()">
-   <div class="serviceIcon">📱</div>Pulsa / Data
-  </div>
-
-  <div class="service" onclick="openVoyager()">
-   <div class="serviceIcon">✈️</div>Travel
-  </div>
-
-  <div class="service" onclick="showToast('Google Play belum tersedia')">
-   <div class="serviceIcon">▶️</div>Google Play
-  </div>
-
-  <div class="service" onclick="showToast('Rewards segera hadir')">
-   <div class="serviceIcon">🎁</div>Rewards
-  </div>
-
-  <div class="service" onclick="showToast('Affiliate segera hadir')">
-   <div class="serviceIcon">🔗</div>Affiliate
-  </div>
-
-  <div class="service" onclick="showToast('Listrik segera hadir')">
-   <div class="serviceIcon">💡</div>Listrik
-  </div>
-
-  <div class="service" onclick="showToast('Layanan belum tersedia')">
-   <div class="serviceIcon">🎟️</div>Promo
-  </div>
-
-  <div class="service" onclick="openPage('ojk')">
-   <div class="serviceIcon">⚖️</div>OJK
-  </div>
-
- </div>
-</div>
-</div>
-
-<!-- TOPUP -->
-<div class="page" id="topup">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Isi Saldo</h2>
- </div>
-
- <div class="card">
-  <div class="cardTitle">🔎 Cari metode</div>
-  <input class="input" placeholder="Search">
- </div>
-
- <div class="card">
-  <div class="cardTitle">Transfer Bank</div>
-  <div class="option"><div class="optionIcon">🏦</div>BI-FAST</div>
-  <div class="option"><div class="optionIcon">B</div>BRI</div>
-  <div class="option"><div class="optionIcon">C</div>CIMB Niaga</div>
- </div>
-
- <div class="card">
-  <div class="cardTitle">Uang Tunai</div>
-  <div class="option"><div class="optionIcon">D</div>DANA</div>
-
-  <div class="option" onclick="openPage('indomaret')">
-   <div class="optionIcon">🛒</div><b>Indomaret</b>
-  </div>
-
-  <div class="option">
-   <div class="optionIcon">🛍️</div>Alfamaret
-  </div>
- </div>
-
- <div class="card">
-  <div class="cardTitle">📷 QR SannnPay</div>
-  <button class="btn" onclick="openQR()">Isi Saldo dengan QR</button>
- </div>
-</div>
-
-<!-- INDOMARET -->
-<div class="page" id="indomaret">
- <div class="head">
-  <div class="back" onclick="openPage('topup')">←</div>
-  <h2>Indomaret</h2>
- </div>
-
- <div class="card">
-  <div class="cardTitle">Top Up Amount</div>
-  <input class="input" id="indAmount" type="number" placeholder="Masukkan nominal">
-  <button class="btn" onclick="indomaretPay()">Lanjutkan</button>
- </div>
-</div>
-
-<!-- QR -->
-<div class="page" id="qr">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Isi Saldo QR</h2>
- </div>
-
- <div class="card">
-  <div class="cardTitle">Nominal Isi Saldo</div>
-
-  <select class="input" id="qrAmount">
-   <option value="10000">Rp10.000</option>
-   <option value="25000">Rp25.000</option>
-   <option value="50000">Rp50.000</option>
-   <option value="100000">Rp100.000</option>
-   <option value="250000">Rp250.000</option>
-   <option value="500000">Rp500.000</option>
-  </select>
-
-  <button class="btn" onclick="showQR()">Tampilkan QR</button>
- </div>
-</div>
-
-<!-- SEND -->
-<div class="page" id="send">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Kirim Saldo</h2>
- </div>
-
- <div class="card">
-  <div class="cardTitle">Tujuan</div>
-  <input class="input" id="sendUser" placeholder="Username tujuan">
-  <input class="input" id="sendAmount" type="number" placeholder="Nominal">
-  <button class="btn" onclick="sendMoney()">Kirim</button>
- </div>
-</div>
-
-<!-- PULSA DATA -->
-<div class="page" id="pulsa">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Pulsa / Data</h2>
- </div>
-
- <div class="card">
-  <div class="cardTitle">Nomor Telepon</div>
-  <input class="input" id="phone" type="tel" placeholder="08xxxxxxxxxx">
-
-  <div class="tabs">
-   <button class="tab active" id="dataTab" onclick="switchPackage('data')">📶 Data</button>
-   <button class="tab" id="pulsaTab" onclick="switchPackage('pulsa')">📱 Pulsa</button>
-  </div>
- </div>
-
- <div id="dataList">
-  <div class="title">
-   <h3>Paket Data</h3>
-   <span>Geser →</span>
-  </div>
-
-  <div class="scroll">
-
-   <div class="package" onclick="buyPackage(28000,'150 GB','Data')">
-    <div class="packageTop"><b>150 GB</b><span>28 Hari</span></div>
-    <small>Happy 150 GB</small>
-    <div class="packageInfo"><b>Kuota Utama</b><br>150 GB</div>
-    <strong>Rp28.000</strong>
-   </div>
-
-   <div class="package" onclick="buyPackage(24000,'100 GB','Data')">
-    <div class="packageTop"><b>100 GB</b><span>28 Hari</span></div>
-    <small>Happy 100 GB</small>
-    <div class="packageInfo"><b>Kuota Utama</b><br>100 GB</div>
-    <strong>Rp24.000</strong>
-   </div>
-
-   <div class="package" onclick="buyPackage(20000,'80 GB','Data')">
-    <div class="packageTop"><b>80 GB</b><span>28 Hari</span></div>
-    <small>Happy 80 GB</small>
-    <div class="packageInfo"><b>Kuota Utama</b><br>80 GB</div>
-    <strong>Rp20.000</strong>
-   </div>
-
-   <div class="package" onclick="buyPackage(17000,'50 GB','Data')">
-    <div class="packageTop"><b>50 GB</b><span>28 Hari</span></div>
-    <small>Happy 50 GB</small>
-    <div class="packageInfo"><b>Kuota Utama</b><br>50 GB</div>
-    <strong>Rp17.000</strong>
-   </div>
-
-  </div>
- </div>
-
- <div id="pulsaList" style="display:none">
-
-  <div class="title">
-   <h3>Pulsa</h3>
-   <span>Aktif 30 Hari</span>
-  </div>
-
-  <div class="scroll">
-
-   <div class="package" onclick="buyPackage(11000,'Rp10.000','Pulsa')">
-    <div class="packageTop"><b>Rp10.000</b><span>30 Hari</span></div>
-    <small>Pulsa Reguler</small>
-    <div class="packageInfo"><b>Nominal</b><br>Rp10.000</div>
-    <strong>Rp11.000</strong>
-   </div>
-
-   <div class="package" onclick="buyPackage(21000,'Rp20.000','Pulsa')">
-    <div class="packageTop"><b>Rp20.000</b><span>30 Hari</span></div>
-    <small>Pulsa Reguler</small>
-    <div class="packageInfo"><b>Nominal</b><br>Rp20.000</div>
-    <strong>Rp21.000</strong>
-   </div>
-
-   <div class="package" onclick="buyPackage(51000,'Rp50.000','Pulsa')">
-    <div class="packageTop"><b>Rp50.000</b><span>30 Hari</span></div>
-    <small>Pulsa Reguler</small>
-    <div class="packageInfo"><b>Nominal</b><br>Rp50.000</div>
-    <strong>Rp51.000</strong>
-   </div>
-
-   <div class="package" onclick="buyPackage(101000,'Rp100.000','Pulsa')">
-    <div class="packageTop"><b>Rp100.000</b><span>30 Hari</span></div>
-    <small>Pulsa Reguler</small>
-    <div class="packageInfo"><b>Nominal</b><br>Rp100.000</div>
-    <strong>Rp101.000</strong>
-   </div>
-
-  </div>
- </div>
-</div>
-
-<!-- ACTIVITY -->
-<div class="page" id="activity">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Aktivitas</h2>
- </div>
- <div class="card" id="activityList"></div>
-</div>
-
-<!-- WALLET -->
-<div class="page" id="wallet">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Dompet</h2>
- </div>
-
- <div class="card" style="text-align:center">
-  <div style="font-size:45px">👛</div>
-  <p style="font-size:11px;color:#8993a2">Saldo</p>
-  <h1 id="walletBalance" style="color:#0875e8;margin:8px">Rp0</h1>
-  <button class="btn" onclick="openPage('topup')">Isi Saldo</button>
- </div>
-</div>
-
-<!-- PROFILE -->
-<div class="page" id="profile">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Saya</h2>
- </div>
-
- <div class="card" style="text-align:center">
-  <div class="pp" style="margin:auto" id="profilePP">S</div>
-  <h2 id="profileName" style="margin-top:10px"></h2>
-  <p id="profileUsername" style="font-size:11px;color:#8993a2"></p>
- </div>
-
- <div class="card">
-  <div class="option" onclick="openPage('suggestion')">
-   <div class="optionIcon">💬</div>Saran / Kesan
-  </div>
-  <div class="option" onclick="openPage('ojk')">
-   <div class="optionIcon">⚖️</div>Informasi OJK
-  </div>
-  <div class="option" onclick="logout()">
-   <div class="optionIcon">🚪</div>Keluar
-  </div>
- </div>
-</div>
-
-<!-- SUGGESTION -->
-<div class="page" id="suggestion">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Saran / Kesan</h2>
- </div>
-
- <div class="card">
-  <div class="cardTitle">Berikan saran</div>
-  <textarea id="suggestionText" style="width:100%;height:120px;border:1px solid #dde5ee;border-radius:13px;padding:12px" placeholder="Tulis saran..."></textarea>
-  <button class="btn" style="margin-top:10px" onclick="saveSuggestion()">Kirim</button>
- </div>
-</div>
-
-<!-- OJK -->
-<div class="page" id="ojk">
- <div class="head">
-  <div class="back" onclick="home()">←</div>
-  <h2>Informasi</h2>
- </div>
-
- <div class="card">
-  <div style="font-size:45px;text-align:center">⚖️</div>
-  <h2 style="text-align:center;margin:10px">Keamanan Keuangan</h2>
-  <p style="font-size:12px;color:#657084;line-height:1.6">
-   SannnPay merupakan proyek web lokal. Informasi ini tidak berarti
-   SannnPay terdaftar atau diawasi OJK.
-  </p>
- </div>
-</div>
-
-<!-- VOYAGER -->
-<div id="voyager">
-
- <div class="vHead">
-  <div class="vTop">
-   <div class="vLogo">SannnPay | Voyager</div>
-   <button class="close" onclick="closeVoyager()">×</button>
-  </div>
-
-  <div class="profileTravel">
-   <div class="pp" id="voyPP">S</div>
-   <div>
-    <small>Selamat datang</small>
-    <h3 id="voyName">Hai, Pengelana</h3>
-   </div>
-  </div>
- </div>
-
- <div class="vContent">
-
-  <div class="vTabs">
-   <button class="vTab active" onclick="travelType('Kereta',this)">🚆<br>Kereta Api</button>
-   <button class="vTab" onclick="travelType('Pesawat',this)">✈️<br>Pesawat</button>
-   <button class="vTab" onclick="travelType('Hotel',this)">🏨<br>Hotel</button>
-   <button class="vTab" onclick="travelType('Rides',this)">🚗<br>Rides</button>
-  </div>
-
-  <div class="card" style="margin-top:18px">
-   <div class="cardTitle" id="travelTitle">Kereta Api</div>
-
-   <input class="input" id="travelFrom" placeholder="Dari">
-   <input class="input" id="travelTo" placeholder="Ke">
-
-   <input class="input" id="travelDate" type="date">
-
-   <button class="btn" onclick="searchTravel()">Cari</button>
-  </div>
-
-  <div id="travelResult"></div>
-
- </div>
+
+<div class="container">
+
+
+    <!-- MENU -->
+    <div class="menu">
+
+        <button
+            id="menuTeks"
+            class="active"
+            onclick="bukaTeks()">
+
+            📝
+            <br>
+            Salin Teks
+
+        </button>
+
+
+        <button
+            id="menuPDF"
+            onclick="bukaPDF()">
+
+            📄
+            <br>
+            Buat Dokumen PDF
+
+        </button>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- MENU SALIN TEKS -->
+    <!-- ===================== -->
+
+    <div
+        class="card"
+        id="halamanTeks">
+
+        <h2>
+            📝 Generator Teks
+        </h2>
+
+
+        <label>
+            Teks awal
+        </label>
+
+        <textarea
+            id="teks"
+            placeholder="Contoh: Maaf">
+        </textarea>
+
+
+        <label>
+            Jumlah teks
+        </label>
+
+        <input
+            id="jumlah"
+            type="number"
+            min="1"
+            max="1000"
+            value="100">
+
+
+        <label>
+            Format teks
+        </label>
+
+        <select id="format">
+
+            <option value="depan">
+                1. Maaf
+            </option>
+
+            <option value="tanpa">
+                Maaf
+            </option>
+
+            <option value="belakang">
+                Maaf 1
+            </option>
+
+        </select>
+
+
+        <div class="info">
+
+            Maksimal menu ini:
+            <b>1.000 teks</b>.
+
+            Hasil bisa langsung disalin.
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                class="action green"
+                onclick="buatTeks()">
+
+                ✨ Buat Teks
+
+            </button>
+
+
+            <button
+                class="action gray"
+                onclick="resetSemua()">
+
+                🔄 Reset
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- HASIL TEKS -->
+
+    <div
+        class="card"
+        id="hasilTeks"
+        style="display:none;">
+
+        <div class="result-title">
+
+            <h2>
+                📋 Hasil
+            </h2>
+
+            <span
+                class="badge"
+                id="badgeTeks">
+                0 teks
+            </span>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                class="action green"
+                onclick="salinSemua()">
+
+                📋 Salin Semua
+
+            </button>
+
+
+            <button
+                class="action gray"
+                onclick="salinTanpaNomor()">
+
+                📄 Tanpa Nomor
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="text-list"
+            id="daftarTeks">
+        </div>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- MENU PDF -->
+    <!-- ===================== -->
+
+    <div
+        class="card"
+        id="halamanPDF"
+        style="display:none;">
+
+        <h2>
+            📄 Buat Dokumen PDF
+        </h2>
+
+
+        <label>
+            Teks awal dokumen
+        </label>
+
+        <textarea
+            id="teksPDF"
+            placeholder="Contoh: Maaf">
+        </textarea>
+
+
+        <label>
+            Jumlah teks
+        </label>
+
+        <input
+            id="jumlahPDF"
+            type="number"
+            min="1"
+            max="10000"
+            value="1000">
+
+
+        <label>
+            Format teks
+        </label>
+
+        <select id="formatPDF">
+
+            <option value="depan">
+                1. Maaf
+            </option>
+
+            <option value="tanpa">
+                Maaf
+            </option>
+
+            <option value="belakang">
+                Maaf 1
+            </option>
+
+        </select>
+
+
+        <label>
+            Judul dokumen PDF
+        </label>
+
+        <input
+            id="judulPDF"
+            type="text"
+            value="Sann Text Generator"
+            placeholder="Judul PDF">
+
+
+        <label>
+            Teks per lembar
+        </label>
+
+        <select id="perLembar">
+
+            <option value="30">
+                30 teks / lembar
+            </option>
+
+            <option value="50" selected>
+                50 teks / lembar
+            </option>
+
+            <option value="75">
+                75 teks / lembar
+            </option>
+
+            <option value="100">
+                100 teks / lembar
+            </option>
+
+        </select>
+
+
+        <div class="info">
+
+            📄 Bisa membuat sampai
+            <b>10.000 teks</b>.
+
+            <br><br>
+
+            Contoh:
+
+            <br>
+            Lembar 1 → teks 1–50
+            <br>
+            Lembar 2 → teks 51–100
+            <br>
+            Lembar 3 → teks 101–150
+            <br>
+            dan seterusnya.
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                class="action green"
+                onclick="buatPDF()">
+
+                📄 Buat Dokumen PDF
+
+            </button>
+
+
+            <button
+                class="action gray"
+                onclick="resetPDF()">
+
+                🔄 Reset
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- HASIL PDF -->
+
+    <div
+        class="card"
+        id="hasilPDF"
+        style="display:none;">
+
+        <div class="result-title">
+
+            <h2>
+                📄 Dokumen PDF
+            </h2>
+
+            <span
+                class="badge"
+                id="badgePDF">
+                0 teks
+            </span>
+
+        </div>
+
+
+        <div class="pdf-preview no-print">
+
+            <h3>
+                ✅ Dokumen siap
+            </h3>
+
+            <p id="infoPDF">
+                PDF siap dibuat.
+            </p>
+
+
+            <div class="buttons">
+
+                <button
+                    class="action green"
+                    onclick="cetakPDF()">
+
+                    📄 Simpan sebagai PDF
+
+                </button>
+
+
+                <button
+                    class="action blue"
+                    onclick="bagikanPDF()">
+
+                    📤 Bagikan PDF
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ISI PDF -->
+        <div
+            class="text-list"
+            id="isiPDF">
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        Sann Text Generator • by sann
+    </div>
+
 </div>
 
-<!-- QR MODAL -->
-<div class="overlay" id="qrModal">
- <div class="modal">
-
-  <div class="cardTitle">QR Isi Saldo</div>
-
-  <div class="fakeQR"></div>
-
-  <b id="qrNominal">Rp0</b>
-
-  <p style="margin-top:8px">
-   QR berlaku selama 6 detik.
-  </p>
-
-  <div id="qrTimer" style="font-size:22px;color:#0875e8;font-weight:bold;margin:12px">
-   6
-  </div>
-
- </div>
-</div>
-
-<!-- SUCCESS -->
-<div class="overlay" id="successModal">
- <div class="modal">
-  <div class="success">✓</div>
-  <h2>Berhasil!</h2>
-  <p id="successMessage">Saldo berhasil ditambahkan.</p>
- </div>
-</div>
 
 <script>
-let account=null;
-let visible=true;
-let selectedTravel="Kereta";
 
-function accounts(){
- return JSON.parse(localStorage.getItem("sannnpayAccounts")||"[]")
-}
-function saveAccounts(a){
- localStorage.setItem("sannnpayAccounts",JSON.stringify(a))
-}
-function save(){
- let a=accounts();
- let i=a.findIndex(x=>x.username===account.username);
- if(i>=0)a[i]=account;
- saveAccounts(a)
-}
+/* =========================
+   DATA
+========================= */
 
-function toast(t){
- let x=document.getElementById("toast");
- x.textContent=t;
- x.classList.add("show");
- setTimeout(()=>x.classList.remove("show"),2500)
-}
+let hasil = [];
 
-function showLogin(){
- registerBox.style.display="none";
- loginBox.style.display="block"
-}
-function showRegister(){
- loginBox.style.display="none";
- registerBox.style.display="block"
-}
+let pdfData = [];
 
-function register(){
 
- let u=regUser.value.trim();
- let n=regName.value.trim();
- let p=regPass.value;
- let c=regConfirm.value;
+/* =========================
+   MENU
+========================= */
 
- if(!u||!n||!p){
-  toast("Lengkapi semua data");
-  return
- }
+function bukaTeks(){
 
- if(p!==c){
-  toast("Confirm password tidak sama");
-  return
- }
+    document.getElementById("halamanTeks")
+        .style.display = "block";
 
- let a=accounts();
+    document.getElementById("hasilTeks")
+        .style.display = "none";
 
- if(a.some(x=>x.username===u)){
-  toast("Username sudah digunakan");
-  return
- }
+    document.getElementById("halamanPDF")
+        .style.display = "none";
 
- a.push({
-  username:u,
-  name:n,
-  password:p,
-  balance:0,
-  activities:[]
- });
+    document.getElementById("hasilPDF")
+        .style.display = "none";
 
- saveAccounts(a);
 
- toast("Akun berhasil dibuat");
+    document.getElementById("menuTeks")
+        .classList.add("active");
 
- setTimeout(showLogin,600)
+    document.getElementById("menuPDF")
+        .classList.remove("active");
+
 }
 
-function login(){
 
- let u=loginUser.value.trim();
- let p=loginPass.value;
+function bukaPDF(){
 
- let a=accounts();
+    document.getElementById("halamanTeks")
+        .style.display = "none";
 
- let found=a.find(x=>x.username===u&&x.password===p);
+    document.getElementById("hasilTeks")
+        .style.display = "none";
 
- if(!found){
-  toast("Username atau password salah");
-  return
- }
+    document.getElementById("halamanPDF")
+        .style.display = "block";
 
- account=found;
+    document.getElementById("hasilPDF")
+        .style.display = "none";
 
- localStorage.setItem("sannnpayCurrent",u);
 
- start()
+    document.getElementById("menuTeks")
+        .classList.remove("active");
+
+    document.getElementById("menuPDF")
+        .classList.add("active");
+
 }
 
-function start(){
 
- auth.style.display="none";
- app.style.display="block";
+/* =========================
+   BUAT TEKS
+========================= */
 
- update()
+function buatTeks(){
+
+    let teks =
+        document.getElementById("teks")
+        .value
+        .trim();
+
+    let jumlah =
+        parseInt(
+            document.getElementById("jumlah").value
+        );
+
+    let format =
+        document.getElementById("format").value;
+
+
+    if(!teks){
+
+        alert("Masukkan teks terlebih dahulu.");
+
+        return;
+    }
+
+
+    if(jumlah < 1){
+
+        alert("Jumlah minimal 1.");
+
+        return;
+    }
+
+
+    if(jumlah > 1000){
+
+        jumlah = 1000;
+
+        alert(
+            "Menu Salin Teks maksimal 1.000 teks."
+        );
+    }
+
+
+    hasil = [];
+
+
+    for(let i=1;i<=jumlah;i++){
+
+        if(format === "depan"){
+
+            hasil.push(
+                i + ". " + teks
+            );
+
+        }
+
+        else if(format === "tanpa"){
+
+            hasil.push(teks);
+
+        }
+
+        else{
+
+            hasil.push(
+                teks + " " + i
+            );
+
+        }
+
+    }
+
+
+    tampilkanTeks();
+
+
+    document.getElementById("hasilTeks")
+        .style.display = "block";
+
+
+    document.getElementById("badgeTeks")
+        .innerText =
+        jumlah.toLocaleString("id-ID") +
+        " teks";
+
+
+    document.getElementById("hasilTeks")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
 }
 
-function update(){
 
- if(!account)return;
+/* =========================
+   TAMPILKAN TEKS
+========================= */
 
- miniUser.textContent="👤 "+account.name;
+function tampilkanTeks(){
 
- balance.textContent=
- visible?format(account.balance):"Rp••••••";
+    let box =
+        document.getElementById("daftarTeks");
 
- walletBalance.textContent=format(account.balance);
+    box.innerHTML = "";
 
- profileName.textContent=account.name;
- profileUsername.textContent="@"+account.username;
 
- profilePP.textContent=account.name[0].toUpperCase();
+    let fragment =
+        document.createDocumentFragment();
 
- voyName.textContent="Hai, "+account.name;
- voyPP.textContent=account.name[0].toUpperCase()
+
+    hasil.forEach(function(item){
+
+        let div =
+            document.createElement("div");
+
+        div.className = "text-item";
+
+        div.textContent = item;
+
+        fragment.appendChild(div);
+
+    });
+
+
+    box.appendChild(fragment);
 }
 
-function format(n){
- return "Rp"+Number(n).toLocaleString("id-ID")
+
+/* =========================
+   SALIN
+========================= */
+
+async function salinSemua(){
+
+    if(!hasil.length){
+
+        alert("Buat teks terlebih dahulu.");
+
+        return;
+    }
+
+
+    salin(
+        hasil.join("\n")
+    );
+
 }
 
-function toggleBalance(){
- visible=!visible;
- update()
+
+function salinTanpaNomor(){
+
+    if(!hasil.length){
+
+        alert("Buat teks terlebih dahulu.");
+
+        return;
+    }
+
+
+    let teks =
+        document.getElementById("teks")
+        .value
+        .trim();
+
+
+    let jumlah = hasil.length;
+
+    let arr = [];
+
+
+    for(let i=0;i<jumlah;i++){
+
+        arr.push(teks);
+
+    }
+
+
+    salin(arr.join("\n"));
+
 }
 
-function openPage(id){
 
- document.querySelectorAll(".page")
- .forEach(x=>x.classList.remove("active"));
+async function salin(isi){
 
- document.getElementById(id).classList.add("active");
+    try{
 
- app.style.display="none";
+        await navigator.clipboard.writeText(isi);
 
- if(id==="activity")renderActivity()
+        alert("✅ Berhasil disalin!");
+
+    }
+
+    catch(e){
+
+        let area =
+            document.createElement("textarea");
+
+        area.value = isi;
+
+        area.style.position = "fixed";
+
+        area.style.left = "-9999px";
+
+        document.body.appendChild(area);
+
+        area.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(area);
+
+        alert("✅ Berhasil disalin!");
+
+    }
+
 }
 
-function home(){
 
- document.querySelectorAll(".page")
- .forEach(x=>x.classList.remove("active"));
+/* =========================
+   BUAT PDF
+========================= */
 
- app.style.display="block"
+function buatPDF(){
+
+    let teks =
+        document.getElementById("teksPDF")
+        .value
+        .trim();
+
+    let jumlah =
+        parseInt(
+            document.getElementById("jumlahPDF").value
+        );
+
+    let format =
+        document.getElementById("formatPDF").value;
+
+    let judul =
+        document.getElementById("judulPDF")
+        .value
+        .trim();
+
+    let perLembar =
+        parseInt(
+            document.getElementById("perLembar").value
+        );
+
+
+    if(!teks){
+
+        alert("Masukkan teks awal dokumen.");
+
+        return;
+    }
+
+
+    if(!jumlah || jumlah < 1){
+
+        alert("Jumlah minimal 1.");
+
+        return;
+    }
+
+
+    if(jumlah > 10000){
+
+        jumlah = 10000;
+
+        document.getElementById("jumlahPDF")
+            .value = 10000;
+
+    }
+
+
+    pdfData = [];
+
+
+    /* Buat teks PDF */
+
+    for(let i=1;i<=jumlah;i++){
+
+        let item;
+
+
+        if(format === "depan"){
+
+            item =
+                i + ". " + teks;
+
+        }
+
+        else if(format === "tanpa"){
+
+            item = teks;
+
+        }
+
+        else{
+
+            item =
+                teks + " " + i;
+
+        }
+
+
+        pdfData.push(item);
+
+    }
+
+
+    /* Tampilkan preview */
+
+    let box =
+        document.getElementById("isiPDF");
+
+    box.innerHTML = "";
+
+
+    let fragment =
+        document.createDocumentFragment();
+
+
+    pdfData.forEach(function(item,index){
+
+        let div =
+            document.createElement("div");
+
+        div.className = "text-item";
+
+        div.textContent = item;
+
+        fragment.appendChild(div);
+
+    });
+
+
+    box.appendChild(fragment);
+
+
+    document.getElementById("hasilPDF")
+        .style.display = "block";
+
+
+    document.getElementById("badgePDF")
+        .innerText =
+        jumlah.toLocaleString("id-ID") +
+        " teks";
+
+
+    let halaman =
+        Math.ceil(jumlah / perLembar);
+
+
+    document.getElementById("infoPDF")
+        .innerHTML =
+        "Judul: <b>" +
+        (judul || "Sann Text Generator") +
+        "</b><br>" +
+        "Jumlah: <b>" +
+        jumlah.toLocaleString("id-ID") +
+        " teks</b><br>" +
+        "Perkiraan lembar: <b>" +
+        halaman.toLocaleString("id-ID") +
+        " halaman</b>";
+
+
+    document.getElementById("hasilPDF")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
 }
 
-/* TOPUP INDOMARET */
 
-function indomaretPay(){
+/* =========================
+   CETAK / SIMPAN PDF
+========================= */
 
- let amount=Number(indAmount.value);
+function cetakPDF(){
 
- if(!amount||amount<=0){
-  toast("Masukkan nominal");
-  return
- }
+    if(!pdfData.length){
 
- account.balance+=amount;
+        alert(
+            "Buat dokumen PDF terlebih dahulu."
+        );
 
- account.activities.unshift({
-  title:"Isi Saldo",
-  detail:"Indomaret",
-  amount:amount,
-  type:"plus",
-  date:new Date().toLocaleString("id-ID")
- });
+        return;
+    }
 
- save();
- update();
 
- successMessage.textContent=
- format(amount)+" berhasil ditambahkan.";
+    /*
+       Browser akan membuka menu cetak.
 
- successModal.style.display="flex";
+       Pada Android biasanya pilih:
+       "Simpan sebagai PDF"
+    */
 
- setTimeout(()=>{
-  successModal.style.display="none";
-  home()
- },2500)
+    window.print();
+
 }
 
-/* QR */
 
-function openQR(){
- openPage("qr")
+/* =========================
+   BAGIKAN PDF
+========================= */
+
+async function bagikanPDF(){
+
+    if(!pdfData.length){
+
+        alert(
+            "Buat dokumen PDF terlebih dahulu."
+        );
+
+        return;
+    }
+
+
+    /*
+       Web browser tidak selalu bisa
+       membuat File PDF langsung tanpa
+       library tambahan.
+
+       Jadi kita buka menu cetak terlebih
+       dahulu agar PDF bisa disimpan,
+       kemudian pengguna dapat membagikannya
+       dari file manager.
+    */
+
+    alert(
+        "Simpan PDF terlebih dahulu melalui " +
+        "menu 'Simpan sebagai PDF'. Setelah tersimpan, " +
+        "PDF bisa dibagikan melalui WhatsApp, Telegram, " +
+        "atau aplikasi lainnya."
+    );
+
+    window.print();
+
 }
 
-function showQR(){
 
- let amount=Number(qrAmount.value);
+/* =========================
+   RESET TEKS
+========================= */
 
- qrNominal.textContent=format(amount);
+function resetSemua(){
 
- qrModal.style.display="flex";
+    document.getElementById("teks")
+        .value = "";
 
- let time=6;
- qrTimer.textContent=time;
+    document.getElementById("jumlah")
+        .value = 100;
 
- let timer=setInterval(()=>{
+    document.getElementById("format")
+        .value = "depan";
 
-  time--;
-  qrTimer.textContent=time;
+    document.getElementById("hasilTeks")
+        .style.display = "none";
 
-  if(time<=0){
+    document.getElementById("daftarTeks")
+        .innerHTML = "";
 
-   clearInterval(timer);
+    hasil = [];
 
-   qrModal.style.display="none";
-
-   account.balance+=amount;
-
-   account.activities.unshift({
-    title:"Isi Saldo QR",
-    detail:"QR SannnPay",
-    amount:amount,
-    type:"plus",
-    date:new Date().toLocaleString("id-ID")
-   });
-
-   save();
-   update();
-
-   successMessage.textContent=
-   format(amount)+" berhasil ditambahkan melalui QR.";
-
-   successModal.style.display="flex";
-
-   setTimeout(()=>{
-    successModal.style.display="none";
-    home()
-   },2300)
-  }
-
- },1000)
 }
 
-/* SEND */
 
-function sendMoney(){
+/* =========================
+   RESET PDF
+========================= */
 
- let user=sendUser.value.trim();
- let amount=Number(sendAmount.value);
+function resetPDF(){
 
- if(!user||!amount){
-  toast("Lengkapi tujuan dan nominal");
-  return
- }
+    document.getElementById("teksPDF")
+        .value = "";
 
- if(amount>account.balance){
-  toast("Saldo tidak mencukupi");
-  return
- }
+    document.getElementById("jumlahPDF")
+        .value = 1000;
 
- account.balance-=amount;
+    document.getElementById("formatPDF")
+        .value = "depan";
 
- account.activities.unshift({
-  title:"Kirim Saldo",
-  detail:"Ke "+user,
-  amount:amount,
-  type:"minus",
-  date:new Date().toLocaleString("id-ID")
- });
+    document.getElementById("judulPDF")
+        .value = "Sann Text Generator";
 
- save();
- update();
+    document.getElementById("perLembar")
+        .value = 50;
 
- toast("✓ Saldo berhasil dikirim")
+    document.getElementById("hasilPDF")
+        .style.display = "none";
+
+    document.getElementById("isiPDF")
+        .innerHTML = "";
+
+    pdfData = [];
+
 }
 
-/* PULSA */
-
-function openPulsa(){
- openPage("pulsa")
-}
-
-function switchPackage(type){
-
- if(type==="data"){
-
-  dataList.style.display="block";
-  pulsaList.style.display="none";
-
-  dataTab.classList.add("active");
-  pulsaTab.classList.remove("active")
-
- }else{
-
-  dataList.style.display="none";
-  pulsaList.style.display="block";
-
-  pulsaTab.classList.add("active");
-  dataTab.classList.remove("active")
- }
-}
-
-function buyPackage(price,label,type){
-
- let phone=document.getElementById("phone").value.trim();
-
- if(phone.length<10){
-  toast("Masukkan nomor telepon");
-  return
- }
-
- if(account.balance<price){
-  toast("Saldo tidak mencukupi");
-  return
- }
-
- account.balance-=price;
-
- account.activities.unshift({
-  title:type==="Data"?"Beli Paket Data":"Beli Pulsa",
-  detail:label+" • "+phone,
-  amount:price,
-  type:"minus",
-  date:new Date().toLocaleString("id-ID")
- });
-
- save();
- update();
-
- toast("✓ Pembelian berhasil");
-
- setTimeout(()=>{
-  toast(type==="Data"?
-   label+" aktif selama 28 hari":
-   label+" aktif selama 30 hari"
-  )
- },1800)
-}
-
-/* ACTIVITY */
-
-function renderActivity(){
-
- if(!account.activities.length){
-
-  activityList.innerHTML=
-  '<div style="text-align:center;padding:30px;color:#8993a2;font-size:11px">Belum ada aktivitas</div>';
-
-  return
- }
-
- activityList.innerHTML=
- account.activities.map(x=>`
-
- <div class="option">
-
-  <div class="optionIcon">
-   ${x.type==="plus"?"＋":"↗"}
-  </div>
-
-  <div style="flex:1">
-   <b>${x.title}</b>
-   <div style="font-size:10px;color:#8993a2;margin-top:3px">
-    ${x.detail}
-   </div>
-   <div style="font-size:9px;color:#a0a8b4;margin-top:3px">
-    ${x.date}
-   </div>
-  </div>
-
-  <b style="color:${x.type==="plus"?"#20a653":"#e04444"}">
-   ${x.type==="plus"?"+":"-"}${format(x.amount)}
-  </b>
-
- </div>
-
- `).join("")
-}
-
-/* SUGGESTION */
-
-function saveSuggestion(){
-
- let t=suggestionText.value.trim();
-
- if(!t){
-  toast("Tulis saran terlebih dahulu");
-  return
- }
-
- toast("Terima kasih atas sarannya 💙");
-
- suggestionText.value=""
-}
-
-/* VOYAGER */
-
-function openVoyager(){
-
- voyager.style.display="block";
-
- voyName.textContent="Hai, "+account.name
-}
-
-function closeVoyager(){
- voyager.style.display="none"
-}
-
-function travelType(type,el){
-
- selectedTravel=type;
-
- document.querySelectorAll(".vTab")
- .forEach(x=>x.classList.remove("active"));
-
- el.classList.add("active");
-
- travelTitle.textContent=type
-}
-
-function searchTravel(){
-
- let from=travelFrom.value||"Batam";
- let to=travelTo.value||"Jakarta";
-
- let price={
-  "Kereta":185000,
-  "Pesawat":650000,
-  "Hotel":420000,
-  "Rides":35000
- }[selectedTravel];
-
- let ready={
-  "Kereta":"Sudah siap pukul 08.30",
-  "Pesawat":"Sudah siap pukul 07.00",
-  "Hotel":"Check-in siap pukul 14.00",
-  "Rides":"Kendaraan siap pukul 09.00"
- }[selectedTravel];
-
- travelResult.innerHTML=`
-
- <div class="ticket">
-
-  <div class="ticketHead">
-   <b style="color:#0875e8">${selectedTravel} Voyager</b>
-   <span style="font-size:10px;color:#20a653">
-    Tersedia
-   </span>
-  </div>
-
-  <div class="ticketRoute">
-   <b>${from}</b>
-   <span style="color:#0875e8">→</span>
-   <b>${to}</b>
-  </div>
-
-  <div class="ticketInfo">
-
-   <div>
-    <small>Jadwal</small>
-    <b>${ready}</b>
-   </div>
-
-   <div>
-    <small>Penumpang</small>
-    <b>1 Orang</b>
-   </div>
-
-   <div>
-    <small>Tanggal</small>
-    <b>Hari ini</b>
-   </div>
-
-   <div>
-    <small>Status</small>
-    <b>Tersedia</b>
-   </div>
-
-  </div>
-
-  <div class="ticketPrice">
-   <span>Harga</span>
-   <b>${format(price)}</b>
-  </div>
-
-  <button class="btn" style="margin-top:15px"
-   onclick="buyTicket(${price},'${selectedTravel}','${from}','${to}','${ready}')">
-   Beli Tiket
-  </button>
-
- </div>
- `;
-
- travelResult.scrollIntoView({behavior:"smooth"})
-}
-
-function buyTicket(price,type,from,to,ready){
-
- if(account.balance<price){
-  toast("Saldo tidak mencukupi");
-  return
- }
-
- account.balance-=price;
-
- let code="SV-"+Math.floor(100000+Math.random()*900000);
-
- account.activities.unshift({
-  title:"Beli Tiket",
-  detail:type+" • "+from+" → "+to,
-  amount:price,
-  type:"minus",
-  date:new Date().toLocaleString("id-ID")
- });
-
- save();
- update();
-
- toast("✓ Tiket berhasil dibeli");
-
- setTimeout(()=>{
-  toast("🎫 "+code+" • "+ready)
- },1500)
-}
-
-/* LOGOUT */
-
-function logout(){
-
- localStorage.removeItem("sannnpayCurrent");
-
- account=null;
-
- app.style.display="none";
- auth.style.display="flex";
-
- showLogin()
-}
-
-/* NAVIGATION */
-
-function nav(type,el){
-
- document.querySelectorAll(".nav")
- .forEach(x=>x.classList.remove("active"));
-
- el.classList.add("active");
-
- if(type==="home")home();
- if(type==="activity")openPage("activity");
- if(type==="qr")openQR();
- if(type==="wallet")openPage("wallet");
- if(type==="profile")openPage("profile")
-}
-
-window.onload=()=>{
-
- let u=localStorage.getItem("sannnpayCurrent");
-
- if(u){
-
-  account=accounts().find(x=>x.username===u);
-
-  if(account)start()
- }
-}
 </script>
-
-<!-- BOTTOM -->
-<div class="bottom">
-
- <div class="nav active" onclick="nav('home',this)">
-  <div class="navIcon">⌂</div>Beranda
- </div>
-
- <div class="nav" onclick="nav('activity',this)">
-  <div class="navIcon">◷</div>Aktivitas
- </div>
-
- <div class="nav" onclick="nav('qr',this)">
-  <div class="navIcon">▦</div>QR
- </div>
-
- <div class="nav" onclick="nav('wallet',this)">
-  <div class="navIcon">👛</div>Dompet
- </div>
-
- <div class="nav" onclick="nav('profile',this)">
-  <div class="navIcon">👤</div>Saya
- </div>
-
-</div>
 
 </body>
 </html>
