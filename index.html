@@ -247,6 +247,28 @@ button.action{
 
 /* CETAK */
 @media print{
+  header,
+  nav,
+  button,
+  input,
+  select,
+  textarea,
+  .menu,
+  .navbar,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  #pdfPreview {
+    display: block !important;
+  }
+    }
 
     body{
         background:white;
